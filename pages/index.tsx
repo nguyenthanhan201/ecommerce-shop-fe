@@ -11,10 +11,13 @@ Page.Layout = DefaultLayout;
 export async function getServerSideProps() {
   const products = await ProductServices.getAll(true)
     .then((res) => {
-      console.log("👌 ~ res", res);
-      return res.data;
+      // console.log("👌 ~ res", res);
+      return res;
     })
-    .catch((err) => err);
+    .catch((err) => {
+      console.log("🚀 ~ err", err);
+      return [];
+    });
   const seo = useSEO("Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi", {
     description: "Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi",
     image: "/images/Logo-2.png",

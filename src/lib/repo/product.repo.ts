@@ -3,7 +3,7 @@ import { Product } from "../redux/types/product.type";
 import { CrudRepository } from "./crud.repo";
 
 export class ProductRepository extends CrudRepository<Product> {
-  apiName = 'products';
+  apiName = 'product';
   displayName = 'Products';
 
   async createProduct(product: Product) {
