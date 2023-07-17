@@ -70,7 +70,7 @@ const HeroSlider = ({ data, timeOut, auto, control }: HeroSliderProps) => {
     </div>
   );
 };
-
+// http://localhost:3000/images/slider/slide-1.webp?w=1920&q=70
 const HeroSliderItem = ({ item, active, index }: any) => {
   const { t } = useTranslation("home");
   return (
@@ -96,6 +96,7 @@ const HeroSliderItem = ({ item, active, index }: any) => {
       </div>
       <div className="hero-slider_item_image">
         <div className={`shape bg-${item.color}`}></div>
+        {/* <img src={item.img} /> */}
         <Img
           src={item.img}
           alt="oki"
@@ -103,9 +104,10 @@ const HeroSliderItem = ({ item, active, index }: any) => {
           loading={
             item.path === "/catalog/ao-thun-dinosaur-01" ? "eager" : undefined
           }
-          sizes="(max-width: 768px) 100vw,
-                (max-width: 1200px) 50vw,
-                33vw"
+          // sizes="(max-width: 768px) 100vw,
+          //     (max-width: 1200px) 50vw,
+          //     33vw"
+          className="!max-h-[900px]"
         />
       </div>
     </div>

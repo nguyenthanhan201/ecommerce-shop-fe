@@ -39,6 +39,7 @@ body:has(.user-layout) {
 .app,
 .admin {
   display: flex;
+  justify-content: center;
   position: relative;
 
   & .content {
@@ -98,7 +99,7 @@ $val in $colors {
 
 .container {
   width: 100%;
-  max-width: 1620px;
+  // max-width: 1620px;
   padding: 0 60px 0 50px;
   margin: auto;
 

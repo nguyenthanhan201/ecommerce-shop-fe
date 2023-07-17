@@ -15,7 +15,7 @@ export async function getServerSideProps() {
       return res;
     })
     .catch((err) => {
-      console.log("🚀 ~ err", err);
+      // console.log("🚀 ~ err", err);
       return [];
     });
   const seo = useSEO("Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi", {
