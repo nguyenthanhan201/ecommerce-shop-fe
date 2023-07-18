@@ -2,7 +2,7 @@ import { HeroSliderData } from "@/utils/fake-data/hero-slider";
 import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
 import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import classnames from "classnames";
+import { clsx } from "clsx";
 import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -74,7 +74,7 @@ const HeroSlider = ({ data, timeOut, auto, control }: HeroSliderProps) => {
 const HeroSliderItem = ({ item, active, index }: any) => {
   const { t } = useTranslation("home");
   return (
-    <div className={classnames("hero-slider_item", { active })}>
+    <div className={clsx("hero-slider_item", { active })}>
       <div className="hero-slider_item_info">
         <div className={`hero-slider_item_info_title color-${item.color}`}>
           <span>{t(`HeroSlider.${index}.title`, "")}</span>

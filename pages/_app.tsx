@@ -3,8 +3,8 @@ import { ToastProvider } from "@/lib/providers/toast-provider";
 import store from "@/lib/redux/store";
 import { ColorModeContext, useMode } from "@/lib/theme/theme";
 import { ThemeProvider } from "@mui/material";
-import { Roboto } from "@next/font/google";
 import { DefaultSeo, NextSeo } from "next-seo";
+import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,6 @@ function MyApp({ Component, pageProps }: Props) {
   const statusNetWork = useNetWork();
   const router = useRouter();
   const { locale } = router;
-  // console.log("👌 ~ locale", locale);
   const { i18n } = useTranslation();
 
   useEffect(() => {
