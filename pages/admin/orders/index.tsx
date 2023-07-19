@@ -9,13 +9,12 @@ import { useAppSelector } from "@/lib/hooks/useAppSelector";
 import { useToast } from "@/lib/providers/toast-provider";
 import { AuthServices } from "@/lib/repo/auth.repo";
 import { OrderServices } from "@/lib/repo/order.repo";
-import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import { Box, Button as ButtonMUI, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Header from "components/index/admin/components/Header";
 import { tokens } from "lib/theme/theme";
 import { useEffect, useMemo, useState } from "react";
-import { useExcelDownloder } from "react-xls";
+// import { useExcelDownloder } from "react-xls";
 
 const columns: any = [
   {
@@ -105,7 +104,7 @@ const columns: any = [
 ];
 
 const Page = () => {
-  const { ExcelDownloder } = useExcelDownloder();
+  // const { ExcelDownloder } = useExcelDownloder();
   const auth = useAppSelector((state) => state.auth.auth);
   const toast = useToast();
   const theme = useTheme();
@@ -136,11 +135,11 @@ const Page = () => {
   };
 
   useEffect(() => {
-    if(!auth?.email) return;
+    if (!auth?.email) return;
     OrderServices.getAll()
       .then((res) => {
-        // console.log("👌 ~ res", res);
-        setOrders(res.data);
+        console.log("👌 ~ res", res);
+        setOrders(res);
       })
       .catch((err) => {
         console.log("👌 ~ err", err);
@@ -176,7 +175,7 @@ const Page = () => {
             padding: "10px 20px",
           }}
         >
-          <ExcelDownloder
+          {/* <ExcelDownloder
             data={convertOrdersToExcel()}
             filename="book"
             type="link" // or type={'button'}
@@ -184,7 +183,8 @@ const Page = () => {
           >
             <DownloadOutlinedIcon sx={{ mr: "10px" }} />
             Xuất Excel
-          </ExcelDownloder>
+          </ExcelDownloder> */}
+          Xuất Excel
         </ButtonMUI>
       </Box>
     );

@@ -1,8 +1,7 @@
-import Button from "@/components/shared/Button";
 import InfinityList from "@/components/shared/InfinityList";
 import { ProductServices } from "@/lib/repo/product.repo";
 import { productData } from "@/utils/index";
-import { memo, useEffect, useRef, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import CatalogFilter from "./components/CatalogFilter";
 
 export type FilterType = {
@@ -67,19 +66,16 @@ const CatalogPage = () => {
   }, [filter, productList]);
 
   useEffect(() => {
-    ProductServices.getAll().then((res) =>
-      setProductList([...res.data, ...productList])
-    );
+    ProductServices.getAll().then((res: any) => {
+      setProductList([...res, ...productList]);
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <>
       <div className="catalog">
-        <CatalogFilter
-          filter={filter}
-          setFilter={setFilter}
-        />
+        <CatalogFilter filter={filter} setFilter={setFilter} />
         {/* <div className="catalog_filter" ref={filterRef}>
           <div
             className="catalog_filter_close"

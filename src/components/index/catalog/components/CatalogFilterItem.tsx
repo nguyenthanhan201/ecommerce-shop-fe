@@ -1,5 +1,5 @@
 import CheckBox from "@/components/shared/CheckBox";
-import { memo, useEffect } from "react";
+import { memo } from "react";
 
 type Props = {
   filter: any;
@@ -14,9 +14,8 @@ const CatalogFilterItem = ({
   filterSelect,
   customValueInclude,
 }: Props) => {
-  useEffect(() => {
-    console.log("customValueInclude");
-  }, [customValueInclude]);
+  // useEffect(() => {
+  // }, [customValueInclude]);
   return (
     <>
       {filterContent.map((item: any, index: number) => (

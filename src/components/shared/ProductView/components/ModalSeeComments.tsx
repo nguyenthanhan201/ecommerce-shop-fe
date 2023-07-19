@@ -8,6 +8,7 @@ type Props = {
   ratings: Rating[];
 };
 const ModalSeeComments = ({ ratings }: Props) => {
+  console.log("👌  ratings:", ratings);
   return (
     <>
       {ratings.length > 0 && (

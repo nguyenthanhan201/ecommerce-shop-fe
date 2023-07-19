@@ -9,7 +9,7 @@ export abstract class CrudRepository<T> {
   ): Promise<{ fromCache: boolean; data: T[] }> {
     try {
       const res = await get(
-        `/${this.apiName}/getAll${this.displayName}/${this.apiName}`,
+        `/${this.apiName}/getAll${this.displayName}/${this.apiName}s`,
         {
           headers: {
             authentication: isNotToken

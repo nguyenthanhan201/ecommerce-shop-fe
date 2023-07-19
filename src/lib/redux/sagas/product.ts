@@ -5,7 +5,7 @@ import { GET_HIDE_PRODUCTS, GET_PRODUCTS } from "../types";
 
 export function* getProductsSaga(): any {
   const products = yield ProductServices.getAll();
-  yield put(setProductsSlice(products.data));
+  yield put(setProductsSlice(products));
 }
 export function* getHideProductsSaga(): any {
   try {
@@ -13,7 +13,7 @@ export function* getHideProductsSaga(): any {
     yield put(setProductsSlice(products));
   } catch (err: any) {
     // if jwt expired
-    yield put(setErrProductSlice(err.response.data.error.name))
+    yield put(setErrProductSlice(err.response.data.error.name));
   }
 }
 
