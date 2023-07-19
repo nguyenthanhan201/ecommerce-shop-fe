@@ -23,6 +23,7 @@ const columns: any = [
       return (
         <div className="flex flex-col gap-2">
           {Object.values(row.row.order).map((item: any, index: number) => {
+            // console.log("👌  item:", item[0]);
             const { size, color, product } = item[0];
             return (
               <div className="flex items-center gap-2" key={index}>
