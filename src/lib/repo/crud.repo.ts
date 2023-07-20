@@ -12,7 +12,7 @@ export abstract class CrudRepository<T> {
         `/${this.apiName}/getAll${this.displayName}/${this.apiName}s`,
         {
           headers: {
-            authentication: isNotToken
+            Authorization: isNotToken
               ? ""
               : "Bearer " + localStorage.getItem("token"),
           },

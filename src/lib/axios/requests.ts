@@ -19,4 +19,9 @@ export const put = async (path: string, body: object = {}) => {
   return response.data;
 };
 
+export const deleteReq = async (path: string, body: object = {}) => {
+  const response = await request.delete(path, body);
+  return response.data;
+};
+
 export default request;
