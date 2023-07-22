@@ -1,4 +1,4 @@
-import { get, post } from "../axios/requests";
+import { get, put } from "../axios/requests";
 
 export class RatingRepository {
   async getRatingByIdAuth(idAuth: String) {
@@ -10,7 +10,10 @@ export class RatingRepository {
     return res;
   }
   async updateRatingById(idRating: string, rating: number, comment: string) {
-    const res = await post(`/rating/updateRatingById/${idRating}?_method=PUT`, { rating, comment });
+    const res = await put(`/rating/updateRatingById/${idRating}`, {
+      rating,
+      comment,
+    });
     return res;
   }
 }
