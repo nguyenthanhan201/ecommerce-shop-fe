@@ -1,4 +1,5 @@
-import Image from "next/legacy/image";
+import Image from "next/image";
+import { ComponentPropsWithoutRef } from "react";
 
 declare const VALID_LAYOUT_VALUES: readonly [
   "fill",
@@ -11,23 +12,33 @@ declare type LayoutValue = (typeof VALID_LAYOUT_VALUES)[number];
 // declare type ImgElementStyle = NonNullable<
 //   JSX.IntrinsicElements["img"]["style"]
 // >;
-type Props = {
-  id?: string;
+export interface ImgProps extends ComponentPropsWithoutRef<"img"> {
   src: string;
   alt: string;
-  width?: number | undefined;
-  height?: number | undefined;
-  className?: string;
-  objectPosition?: string | undefined;
-  layout?: LayoutValue;
-  sizes?: string;
-  unoptimized?: boolean;
+  width?: number;
+  height?: number;
+  contain?: boolean;
+  avatar?: boolean;
+  rounded?: boolean;
+  ratio169?: boolean;
+  percent?: number;
+  once?: boolean;
+  checkerboard?: boolean;
+  showImageOnClick?: boolean;
+  imageClassName?: string;
+  default?: string;
   compress?: number;
+  border?: boolean;
+  lazyload?: boolean;
+  overflow?: boolean;
+  noImage?: boolean;
+  scrollContainer?: any;
+  objectPosition?: string;
+  layout?: LayoutValue;
+  unoptimized?: boolean;
   hasNotplaceholder?: boolean;
   priority?: boolean;
-  loading?: "eager" | "lazy";
-  onClick?: () => void;
-};
+}
 
 const myLoader = ({ src, width, quality }: any) => {
   return `${src}?w=${width}&q=${quality}`;
@@ -50,7 +61,7 @@ const Img = ({
   loading,
   onClick,
   ...props
-}: Props) => {
+}: ImgProps) => {
   return (
     <Image
       {...props}
@@ -77,6 +88,9 @@ const Img = ({
       quality={70}
       priority={priority}
       onClick={onClick}
+      style={{
+        objectFit: "contain",
+      }}
     />
   );
 };
