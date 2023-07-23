@@ -1,6 +1,6 @@
 import CartPage from "@/components/index/cart/CartPage";
 import DefaultLayout from "@/layouts/default-layout/DefaultLayout";
-import { useSEO } from "@/lib/hooks/useSeo";
+import { useSEO } from "my-package";
 
 const Page = () => {
   return <CartPage />;

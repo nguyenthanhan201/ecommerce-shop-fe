@@ -1,7 +1,7 @@
 import HomePage from "@/components/index/home/HomePage";
 import DefaultLayout from "@/layouts/default-layout/DefaultLayout";
-import { useSEO } from "@/lib/hooks/useSeo";
 import { ProductServices } from "@/lib/repo/product.repo";
+import { useSEO } from "my-package";
 
 export default function Page({ products }: any) {
   return <HomePage products={products} />;

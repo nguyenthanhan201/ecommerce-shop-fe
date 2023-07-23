@@ -112,6 +112,9 @@ const Defaultheader = () => {
               alt="Yolo"
               layout="fill"
               loading="eager"
+              style={{
+                objectFit: "contain",
+              }}
             />
           </Link>
           <div className="header_menu_right">

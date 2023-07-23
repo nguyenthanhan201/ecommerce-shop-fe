@@ -88,9 +88,7 @@ const Img = ({
       quality={70}
       priority={priority}
       onClick={onClick}
-      style={{
-        objectFit: "contain",
-      }}
+      style={props.style}
     />
   );
 };

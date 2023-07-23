@@ -1,6 +1,6 @@
 import CatalogPage from "@/components/index/catalog/CataLogPage";
 import DefaultLayout from "@/layouts/default-layout/DefaultLayout";
-import { useSEO } from "@/lib/hooks/useSeo";
+import { useSEO } from "my-package";
 
 export default function Page() {
   return <CatalogPage />;

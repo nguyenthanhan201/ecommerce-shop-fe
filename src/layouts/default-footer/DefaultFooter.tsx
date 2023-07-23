@@ -52,7 +52,7 @@ const DefaultFooter = () => {
           <Link href="/" className="relative w-[10%] h-10 block">
             <Img
               src="/images/Logo-2.png"
-              className="footer_logo"
+              className="footer_logo object-contain"
               alt="yolo-logo"
               layout="fill"
             />
@@ -60,65 +60,6 @@ const DefaultFooter = () => {
         </div>
         <div className="new_footer_top">
           <Grid col={4} mdCol={2} smCol={1} gap={10}>
-            {/* <div>
-            <div className="footer_title">
-              Tổng Đài Hỗ Trợ
-            </div>
-            <div className="footer_content">
-              <p>
-                Thắc mắc đơn hàng <strong>01234567</strong>
-              </p>
-              <p>
-                Thắc mắc đơn hàng <strong>01234567</strong>
-              </p>
-              <p>
-                Thắc mắc đơn hàng <strong>01234567</strong>
-              </p>
-            </div>
-          </div>
-          <div>
-            <div className="footer_title">
-              Về Yolo
-            </div>
-            <div className="footer_content">
-              {
-                footerAboutLinks.map((item, index) => (
-                  <p key={index}>
-                    <Link to={item.path}>
-                      {item.display}
-                    </Link>
-                  </p>
-                )
-                )}
-            </div>
-          </div>
-          <div>
-            <div className="footer_title">
-              Chăm Sóc Khách Hàng
-            </div>
-            <div className="footer_content">
-              {
-                footerCustomerLinks.map((item, index) => (
-                  <p key={index}>
-                    <Link to={item.path}>
-                      {item.display}
-                    </Link>
-                  </p>
-                ))
-              }
-            </div>
-          </div>
-          <div className="footer_about">
-            <p>
-              <Link to="/">
-                <img src={logo} className="footer_logo" alt="" />
-              </Link>
-            </p>
-            <p>
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Accusantium commodi perspiciatis dolores ipsam ipsa tempore, inventore sapiente quidem incidunt odit!
-            </p>
-          </div> */}
-            {/* Custom */}
             <div>
               <div className="f_widget company_widget wow fadeInLeft">
                 <h3 className="f-title f_600 t_color f_size_18">
@@ -129,7 +70,7 @@ const DefaultFooter = () => {
                   <input type="text" className="form-field_input" placeholder=" " />
                   <label htmlFor="name" className="form-field_label">Email</label>
                 </form> */}
-                <Link href="/register">
+                <Link href="/">
                   <Button
                     backgroundColor={""}
                     size={""}
@@ -189,10 +130,6 @@ const DefaultFooter = () => {
               </div>
             </div>
           </Grid>
-          {/* <div className="footer_bg">
-            <div className="footer_bg_one"></div>
-            <div className="footer_bg_two"></div>
-          </div> */}
         </div>
       </div>
     </footer>

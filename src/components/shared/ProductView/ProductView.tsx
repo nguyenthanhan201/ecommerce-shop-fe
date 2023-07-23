@@ -11,11 +11,12 @@ import { useToast } from "lib/providers/toast-provider";
 import { GET_CART_ITEMS } from "lib/redux/types";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
-import { memo, useCallback, useEffect, useMemo, useState } from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "react-query";
+import Page404 from "../../../../pages/404";
 import Button from "../Button";
 import Img from "../Img/Img";
-import Loading from "../Loading/Loading";
 import Modal from "../Modal/Modal";
 import ImagePreview from "./components/ImagePreview";
 
@@ -39,32 +40,29 @@ type ChoosenItemType = {
 };
 
 const ProductView = ({ product }: ProductViewProps) => {
+  const { isLoading } = useQuery({
+    queryKey: "rating",
+    queryFn: async () =>
+      RatingServices.getRatingByIdProduct(product._id).then((res) => {
+        setRatings(res);
+      }),
+  });
   const { t } = useTranslation("product");
   const { isMobile } = useDevice();
   const toast = useToast();
   const auth = useAppSelector((state) => state.auth.auth);
   const dispatch = useAppDispatch();
   const router = useRouter();
-  const [previewImg, setReviewImg] = useState<string>("");
+  const [previewImg, setReviewImg] = useState<string>(product.image01 || "");
   const [descriptionExpand, setDescriptionExpand] = useState<boolean>(false);
-  const [description, setDescription] = useState<string>("");
   const [choosenItems, setChoosenItems] = useState<ChoosenItemType>({
     color: undefined,
     size: undefined,
     quantity: 1,
   });
   const [ratings, setRatings] = useState<Rating[]>([]);
-  // console.log("👌 ~ ratings", ratings);
   const [showModal, setShowModal] = useState<boolean>(false);
   const { color, size, quantity } = choosenItems;
-
-  useEffect(() => {
-    setReviewImg(product.image01);
-    setDescription(product.description);
-    RatingServices.getRatingByIdProduct(product._id).then((res) => {
-      setRatings(res);
-    });
-  }, []);
 
   const ratingValue = useMemo(() => {
     if (ratings.length === 0) return 0;
@@ -127,7 +125,7 @@ const ProductView = ({ product }: ProductViewProps) => {
     setDescriptionExpand((prev) => !prev);
   }, []);
 
-  if (product === undefined) return <Loading />;
+  if (product === undefined) return <Page404 />;
   return (
     <>
       <div className="product">
@@ -151,7 +149,9 @@ const ProductView = ({ product }: ProductViewProps) => {
           >
             <div className="product-description_title">Chi tiết sản phẩm</div>
             <div className="product-description_content">
-              <p dangerouslySetInnerHTML={{ __html: description }}></p>
+              <div
+                dangerouslySetInnerHTML={{ __html: product.description || "" }}
+              />
             </div>
             <div className="product-description_toggle">
               <Button
@@ -169,16 +169,22 @@ const ProductView = ({ product }: ProductViewProps) => {
         <div className="product_info">
           <h1 className="product_info_title">{product.title}</h1>
           <div className="flex gap-2 items-start">
-            {ratings.length > 0 && ratings[0].rating !== 0 ? (
-              <div
-                className="flex flex-col gap-1 cursor-pointer"
-                onClick={() => setShowModal(true)}
-              >
-                <RatingMUI value={ratingValue} readOnly />
-                <small className="text-[10px]">Nhấn để xem đánh giá</small>
-              </div>
+            {isLoading ? (
+              <p className="animate-pulse">Đang lấy thông tin đánh giá</p>
             ) : (
-              "Chưa có đánh giá"
+              <>
+                {ratings.length > 0 && ratings[0].rating !== 0 ? (
+                  <div
+                    className="flex flex-col gap-1 cursor-pointer"
+                    onClick={() => setShowModal(true)}
+                  >
+                    <RatingMUI value={ratingValue} readOnly />
+                    <small className="text-[10px]">Nhấn để xem đánh giá</small>
+                  </div>
+                ) : (
+                  "Chưa có đánh giá"
+                )}
+              </>
             )}
             <p>{product.sold} đã bán</p>
           </div>

@@ -67,7 +67,12 @@ const ProductCard = ({ product }: ProductCardProps) => {
             onClick={handleIncreaseViewsProduct}
             className="shoess"
           >
-            <Img src={product.image01} alt={product.title} layout="fill" />
+            <Img
+              src={product.image01}
+              alt={product.title}
+              layout="fill"
+              className="rounded-[20px]"
+            />
           </Link>
           <div className="size">
             <span>Giá</span>

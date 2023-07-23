@@ -1,6 +1,6 @@
 import ProductDetailPage from "@/components/index/product-detail/ProductDetailPage";
 import DefaultLayout from "@/layouts/default-layout/DefaultLayout";
-import { useSEO } from "@/lib/hooks/useSeo";
+import { useSEO } from "my-package";
 import { NextPageContext } from "next";
 
 const Page = ({ query }: any) => {

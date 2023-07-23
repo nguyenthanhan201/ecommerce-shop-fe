@@ -50,7 +50,7 @@ const CartPage = () => {
   };
 
   return (
-    <div className="cart">
+    <div className="cart mb-3">
       <div className="cart_info">
         <div className="cart_info_txt">
           <p>
