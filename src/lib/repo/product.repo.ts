@@ -41,7 +41,7 @@ export class ProductRepository extends CrudRepository<Product> {
   }
 
   async getMostViewedProducts() {
-    const res = await get(`/product/most-viewed`);
+    const res = await get(`/product/most-viewed`, {});
     return res;
   }
 

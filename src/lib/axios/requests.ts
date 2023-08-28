@@ -1,26 +1,37 @@
-import axios from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BE,
 });
 
-export const get = async (path: string, option: object = {}) => {
-  const response = await request.get(path, option);
+export const get = async (path: string, config?: AxiosRequestConfig<any>) => {
+  const response = await request.get(path, config);
   return response.data;
 };
 
-export const post = async (path: string, body: object = {}) => {
-  const response = await request.post(path, body);
+export const post = async (
+  path: string,
+  data: object = {},
+  config?: AxiosRequestConfig<any>
+) => {
+  const response = await request.post(path, data, config);
   return response.data;
 };
 
-export const put = async (path: string, body: object = {}) => {
-  const response = await request.put(path, body);
+export const put = async (
+  path: string,
+  data: object = {},
+  config?: AxiosRequestConfig<any>
+) => {
+  const response = await request.put(path, data, config);
   return response.data;
 };
 
-export const deleteReq = async (path: string, body: object = {}) => {
-  const response = await request.delete(path, body);
+export const deleteReq = async (
+  path: string,
+  config?: AxiosRequestConfig<any>
+) => {
+  const response = await request.delete(path, config);
   return response.data;
 };
 
