@@ -38,10 +38,19 @@ function MyApp({ Component, pageProps }: Props) {
   const router = useRouter();
   const { locale } = router;
   const { i18n } = useTranslation();
+  // const channel = new BroadcastChannel("notifications");
 
   useEffect(() => {
     i18n.changeLanguage(locale);
   }, [locale]);
+
+  // useEffect(() => {
+  //   channel.addEventListener("message", (event) => {
+  //     console.log("Receive background: ", event.data);
+  //   });
+
+  //   getMessagingToken();
+  // }, []);
 
   // useEffect(() => {
   //   if ("serviceWorker" in navigator) {
