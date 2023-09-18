@@ -1,5 +1,4 @@
 import Img from "@/components/shared/Img/Img";
-import { RootState } from "@/lib/redux/store";
 import { AuthServices } from "@/lib/repo/auth.repo";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import LocalMallOutlinedIcon from "@mui/icons-material/LocalMallOutlined";
@@ -22,10 +21,7 @@ const Menu = dynamic(() => import("./components/Menu"), { ssr: false });
 const Defaultheader = () => {
   const theme = useTheme();
   const { t } = useTranslation("header");
-  const { cartItems } = useAppSelector(
-    (state: RootState) => state,
-    shallowEqual
-  );
+  const cartItems = useAppSelector((state) => state.cartItems, shallowEqual);
   const auth = useAppSelector((state) => state.auth.auth, shallowEqual);
   // console.log("👌 ~ auth", auth);
   const router = useRouter();

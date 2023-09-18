@@ -1,23 +1,34 @@
 import HomePage from "@/components/index/home/HomePage";
 import DefaultLayout from "@/layouts/default-layout/DefaultLayout";
+import { useSEO } from "@/lib/hooks/useSEO";
+import { queryClient } from "@/lib/react-query/queryClient";
+import { Product } from "@/lib/redux/types/product.type";
 import { ProductServices } from "@/lib/repo/product.repo";
-import { useSEO } from "my-package";
+import { NextPageContext } from "next";
+import { dehydrate } from "react-query";
 
-export default function Page({ products }: any) {
-  return <HomePage products={products} />;
+export default function Page(pageProps: PageProps<{ products: Product[] }>) {
+  const { pageData, dehydratedState } = pageProps;
+
+  return <HomePage products={dehydratedState.queries.at(0)?.state.data} />;
 }
 Page.Layout = DefaultLayout;
 
-export async function getServerSideProps() {
-  const products = await ProductServices.getAll(true)
-    .then((res) => {
-      // console.log("👌 ~ res", res);
-      return res;
-    })
-    .catch((err) => {
-      // console.log("🚀 ~ err", err);
-      return [];
-    });
+export async function getServerSideProps(ctx: NextPageContext) {
+  await queryClient.prefetchQuery(
+    "productsQuery",
+    async () => await ProductServices.getAll(true)
+  );
+
+  // const products = await ProductServices.getAll(true)
+  //   .then((res) => {
+  //     // console.log("👌 ~ res", res);
+  //     return res;
+  //   })
+  //   .catch((err) => {
+  //     // console.log("🚀 ~ err", err);
+  //     return [];
+  //   });
   const seo = useSEO("Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi", {
     description: "Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi",
     image: "/images/Logo-2.png",
@@ -28,18 +39,22 @@ export async function getServerSideProps() {
     props: JSON.parse(
       JSON.stringify({
         seo,
-        products,
+        dehydratedState: dehydrate(queryClient),
+        // pageData: {
+        //   products,
+        // },
       })
-    ),
+    ) as PageProps<{ products: Product[] }>,
   };
-  // return {
-  //   redirect: {
-  //     permanent: false,
-  //     destination: "/login",
-  //   },
-  //   props:{},
-  // };
 }
+
+// return {
+//   redirect: {
+//     permanent: false,
+//     destination: "/login",
+//   },
+//   props:{},
+// };
 
 // <!-- HTML Meta Tags -->
 // <title>undefined</title>

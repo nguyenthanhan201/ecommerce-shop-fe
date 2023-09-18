@@ -116,6 +116,8 @@ const Page = () => {
     if (orders.length <= 0) return;
     const data = Object.values(orders).map((item: any) => {
       const { idAuth, createdAt, order } = item;
+
+      if (!order) return;
       // in cột order có nhiều sản phẩm nên phải map ra
       const Purchaseorders = Object.values(order).map(
         (item2: any) => item2[0].product.title
@@ -138,7 +140,7 @@ const Page = () => {
     if (!auth?.email) return;
     OrderServices.getAll()
       .then((res) => {
-        console.log("👌 ~ res", res);
+        // console.log("👌 ~ res", res);
         setOrders(res);
       })
       .catch((err) => {

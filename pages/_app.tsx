@@ -1,6 +1,8 @@
-import Loading from "@/components/shared/Loading/Loading";
-import { usePageLoading } from "@/lib/hooks/usePageLoading";
 import { ToastProvider } from "@/lib/providers/toast-provider";
+import {
+  QueryClientProvider,
+  queryClient,
+} from "@/lib/react-query/queryClient";
 import store from "@/lib/redux/store";
 import { ColorModeContext, useMode } from "@/lib/theme/theme";
 import { ThemeProvider } from "@mui/material";
@@ -10,27 +12,18 @@ import { Roboto } from "next/font/google";
 import { useRouter } from "next/router";
 import { Fragment, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { QueryClient, QueryClientProvider } from "react-query";
+import { Hydrate } from "react-query";
 import { Provider } from "react-redux";
 import "../src/i18n/i18n";
 import "../src/sass/index.scss";
 import Page404 from "./404";
-
-type Props = {
-  Component: any;
-  pageProps: any;
-};
 
 const roboto = Roboto({
   weight: ["400", "500", "700"],
   subsets: ["vietnamese"],
 });
 
-// Create a client
-const queryClient = new QueryClient();
-
-function MyApp({ Component, pageProps }: Props) {
-  const { isPageLoading } = usePageLoading();
+function MyApp({ Component, pageProps }: any) {
   const Layout = Component.Layout ? Component.Layout : Fragment;
   const layoutProps = Component.LayoutProps ? Component.LayoutProps : {};
   const [theme, colorMode] = useMode();
@@ -85,15 +78,18 @@ function MyApp({ Component, pageProps }: Props) {
       <ColorModeContext.Provider value={colorMode as any}>
         <ThemeProvider theme={theme as any}>
           <ToastProvider>
-            <QueryClientProvider client={queryClient}>
-              <Provider store={store}>
-                <main className={roboto.className}>
-                  <Layout {...layoutProps}>
-                    {isPageLoading ? <Loading /> : <Component {...pageProps} />}
-                  </Layout>
-                </main>
-              </Provider>
-            </QueryClientProvider>
+            <Provider store={store}>
+              <QueryClientProvider client={queryClient}>
+                {/* Hydrate query cache */}
+                <Hydrate state={pageProps.dehydratedState}>
+                  <main className={roboto.className}>
+                    <Layout {...layoutProps}>
+                      <Component {...pageProps} />
+                    </Layout>
+                  </main>
+                </Hydrate>
+              </QueryClientProvider>
+            </Provider>
           </ToastProvider>
         </ThemeProvider>
       </ColorModeContext.Provider>

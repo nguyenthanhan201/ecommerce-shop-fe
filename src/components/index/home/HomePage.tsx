@@ -9,7 +9,6 @@ import { Product } from "@/lib/redux/types/product.type";
 import { heroSliderData, policy } from "@/utils/index";
 import dynamic from "next/dynamic";
 import { memo } from "react";
-// import { ScrollContainer } from "react-scroll-motion";
 
 const ProductCard = dynamic(import("@/components/shared/ProductCard"), {
   ssr: false,
