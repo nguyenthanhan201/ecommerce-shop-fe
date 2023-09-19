@@ -1,61 +1,37 @@
-const accessories_01_image_01 =
-  require("../images/accessories/accessories-01(1).png").default;
-const accessories_01_image_02 =
-  require("../images/accessories/accessories-01(2).jpg").default;
-const accessories_02_image_01 =
-  require("../images/accessories/accessories-02(1).png").default;
-const accessories_02_image_02 =
-  require("../images/accessories/accessories-02(2).jpg").default;
+const accessories_01_image_01 = require("../images/accessories/accessories-01(1).png").default;
+const accessories_01_image_02 = require("../images/accessories/accessories-01(2).jpg").default;
+const accessories_02_image_01 = require("../images/accessories/accessories-02(1).png").default;
+const accessories_02_image_02 = require("../images/accessories/accessories-02(2).jpg").default;
 
-const accessories_03_image_01 =
-  require("../images/accessories/accessories-03(1).png").default;
-const accessories_03_image_02 =
-  require("../images/accessories/accessories-03(2).jpg").default;
+const accessories_03_image_01 = require("../images/accessories/accessories-03(1).png").default;
+const accessories_03_image_02 = require("../images/accessories/accessories-03(2).jpg").default;
 
-const accessories_04_image_01 =
-  require("../images/accessories/accessories-04(1).png").default;
-const accessories_04_image_02 =
-  require("../images/accessories/accessories-04(2).jpg").default;
+const accessories_04_image_01 = require("../images/accessories/accessories-04(1).png").default;
+const accessories_04_image_02 = require("../images/accessories/accessories-04(2).jpg").default;
 
-const accessories_05_image_01 =
-  require("../images/accessories/accessories-05(1).jpg").default;
-const accessories_05_image_02 =
-  require("../images/accessories/accessories-05(2).jpg").default;
+const accessories_05_image_01 = require("../images/accessories/accessories-05(1).jpg").default;
+const accessories_05_image_02 = require("../images/accessories/accessories-05(2).jpg").default;
 
-const accessories_06_image_01 =
-  require("../images/accessories/accessories-06(1).jpg").default;
-const accessories_06_image_02 =
-  require("../images/accessories/accessories-06(2).jpg").default;
+const accessories_06_image_01 = require("../images/accessories/accessories-06(1).jpg").default;
+const accessories_06_image_02 = require("../images/accessories/accessories-06(2).jpg").default;
 
-const accessories_07_image_01 =
-  require("../images/accessories/accessories-07(1).jpg").default;
-const accessories_07_image_02 =
-  require("../images/accessories/accessories-07(2).jpg").default;
+const accessories_07_image_01 = require("../images/accessories/accessories-07(1).jpg").default;
+const accessories_07_image_02 = require("../images/accessories/accessories-07(2).jpg").default;
 
-const accessories_08_image_01 =
-  require("../images/accessories/accessories-08(1).jpg").default;
-const accessories_08_image_02 =
-  require("../images/accessories/accessories-08(2).jpg").default;
+const accessories_08_image_01 = require("../images/accessories/accessories-08(1).jpg").default;
+const accessories_08_image_02 = require("../images/accessories/accessories-08(2).jpg").default;
 
-const accessories_09_image_01 =
-  require("../images/accessories/accessories-09(1).png").default;
-const accessories_09_image_02 =
-  require("../images/accessories/accessories-09(2).jpg").default;
+const accessories_09_image_01 = require("../images/accessories/accessories-09(1).png").default;
+const accessories_09_image_02 = require("../images/accessories/accessories-09(2).jpg").default;
 
-const accessories_10_image_01 =
-  require("../images/accessories/accessories-10(1).png").default;
-const accessories_10_image_02 =
-  require("../images/accessories/accessories-10(2).jpg").default;
+const accessories_10_image_01 = require("../images/accessories/accessories-10(1).png").default;
+const accessories_10_image_02 = require("../images/accessories/accessories-10(2).jpg").default;
 
-const accessories_11_image_01 =
-  require("../images/accessories/accessories-11(1).png").default;
-const accessories_11_image_02 =
-  require("../images/accessories/accessories-11(2).jpg").default;
+const accessories_11_image_01 = require("../images/accessories/accessories-11(1).png").default;
+const accessories_11_image_02 = require("../images/accessories/accessories-11(2).jpg").default;
 
-const accessories_12_image_01 =
-  require("../images/accessories/accessories-12(1).png").default;
-const accessories_12_image_02 =
-  require("../images/accessories/accessories-12(2).png").default;
+const accessories_12_image_01 = require("../images/accessories/accessories-12(1).png").default;
+const accessories_12_image_02 = require("../images/accessories/accessories-12(2).png").default;
 
 const data2 = {
   cardData2: [

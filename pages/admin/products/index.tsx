@@ -14,22 +14,16 @@ import { tokens } from "lib/theme/theme";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
-const ModalAddProduct = dynamic(
-  import("@/components/index/admin/products/ModalAddProduct")
-);
+const ModalAddProduct = dynamic(import("@/components/index/admin/products/ModalAddProduct"));
 
 const Page = () => {
   const toast = useToast();
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const products = useAppSelector(
-    (state: RootState) => state.products.products
-  );
+  const products = useAppSelector((state: RootState) => state.products.products);
   const [open, setOpen] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(
-    undefined
-  );
+  const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(undefined);
 
   const columns: any = [
     {
@@ -97,9 +91,9 @@ const Page = () => {
       renderCell: (row: any) => {
         // console.log("👌 ~ row", row.row);
         return (
-          <Box display="flex" justifyContent="center">
+          <Box display='flex' justifyContent='center'>
             <Button
-              variant="contained"
+              variant='contained'
               style={{ backgroundColor: "#70d8bd" }}
               onClick={() => {
                 setSelectedProduct(row.row);
@@ -109,7 +103,7 @@ const Page = () => {
               sửa
             </Button>
             <Button
-              variant="contained"
+              variant='contained'
               style={{ backgroundColor: "#70d8bd" }}
               onClick={() => {
                 hideProduct(row.row._id);
@@ -130,16 +124,14 @@ const Page = () => {
   const hideProduct = (id: string) => {
     toast.promise(
       "Ẩn sản phẩm thành công",
-      ProductServices.hideProduct(id).then(() =>
-        dispatch({ type: GET_PRODUCTS })
-      ),
-      "Ẩn sản phẩm thất bại"
+      ProductServices.hideProduct(id).then(() => dispatch({ type: GET_PRODUCTS })),
+      "Ẩn sản phẩm thất bại",
     );
   };
 
   return (
     <>
-      <Box m="20px">
+      <Box m='20px'>
         <Box
           sx={{
             justifyContent: "space-between",
@@ -147,7 +139,7 @@ const Page = () => {
             alignItems: "center",
           }}
         >
-          <Header title="Sản phẩm" subtitle="Chào mừng tới quản lí sản phẩm" />
+          <Header title='Sản phẩm' subtitle='Chào mừng tới quản lí sản phẩm' />
           <Box>
             <Button
               sx={{
@@ -166,8 +158,8 @@ const Page = () => {
           </Box>
         </Box>
         <Box
-          m="40px 0 0 0"
-          height="75vh"
+          m='40px 0 0 0'
+          height='75vh'
           sx={{
             "& .MuiDataGrid-root": {
               border: "none",

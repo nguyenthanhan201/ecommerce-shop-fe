@@ -4,11 +4,7 @@ import { tokens } from "@/lib/theme/theme";
 import { Box, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import Loading from "components/shared/Loading/Loading";
-import {
-  formatDate,
-  getSalePrice,
-  numberWithCommans,
-} from "lib/helpers/parser";
+import { formatDate, getSalePrice, numberWithCommans } from "lib/helpers/parser";
 import { useAppSelector } from "lib/hooks/useAppSelector";
 import { useEffect, useState } from "react";
 
@@ -21,23 +17,21 @@ const columns: any = [
     align: "left",
     renderCell: (row: any) => {
       return (
-        <div className="flex flex-col gap-2">
+        <div className='flex flex-col gap-2'>
           {Object.values(row.row.order).map((item: any, index: number) => {
             // console.log("👌  item:", item[0]);
             const { size, color, product } = item[0];
             return (
-              <div className="flex items-center gap-2" key={index}>
+              <div className='flex items-center gap-2' key={index}>
                 <Img
                   src={product.image01}
                   alt={product.image01}
                   width={30}
                   height={30}
-                  className="rounded-full"
+                  className='rounded-full'
                   hasNotplaceholder
                 />
-                <p
-                  style={{ whiteSpace: "break-spaces" }}
-                >{`${product.title}-${size}-${color}`}</p>
+                <p style={{ whiteSpace: "break-spaces" }}>{`${product.title}-${size}-${color}`}</p>
               </div>
             );
           })}
@@ -61,18 +55,13 @@ const columns: any = [
     align: "center",
     renderCell: (row: any) => {
       return (
-        <div className="flex flex-col gap-2">
+        <div className='flex flex-col gap-2'>
           {Object.values(row.row.order).map((item: any, index: number) => {
             const { quantity, price, product } = item[0];
             return (
-              <div
-                key={index}
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div key={index} style={{ display: "flex", alignItems: "center" }}>
                 {product.discount
-                  ? numberWithCommans(
-                      getSalePrice(product.price, product.discount) * quantity
-                    )
+                  ? numberWithCommans(getSalePrice(product.price, product.discount) * quantity)
                   : numberWithCommans(price * quantity)}
               </div>
             );
@@ -123,8 +112,8 @@ const ManagerOrders = () => {
       ) : (
         <>
           <Box
-            m="40px 0 0 0"
-            height="75vh"
+            m='40px 0 0 0'
+            height='75vh'
             sx={{
               "& .MuiDataGrid-root": {
                 border: "none",

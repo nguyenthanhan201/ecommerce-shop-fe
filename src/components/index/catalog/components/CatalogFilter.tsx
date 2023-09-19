@@ -19,6 +19,7 @@ type CatalogFilterProps = {
 
 const CatalogFilter = ({ filter, setFilter }: CatalogFilterProps) => {
   const filterRef = useRef<any>(null);
+  let newCategory: Array<any>, newColor: Array<any>, newSize: Array<any>, newPrice: Array<any>;
 
   const filterSelect = (type: any, checked: any, item: any) => {
     if (checked) {
@@ -52,30 +53,28 @@ const CatalogFilter = ({ filter, setFilter }: CatalogFilterProps) => {
     } else {
       switch (type) {
         case "CATEGORYSLUG":
-          const newCategory = filter.category.filter(
-            (e: any) => e !== item.categorySlug
-          );
+          newCategory = filter.category.filter((e: unknown) => e !== item.categorySlug);
           setFilter((prevState: any) => ({
             ...prevState,
             category: newCategory,
           }));
           break;
         case "COLOR":
-          const newColor = filter.color.filter((e: any) => e !== item.color);
+          newColor = filter.color.filter((e: any) => e !== item.color);
           setFilter((prevState: any) => ({
             ...prevState,
             color: newColor,
           }));
           break;
         case "SIZE":
-          const newSize = filter.size.filter((e: any) => e !== item.size);
+          newSize = filter.size.filter((e: any) => e !== item.size);
           setFilter((prevState: any) => ({
             ...prevState,
             size: newSize,
           }));
           break;
         case "PRICE":
-          const newPrice = filter.prices.filter((e: any) => e !== item.price);
+          newPrice = filter.prices.filter((e: any) => e !== item.price);
           setFilter((prevState: any) => ({
             ...prevState,
             prices: newPrice,
@@ -98,64 +97,64 @@ const CatalogFilter = ({ filter, setFilter }: CatalogFilterProps) => {
 
   return (
     <>
-      <div className="catalog_filter" ref={filterRef}>
-        <div className="catalog_filter_close" onClick={() => showHideFilter()}>
-          <KeyboardArrowLeftIcon fontSize="inherit" />
+      <div className='catalog_filter' ref={filterRef}>
+        <div className='catalog_filter_close' onClick={() => showHideFilter()}>
+          <KeyboardArrowLeftIcon fontSize='inherit' />
         </div>
-        <div className="catalog_filter_widget">
-          <div className="catalog_filter_widget_title">Giá</div>
-          <div className="catalog_filter_widget_content">
+        <div className='catalog_filter_widget'>
+          <div className='catalog_filter_widget_title'>Giá</div>
+          <div className='catalog_filter_widget_content'>
             <CatalogFilterItem
+              customValueInclude='price'
               filter={filter.prices}
-              filterSelect={filterSelect}
               filterContent={prices}
-              customValueInclude="price"
+              filterSelect={filterSelect}
             />
           </div>
         </div>
-        <div className="catalog_filter_widget">
-          <div className="catalog_filter_widget_title">danh mục sản phẩm</div>
-          <div className="catalog_filter_widget_content">
+        <div className='catalog_filter_widget'>
+          <div className='catalog_filter_widget_title'>danh mục sản phẩm</div>
+          <div className='catalog_filter_widget_content'>
             <CatalogFilterItem
+              customValueInclude='categorySlug'
               filter={filter.category}
-              filterSelect={filterSelect}
               filterContent={category}
-              customValueInclude="categorySlug"
+              filterSelect={filterSelect}
             />
           </div>
         </div>
-        <div className="catalog_filter_widget">
-          <div className="catalog_filter_widget_title">màu sắc</div>
-          <div className="catalog_filter_widget_content">
+        <div className='catalog_filter_widget'>
+          <div className='catalog_filter_widget_title'>màu sắc</div>
+          <div className='catalog_filter_widget_content'>
             <CatalogFilterItem
+              customValueInclude='color'
               filter={filter.color}
-              filterSelect={filterSelect}
               filterContent={colors}
-              customValueInclude="color"
-            />
-          </div>
-        </div>
-        <div className="catalog_filter_widget">
-          <div className="catalog_filter_widget_title">kích thước</div>
-          <div className="catalog_filter_widget_content">
-            <CatalogFilterItem
-              filter={filter.size}
               filterSelect={filterSelect}
-              filterContent={size}
-              customValueInclude="size"
             />
           </div>
         </div>
-        <div className="catalog_filter_widget">
-          <div className="catalog_filter_widget_content">
-            <Button size="sm" onClick={clearFilter}>
+        <div className='catalog_filter_widget'>
+          <div className='catalog_filter_widget_title'>kích thước</div>
+          <div className='catalog_filter_widget_content'>
+            <CatalogFilterItem
+              customValueInclude='size'
+              filter={filter.size}
+              filterContent={size}
+              filterSelect={filterSelect}
+            />
+          </div>
+        </div>
+        <div className='catalog_filter_widget'>
+          <div className='catalog_filter_widget_content'>
+            <Button onClick={clearFilter} size='sm'>
               xóa bộ lọc
             </Button>
           </div>
         </div>
       </div>
-      <div className="catalog_filter_toggle">
-        <Button size="sm" onClick={() => showHideFilter()}>
+      <div className='catalog_filter_toggle'>
+        <Button onClick={() => showHideFilter()} size='sm'>
           bộ lọc
         </Button>
       </div>

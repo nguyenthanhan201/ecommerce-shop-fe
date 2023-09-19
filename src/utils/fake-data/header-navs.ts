@@ -4,7 +4,7 @@ export const mainNav = [
     path: "/",
   },
   {
-   name: "products",
+    name: "products",
     path: "/catalog",
   },
 ];

@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals */
 import { ProductServices } from "@/lib/repo/product.repo";
-import { processList } from "./enums";
+import { ProcessList } from "./enums";
 
 self.onmessage = async (e: MessageEvent<string>) => {
-  if (e.data === processList.getData) {
+  if (e.data === ProcessList.getData) {
     const products = await ProductServices.getAll();
-    self.postMessage(products)
+    self.postMessage(products);
   }
-}
+};

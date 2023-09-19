@@ -12,22 +12,13 @@ type ProductViewModelProps = {
   setOpen: (open: boolean) => void;
 };
 
-const ProductViewModel = ({
-  product,
-  open,
-  setOpen,
-}: ProductViewModelProps) => {
+const ProductViewModel = ({ product, open, setOpen }: ProductViewModelProps) => {
   return (
     <div className={`product-view_modal ${open ? "active" : ""}`}>
-      <div className="product-view_modal_content">
-        {open && <ProductView product={product} />}
-        <div className="product-view_modal_content_close">
-          <Button
-            size="sm"
-            icon={""}
-            animate={false}
-            onClick={() => setOpen(false)}
-          >
+      <div className='product-view_modal_content'>
+        {open ? <ProductView product={product} /> : null}
+        <div className='product-view_modal_content_close'>
+          <Button animate={false} icon='' onClick={() => setOpen(false)} size='sm'>
             Đóng
           </Button>
         </div>

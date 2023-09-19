@@ -12,7 +12,7 @@ const Topbar = () => {
   const colorMode = useContext(ColorModeContext);
 
   return (
-    <Box display="flex" justifyContent="flex-end" p={2}>
+    <Box display='flex' justifyContent='flex-end' p={2}>
       {/* SEARCH BAR */}
       {/* <Box display={"flex"} borderRadius={"3px"} bgcolor={colors.grey[400]}>
         <InputBase sx={{ ml: 2, flex: 1 }} placeholder="Search..." />
@@ -21,16 +21,12 @@ const Topbar = () => {
         </IconButton>
       </Box> */}
       {/* ICONS */}
-      <Box display="flex">
+      <Box display='flex'>
         <IconButton onClick={() => router.push("/")}>
           <HomeOutlinedIcon />
         </IconButton>
         <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon />
-          ) : (
-            <LightModeOutlinedIcon />
-          )}
+          {theme.palette.mode === "dark" ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
         </IconButton>
         {/* <IconButton
           onClick={() => {

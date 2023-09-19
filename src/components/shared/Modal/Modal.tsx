@@ -7,12 +7,14 @@ type ModalProps = {
   children: any;
 };
 
-const Modal = React.forwardRef((props: ModalProps, ref: any) => {
+const Modal = React.forwardRef((props: ModalProps, _ref) => {
   return (
-    <ModalMUI open={props.open} onClose={props.handleClose} keepMounted={false}>
-      <div className="modal">{props.children}</div>
+    <ModalMUI keepMounted={false} onClose={props.handleClose} open={props.open}>
+      <div className='modal'>{props.children}</div>
     </ModalMUI>
   );
 });
+
+Modal.displayName = "Modal";
 
 export default Modal;

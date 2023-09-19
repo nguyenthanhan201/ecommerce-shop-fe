@@ -9,26 +9,20 @@ interface SelectProps extends FormControlProps {
 }
 
 const Select = React.forwardRef(
-  (
-    { defaultValue, label, error, children, multiple, ...props }: SelectProps,
-    ref
-  ) => {
+  ({ defaultValue, label, error, children, multiple, ...props }: SelectProps, _ref) => {
     return (
-      <FormControl
-        fullWidth
-        error={error}
-        className="input"
-        style={{ marginTop: "20px" }}
-      >
+      <FormControl className='input' error={error} fullWidth style={{ marginTop: "20px" }}>
         <InputLabel>{label}</InputLabel>
-        <SelectMUI {...props} multiple={multiple} defaultValue={defaultValue}>
+        <SelectMUI {...props} defaultValue={defaultValue} multiple={multiple}>
           {children}
         </SelectMUI>
         {/* Checking if there is an error and if there is, it will display the error message. */}
-        {Boolean(error) && <p className="input__err">{error}</p>}
+        {error ? <p className='input__err'>{error}</p> : null}
       </FormControl>
     );
-  }
+  },
 );
+
+Select.displayName = "Select";
 
 export default Select;

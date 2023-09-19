@@ -1,3 +1,4 @@
+/* eslint-disable prefer-const */
 import { useEffect } from "react";
 
 type ImagePreviewProps = {
@@ -8,7 +9,7 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
   useEffect(() => {
     let ignore = false;
     function imageZoom(imgID: any, resultID: any) {
-      var img: any, lens: any, result: any, cx: any, cy: any;
+      let img: any, lens: any, result: any, cx: any, cy: any;
       img = document.getElementById(imgID);
       // console.log("👌 ~ img", img.height);
       result = document.getElementById(resultID);
@@ -22,8 +23,7 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
       cy = result.offsetHeight / lens.offsetHeight;
       /*set background properties for the result DIV:*/
       result.style.backgroundImage = "url('" + img.src + "')";
-      result.style.backgroundSize =
-        img.width * cx + "px " + img.height * cy + "px";
+      result.style.backgroundSize = img.width * cx + "px " + img.height * cy + "px";
       /*execute a function when someone moves the cursor over the image, or the lens:*/
       lens.addEventListener("mousemove", moveLens);
       img.addEventListener("mousemove", moveLens);
@@ -31,7 +31,7 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
       // lens.addEventListener("touchmove", moveLens);
       // img.addEventListener("touchmove", moveLens);
       function moveLens(e: any) {
-        var pos, x, y;
+        let pos, x, y;
         /*prevent any other actions that may occur when moving over the image:*/
         e.preventDefault();
         /*get the cursor's x and y positions:*/
@@ -59,7 +59,7 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
         result.style.backgroundPosition = "-" + x * cx + "px -" + y * cy + "px";
       }
       function getCursorPos(e: any) {
-        var a,
+        let a,
           x = 0,
           y = 0;
         e = e || window.event;
@@ -77,19 +77,16 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
 
     function customRightResult() {
       window.addEventListener("load", () => {
-        var elementResult: any = document.querySelector("#myresult");
+        let elementResult: any = document.querySelector("#myresult");
 
         // ?Lay cac phan tu tinh toan do dai zoom_result
-        var container = Array.from(
-          document.getElementsByClassName("container")
-        );
+        let container = Array.from(document.getElementsByClassName("container"));
         // console.log(container[1].clientWidth);
-        var product_image: any = document.querySelector(".product_image");
-        var num: any =
-          (product_image.clientWidth * 100) / container[1].clientWidth;
+        let product_image: any = document.querySelector(".product_image");
+        let num: any = (product_image.clientWidth * 100) / container[1].clientWidth;
         // console.log("phan tram cua product_image:" + num.toFixed());
 
-        var widthOfResult = 98 - num.toFixed();
+        let widthOfResult = 98 - num.toFixed();
         // console.log("phan tram cua result:" + widthOfResult);
 
         if (typeof elementResult != "undefined") {
@@ -112,9 +109,9 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
   }, []);
 
   return (
-    <div className="img-zoom-container">
-      <img id="myimage" src={previewImg} alt={previewImg} />
-      <div id="myresult" className="img-zoom-result"></div>
+    <div className='img-zoom-container'>
+      <img id='myimage' src={previewImg} alt={previewImg} />
+      <div id='myresult' className='img-zoom-result'></div>
     </div>
   );
 };

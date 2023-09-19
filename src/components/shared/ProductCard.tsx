@@ -26,8 +26,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
   };
 
   return (
-    <div className="product-card">
-      <div className="container-product-card">
+    <div className='product-card'>
+      <div className='container-product-card'>
         {/* <ul className="thumb">
           {[product.image01, product.image02].map((child, index) => (
             <li className="child-shoes" key={index}>
@@ -43,7 +43,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             </li>
           ))}
         </ul> */}
-        <div className="imgBox">
+        <div className='imgBox'>
           <h2>{product.title}</h2>
           <Link
             href={{
@@ -65,24 +65,20 @@ const ProductCard = ({ product }: ProductCardProps) => {
               },
             }}
             onClick={handleIncreaseViewsProduct}
-            className="shoess"
+            className='shoess'
           >
             <Img
               src={product.image01}
               alt={product.title}
-              layout="fill"
-              className="rounded-[20px]"
+              layout='fill'
+              className='rounded-[20px]'
             />
           </Link>
-          <div className="size">
+          <div className='size'>
             <span>Giá</span>
             {product.discount ? (
               <>
-                <p>
-                  {numberWithCommans(
-                    getSalePrice(product.price, product.discount)
-                  )}
-                </p>
+                <p>{numberWithCommans(getSalePrice(product.price, product.discount))}</p>
                 <del>{numberWithCommans(Number(product.price))}</del>
               </>
             ) : (
@@ -90,8 +86,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
             )}
           </div>
           <Button
-            size="sm"
-            icon={<ShoppingCartOutlinedIcon fontSize="inherit" />}
+            size='sm'
+            icon={<ShoppingCartOutlinedIcon fontSize='inherit' />}
             animate={true}
             onClick={() => setOpen(true)}
           >
@@ -99,9 +95,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           </Button>
         </div>
       </div>
-      {open && (
-        <ProductViewModel open={open} product={product} setOpen={setOpen} />
-      )}
+      {open ? <ProductViewModel open={open} product={product} setOpen={setOpen} /> : null}
     </div>
   );
 };

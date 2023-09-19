@@ -17,15 +17,7 @@ import Header from "components/index/admin/components/Header";
 import { useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Page = () => {
   const [chartData, setChartData] = useState<any>();
@@ -187,10 +179,10 @@ const Page = () => {
   if (!chartData) return <div>Loading...</div>;
   return (
     <>
-      <Box m="20px">
+      <Box m='20px'>
         {/* HEADER */}
-        <Box display="flex" justifyContent="space-between" alignItems="center">
-          <Header title="Thống kê lượt xem" subtitle="Chào mừng tới thống kê" />
+        <Box display='flex' justifyContent='space-between' alignItems='center'>
+          <Header title='Thống kê lượt xem' subtitle='Chào mừng tới thống kê' />
         </Box>
         {/* GRID & CHARTS */}
       </Box>

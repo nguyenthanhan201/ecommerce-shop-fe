@@ -1,10 +1,6 @@
 import Img from "@/components/shared/Img/Img";
 import AdminLayout from "@/layouts/admin-layout/AdminLayout";
-import {
-  formatDate,
-  getSalePrice,
-  numberWithCommans,
-} from "@/lib/helpers/parser";
+import { formatDate, getSalePrice, numberWithCommans } from "@/lib/helpers/parser";
 import { useAppSelector } from "@/lib/hooks/useAppSelector";
 import { useToast } from "@/lib/providers/toast-provider";
 import { AuthServices } from "@/lib/repo/auth.repo";
@@ -32,22 +28,20 @@ const columns: any = [
     align: "left",
     renderCell: (row: any) => {
       return (
-        <div className="flex flex-col gap-2">
+        <div className='flex flex-col gap-2'>
           {Object.values(row.row.order).map((item: any, index: number) => {
             const { size, color, product } = item[0];
             return (
-              <div className="flex items-center gap-2" key={index}>
+              <div className='flex items-center gap-2' key={index}>
                 <Img
                   src={product.image01}
                   alt={product.image01}
                   width={30}
                   height={30}
-                  className="rounded-full"
+                  className='rounded-full'
                   hasNotplaceholder
                 />
-                <p
-                  style={{ whiteSpace: "break-spaces" }}
-                >{`${product.title}-${size}-${color}`}</p>
+                <p style={{ whiteSpace: "break-spaces" }}>{`${product.title}-${size}-${color}`}</p>
               </div>
             );
           })}
@@ -71,18 +65,13 @@ const columns: any = [
     align: "center",
     renderCell: (row: any) => {
       return (
-        <div className="flex flex-col gap-2">
+        <div className='flex flex-col gap-2'>
           {Object.values(row.row.order).map((item: any, index: number) => {
             const { quantity, price, product } = item[0];
             return (
-              <div
-                key={index}
-                style={{ display: "flex", alignItems: "center" }}
-              >
+              <div key={index} style={{ display: "flex", alignItems: "center" }}>
                 {product.discount
-                  ? numberWithCommans(
-                      getSalePrice(product.price, product.discount) * quantity
-                    )
+                  ? numberWithCommans(getSalePrice(product.price, product.discount) * quantity)
                   : numberWithCommans(price * quantity)}
               </div>
             );
@@ -119,13 +108,9 @@ const Page = () => {
 
       if (!order) return;
       // in cột order có nhiều sản phẩm nên phải map ra
-      const Purchaseorders = Object.values(order).map(
-        (item2: any) => item2[0].product.title
-      );
+      const Purchaseorders = Object.values(order).map((item2: any) => item2[0].product.title);
       // in cột price có nhiều sản phẩm nên phải map ra
-      const PurchasePrice = Object.values(order).map(
-        (item2: any) => item2[0].product.price
-      );
+      const PurchasePrice = Object.values(order).map((item2: any) => item2[0].product.price);
       return {
         idAuth,
         createdAt,
@@ -145,10 +130,7 @@ const Page = () => {
       })
       .catch((err) => {
         console.log("👌 ~ err", err);
-        if (
-          err.response.data.error.name === "TokenExpiredError" &&
-          auth?.email
-        ) {
+        if (err.response.data.error.name === "TokenExpiredError" && auth?.email) {
           toast.promise(
             "Làm mới access token thành công. Làm mới trang để tiếp tục",
             AuthServices.token(auth?.email)
@@ -158,7 +140,7 @@ const Page = () => {
               .catch((err) => {
                 Promise.reject(err);
               }),
-            "Làm mới access token thất bại"
+            "Làm mới access token thất bại",
           );
         }
       });
@@ -193,14 +175,14 @@ const Page = () => {
   }, [convertOrdersToExcel]);
 
   return (
-    <Box m="20px">
-      <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Header title="Orders" subtitle="Welcome to orders dashboard" />
+    <Box m='20px'>
+      <Box display='flex' justifyContent='space-between' alignItems='center'>
+        <Header title='Orders' subtitle='Welcome to orders dashboard' />
         {ButtonExcel}
       </Box>
       <Box
-        m="20px 0 0 0"
-        height="75vh"
+        m='20px 0 0 0'
+        height='75vh'
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",

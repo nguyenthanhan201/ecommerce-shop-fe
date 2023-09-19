@@ -39,9 +39,7 @@ const CatalogPage = () => {
 
       if (filter.category.length > 0) {
         temp = temp.filter((e) => {
-          const check = filter.category.find(
-            (category) => e.categorySlug === category
-          );
+          const check = filter.category.find((category) => e.categorySlug === category);
           return check !== undefined;
         });
       }
@@ -74,9 +72,9 @@ const CatalogPage = () => {
 
   return (
     <>
-      <div className="catalog">
+      <div className='catalog'>
         <CatalogFilter filter={filter} setFilter={setFilter} />
-        <div className="catalog_content">
+        <div className='catalog_content'>
           {isLoading ? <Loading /> : <InfinityList data={products as any} />}
         </div>
       </div>

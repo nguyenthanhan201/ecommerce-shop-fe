@@ -1,6 +1,6 @@
 import format from "date-fns/format";
 
-export const numberWithCommans = (num: Number) =>
+export const numberWithCommans = (num: number) =>
   num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₫";
 
 export const getSalePrice = (basePrice: number | string, discount: number) => {
@@ -9,12 +9,7 @@ export const getSalePrice = (basePrice: number | string, discount: number) => {
 
 export function formatDate(
   date: string | Date | number | undefined,
-  formatText:
-    | "date"
-    | "time"
-    | "datetime"
-    | "year_month_date"
-    | (string & {}) = "date"
+  formatText: "date" | "time" | "datetime" | "year_month_date" | (string & object) = "date",
 ): string {
   let formatString;
   switch (formatText) {

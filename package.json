@@ -9,7 +9,10 @@
     "analyze": "ANALYZE=true next build",
     "deploy": "react-scripts build && gh-pages -d build",
     "reinstall-ds": "rm -rf ./node_modules/my-package && npm cache clean pacote:tarball:file:react-typescript-hooks-1.3.3.tgz && npm install my-package",
-    "reinstall": "rm -rf ./node_modules/my-package && rm -rf package-lock.json && npm cache clean pacote:tarball:file:react-typescript-hooks-1.3.3.tgz && npm instal"
+    "reinstall": "rm -rf ./node_modules/my-package && rm -rf package-lock.json && npm cache clean pacote:tarball:file:react-typescript-hooks-1.3.3.tgz && npm instal",
+    "lint:fix": "eslint ./src --ext .jsx,.js,.ts,.tsx --quiet --fix --ignore-path ./.gitignore",
+    "lint:format": "prettier  --loglevel warn --write \"./**/*.{js,jsx,ts,tsx,md,json}\" ",
+    "lint": "yarn lint:format && yarn lint:fix"
   },
   "dependencies": {
     "@emotion/react": "^11.10.5",
@@ -65,8 +68,15 @@
   "devDependencies": {
     "@hookform/resolvers": "^2.9.10",
     "@types/react-helmet": "^6.1.6",
+    "@typescript-eslint/eslint-plugin": "^6.7.0",
+    "@typescript-eslint/parser": "^6.7.0",
     "autoprefixer": "^10.4.13",
+    "eslint": "^8.49.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-prettier": "^5.0.0",
+    "eslint-plugin-react": "^7.33.2",
     "postcss": "^8.4.21",
+    "prettier": "^3.0.3",
     "react-hook-form": "^7.41.1",
     "sass": "^1.57.1",
     "tailwindcss": "^3.2.4",

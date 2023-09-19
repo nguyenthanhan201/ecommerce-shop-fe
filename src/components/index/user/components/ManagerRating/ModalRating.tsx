@@ -22,12 +22,10 @@ const ModalRating = ({ selectedRating }: ModalRatingProps) => {
     if (rating === null || comment === "" || !selectedRating?._id) return;
     toast.promise(
       "Gửi đánh giá thành công",
-      RatingServices.updateRatingById(
-        selectedRating?._id,
-        rating,
-        comment
-      ).then(() => setIdDisabled(true)),
-      "Gửi đánh giá thất bại"
+      RatingServices.updateRatingById(selectedRating?._id, rating, comment).then(() =>
+        setIdDisabled(true),
+      ),
+      "Gửi đánh giá thất bại",
     );
   };
 
@@ -35,22 +33,23 @@ const ModalRating = ({ selectedRating }: ModalRatingProps) => {
     <>
       <p>{selectedRating?.idProduct.title}</p>
       <RatingMUI
-        name="simple-controlled"
-        value={rating}
+        name='simple-controlled'
         onChange={(event, newValue) => {
           setRating(newValue);
         }}
+        value={rating}
       />
       <Input
-        type="editor"
-        value={comment}
         onChange={onEditorStateChange}
-        placeholder="Nhập nội dụng comment"
+        placeholder='Nhập nội dụng comment'
+        type='editor'
+        value={comment}
       />
       <button
-        className="px-2 py-1 rounded border-none mt-3 cursor-pointer bg-main"
-        onClick={handleRating}
+        className='px-2 py-1 rounded border-none mt-3 cursor-pointer bg-main'
         disabled={idDisabled}
+        onClick={handleRating}
+        type='button'
       >
         Gửi đánh giá
       </button>

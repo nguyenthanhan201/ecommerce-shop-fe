@@ -1,7 +1,7 @@
 import { get, put } from "../axios/requests";
 
 export class RatingRepository {
-  async getRatingByIdAuth(idAuth: String) {
+  async getRatingByIdAuth(idAuth: string) {
     const res = await get(`/rating/getRatingByIdAuth/${idAuth}`);
     return res;
   }

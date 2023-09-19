@@ -7,14 +7,14 @@ import Topbar from "./components/Topbar";
 const AdminLayout = ({ ...props }: any) => {
   useAuth();
   const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  const _colors = tokens(theme.palette.mode);
 
   return (
     <>
       <CssBaseline />
-      <div className="admin" style={{}}>
+      <div className='admin' style={{}}>
         <Sidebar />
-        <main className="w-full h-full">
+        <main className='w-full h-full'>
           <Topbar />
           {props.children}
         </main>

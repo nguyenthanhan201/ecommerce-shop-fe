@@ -28,7 +28,7 @@ export function useSEO(
     image?: string;
     keyword?: string;
     shopName?: string;
-  } = {}
+  } = {},
 ): SEO {
   return {
     titleTemplate: data.shopName ? `%s | ${data.shopName}` : `%s`,

@@ -1,3 +1,4 @@
+/* eslint-disable react/destructuring-assignment */
 import { memo, ReactNode } from "react";
 
 type ButtonProps = {
@@ -5,7 +6,7 @@ type ButtonProps = {
   backgroundColor?: string;
   size?: string;
   icon?: ReactNode;
-animate?: boolean;
+  animate?: boolean;
   onClick?: () => void;
 };
 
@@ -21,10 +22,11 @@ const Button = (props: ButtonProps) => {
     <button
       className={`btn ${bg} ${size} ${animate}`}
       onClick={props.onClick ? props.onClick : undefined}
+      type='button'
     >
-      <span className="btn_txt">{props.children}</span>
+      <span className='btn_txt'>{props.children}</span>
       {props.icon ? (
-        <span className="btn_icon">
+        <span className='btn_icon'>
           {/* <i className={`${props.icon} bx-tada`}></i> */}
           {props.icon}
         </span>

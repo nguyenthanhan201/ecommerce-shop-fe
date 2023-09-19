@@ -9,6 +9,7 @@ type InfinityListProps = {
 };
 
 const InfinityList = (props: InfinityListProps) => {
+  const { data: dataProp } = props;
   const perLoad = 6;
   const listRef = useRef<any>(null);
 
@@ -19,9 +20,9 @@ const InfinityList = (props: InfinityListProps) => {
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
-    setData(props.data.slice(0, perLoad));
+    setData(dataProp.slice(0, perLoad));
     setIndex(1);
-  }, [props.data]);
+  }, [dataProp]);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -40,24 +41,24 @@ const InfinityList = (props: InfinityListProps) => {
 
   useEffect(() => {
     const getItems = () => {
-      const pages = Math.floor(props.data.length / perLoad);
-      const maxIndex = props.data.length % perLoad === 0 ? pages : pages + 1;
+      const pages = Math.floor(dataProp.length / perLoad);
+      const maxIndex = dataProp.length % perLoad === 0 ? pages : pages + 1;
 
       if (load && index <= maxIndex) {
         const start = perLoad + index;
         const end = start + perLoad;
 
-        setData(data.concat(props.data.slice(start, end)));
+        setData(data.concat(dataProp.slice(start, end)));
         setIndex(index + 1);
       }
     };
     getItems();
     setLoad(false);
-  }, [load, index, data, props.data]);
+  }, [load, index, data, dataProp]);
 
   return (
     <div ref={listRef}>
-      <Grid col={3} mdCol={2} smCol={1} gap={20}>
+      <Grid col={3} gap={20} mdCol={2} smCol={1}>
         {data.map((item: any) => (
           <ProductCard key={Math.random()} product={item} />
         ))}

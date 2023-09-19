@@ -6,7 +6,7 @@ export class CartRepository {
     idProduct: string,
     size: string,
     color: string,
-    quantity: number
+    quantity: number,
   ) {
     const res = await post(`/cart-item/create`, {
       idAuth,
@@ -18,12 +18,7 @@ export class CartRepository {
     return res;
   }
 
-  async deleteCartItem(
-    idAuth: string,
-    idProduct: string,
-    size: string,
-    color: string
-  ) {
+  async deleteCartItem(idAuth: string, idProduct: string, size: string, color: string) {
     const res = await post(`/cart-item/delete`, {
       idAuth,
       idProduct,

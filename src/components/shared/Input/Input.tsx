@@ -32,7 +32,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       label,
       defaultValue,
       placeholder,
-      className,
+      // className,
       multiple,
       error,
       value,
@@ -41,60 +41,56 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       onChange,
       onBlur,
       style = {},
-      listSelecte,
+      // listSelecte,
       children,
       ...props
     }: InputProps,
-    ref
+    ref,
   ) => {
     return (
       <>
-        <div className="input">
-          {label && (
-            <label htmlFor="" className="input__label">
+        <div className='input'>
+          {label ? (
+            <label className='input__label' htmlFor=''>
               {label}
             </label>
-          )}
+          ) : null}
           {type === "select" ? (
             <FormControl fullWidth>
-              <Select
-                {...props}
-                defaultValue={defaultValue}
-                multiple={multiple}
-              >
+              <Select {...props} defaultValue={defaultValue} multiple={multiple}>
                 {children}
               </Select>
             </FormControl>
           ) : type === "editor" ? (
             <ReactQuill
-              theme="snow"
-              value={value}
               onChange={onChange as any}
               placeholder={placeholder}
+              theme='snow'
+              value={value}
             />
           ) : (
             <input
-              type={type}
-              ref={ref}
-              value={value || undefined}
-              name={name}
+              className='input__field'
               defaultValue={defaultValue || undefined}
-              required={required}
-              placeholder={placeholder}
               disabled={disabled}
-              className={`input__field`}
-              style={{ ...style }}
-              onChange={onChange}
+              name={name}
               onBlur={onBlur}
+              onChange={onChange}
+              placeholder={placeholder}
+              ref={ref}
+              required={required}
+              style={{ ...style }}
+              type={type}
+              value={value || undefined}
               {...props}
             />
           )}
         </div>
         {/* Checking if there is an error and if there is, it will display the error message. */}
-        {Boolean(error) && <p className="input__err">{error}</p>}
+        {error ? <p className='input__err'>{error}</p> : null}
       </>
     );
-  }
+  },
 );
 
 Input.displayName = "Input";

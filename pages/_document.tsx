@@ -8,12 +8,12 @@ export default class MyDocument extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang='en'>
         <Head>
           {/* meta name google-site-verification can replay by other account */}
           <meta
-            name="google-site-verification"
-            content="Dxc_EFlajz1_k2ONTT0dESX28uwbYlAQsMRbO-qGa14"
+            name='google-site-verification'
+            content='Dxc_EFlajz1_k2ONTT0dESX28uwbYlAQsMRbO-qGa14'
           />
           {/* verify your domain in Facebook Business Manager */}
           {/* <meta

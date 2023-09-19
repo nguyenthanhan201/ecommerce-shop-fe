@@ -34,9 +34,7 @@ const Menu = ({ handleLogout }: MenuProps) => {
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   const [isChangedDropdown, setIsChangedDropdown] = useState<boolean>(false);
-  const [selectedTypeChild, setSelectedTypeChild] = useState<string | null>(
-    null
-  );
+  const [selectedTypeChild, setSelectedTypeChild] = useState<string | null>(null);
 
   const MENU_ITEMS: MenuItemsProps[] = useMemo(() => {
     return [
@@ -46,9 +44,7 @@ const Menu = ({ handleLogout }: MenuProps) => {
         to: "/user/account",
       },
       {
-        icon: (
-          <AdminPanelSettingsOutlinedIcon sx={{ fontSize: "80% !important" }} />
-        ),
+        icon: <AdminPanelSettingsOutlinedIcon sx={{ fontSize: "80% !important" }} />,
         title: "Trang Admin",
         to: "/admin",
       },
@@ -85,15 +81,9 @@ const Menu = ({ handleLogout }: MenuProps) => {
       {
         icon:
           theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon
-              className="dark_toggle"
-              sx={{ fontSize: "80% !important" }}
-            />
+            <DarkModeOutlinedIcon className='dark_toggle' sx={{ fontSize: "80% !important" }} />
           ) : (
-            <WbSunnyOutlinedIcon
-              className="dark_toggle"
-              sx={{ fontSize: "80% !important" }}
-            />
+            <WbSunnyOutlinedIcon className='dark_toggle' sx={{ fontSize: "80% !important" }} />
           ),
         title: "Giao diện",
         func: () => colorMode.toggleColorMode(),
@@ -108,9 +98,9 @@ const Menu = ({ handleLogout }: MenuProps) => {
 
   const childrenItems = useMemo(() => {
     if (selectedTypeChild === null) return [];
-    return MENU_ITEMS.filter(
-      (item) => item.children?.type === selectedTypeChild
-    ).map((obj) => obj.children?.data);
+    return MENU_ITEMS.filter((item) => item.children?.type === selectedTypeChild).map(
+      (obj) => obj.children?.data,
+    );
   }, [selectedTypeChild, MENU_ITEMS]);
 
   return (
@@ -118,46 +108,38 @@ const Menu = ({ handleLogout }: MenuProps) => {
       className={`dropdown ${isChangedDropdown && "expand"}`}
       onMouseLeave={() => setIsChangedDropdown(false)}
     >
-      <div className="dropdown-content">
-        <div className="dropdown-enter">
+      <div className='dropdown-content'>
+        <div className='dropdown-enter'>
           {MENU_ITEMS.map((menu, index) => {
             return (
-              <div
-                key={index}
-                onClick={() =>
-                  setSelectedTypeChild(menu.children?.type || null)
-                }
-              >
+              <div key={index} onClick={() => setSelectedTypeChild(menu.children?.type || null)}>
                 {menu.to ? (
-                  <Link href={menu.to} className="dropdown_item">
+                  <Link className='dropdown_item' href={menu.to}>
                     {menu.icon}
                     <span>{menu.title}</span>
                   </Link>
                 ) : (
-                  <p className="dropdown_item" onClick={menu.func}>
+                  <p className='dropdown_item' onClick={menu.func}>
                     {menu.icon}
                     <span>{menu.title}</span>
-                    {menu.children && (
+                    {menu.children ? (
                       <ArrowBackIosNewOutlinedIcon
                         sx={{
                           fontSize: "80% !important",
                           transform: "rotate(180deg)",
                         }}
                       />
-                    )}
+                    ) : null}
                   </p>
                 )}
               </div>
             );
           })}
         </div>
-        <div className="dropdown-expand">
-          {childrenItems.length !== 0 && (
-            <MenuChild
-              childrenItems={childrenItems}
-              setIsChangedDropdown={setIsChangedDropdown}
-            />
-          )}
+        <div className='dropdown-expand'>
+          {childrenItems.length !== 0 ? (
+            <MenuChild childrenItems={childrenItems} setIsChangedDropdown={setIsChangedDropdown} />
+          ) : null}
         </div>
       </div>
     </div>

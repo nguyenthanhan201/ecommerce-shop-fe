@@ -19,10 +19,9 @@ const VNPayReturnPage = () => {
       '{"' + query.replace(/&/g, '","').replace(/=/g, '":"') + '"}',
       function (key, value) {
         return key === "" ? value : decodeURIComponent(value);
-      }
+      },
     );
     setResponseCode(tempParams.vnp_ResponseCode);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -37,20 +36,19 @@ const VNPayReturnPage = () => {
         .catch((err) => {
           console.log("🚀 ~ file: VNPayReturn.tsx ~ line 43 ~ err", err);
         }),
-      "Xử lí đơn hàng thất bại"
+      "Xử lí đơn hàng thất bại",
     );
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [auth?._id]);
 
   return (
-    <div className="vnpay-return">
+    <div className='vnpay-return'>
       {responseCode === "00" ? (
-        <p className="vnpay-return__text--success">Thanh toán thành công</p>
+        <p className='vnpay-return__text--success'>Thanh toán thành công</p>
       ) : (
-        <p className="vnpay-return__text--error">Thanh toán thất bại</p>
+        <p className='vnpay-return__text--error'>Thanh toán thất bại</p>
       )}
       <Button>
-        <Link href="/">Quay lại trang chủ</Link>
+        <Link href='/'>Quay lại trang chủ</Link>
       </Button>
     </div>
   );

@@ -13,10 +13,7 @@ function useAuth() {
       onAuthStateChanged(authentication, (user) => {
         // console.log("👌 ~ user", user);
         if (!user) return dispatch(setAuthSlice(undefined));
-        return AuthServices.getUserByEmail(
-          String(user.displayName),
-          String(user.email)
-        )
+        return AuthServices.getUserByEmail(String(user.displayName), String(user.email))
           .then((res) => {
             const { name, email, _id } = res;
             dispatch(
@@ -24,7 +21,7 @@ function useAuth() {
                 name,
                 email,
                 _id,
-              })
+              }),
             );
           })
           .catch((err: any) => {

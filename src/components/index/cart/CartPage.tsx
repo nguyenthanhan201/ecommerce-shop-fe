@@ -32,8 +32,7 @@ const CartPage = () => {
 
       // if product is on sale then use sale price else use price from product
       return (total += item[0].idProduct.discount
-        ? getSalePrice(item[0].idProduct.price, item[0].idProduct.discount) *
-          quantity
+        ? getSalePrice(item[0].idProduct.price, item[0].idProduct.discount) * quantity
         : Number(item[0].idProduct.price) * quantity);
     });
     return total;
@@ -50,47 +49,48 @@ const CartPage = () => {
   };
 
   return (
-    <div className="cart mb-3">
-      <div className="cart_info">
-        <div className="cart_info_txt">
+    <div className='cart mb-3'>
+      <div className='cart_info'>
+        <div className='cart_info_txt'>
           <p>
-            Bạn đang có {filteredCartItems && filteredCartItems.length} sản phẩm
-            trong giỏ hàng
+            Bạn đang có {filteredCartItems ? filteredCartItems.length : null} sản phẩm trong giỏ
+            hàng
           </p>
-          <div className="cart_info_txt_price">
+          <div className='cart_info_txt_price'>
             <span>Thành tiền</span>
             <span>{numberWithCommans(totalPrice)}</span>
           </div>
         </div>
-        <div className="cart_info_btn">
-          <Button size="block" onClick={handleCreateOrder}>
+        <div className='cart_info_btn'>
+          <Button size='block' onClick={handleCreateOrder}>
             đặt hàng
           </Button>
-          <Link href="/">
-            <Button size="block">tiếp tục mua hàng</Button>
+          <Link href='/'>
+            <Button size='block'>tiếp tục mua hàng</Button>
           </Link>
         </div>
       </div>
-      <div className="cart_list">
-        {cartItems &&
-          Object.values(cartItems).map((item, index) => {
-            // console.log("👌 ~ item", item);
-            return (
-              <CartItem
-                key={index}
-                product={item[0].idProduct}
-                quantity={item[0].quantity}
-                size={item[0].size}
-                color={item[0].color}
-              />
-            );
-          })}
-        <p className="text-red-500">
+      <div className='cart_list'>
+        {cartItems
+          ? Object.values(cartItems).map((item, index) => {
+              // console.log("👌 ~ item", item);
+              return (
+                <CartItem
+                  key={index}
+                  product={item[0].idProduct}
+                  quantity={item[0].quantity}
+                  size={item[0].size}
+                  color={item[0].color}
+                />
+              );
+            })
+          : null}
+        <p className='text-red-500'>
           Lưu ý: vào link sau để lấy thông tin thanh toán&nbsp;
           <Link
-            href="https://sandbox.vnpayment.vn/apis/vnpay-demo/"
-            target="_blank"
-            className="text-blue-500"
+            href='https://sandbox.vnpayment.vn/apis/vnpay-demo/'
+            target='_blank'
+            className='text-blue-500'
           >
             https://sandbox.vnpayment.vn/apis/vnpay-demo/
           </Link>

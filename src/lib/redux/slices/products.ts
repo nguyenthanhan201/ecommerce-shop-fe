@@ -4,7 +4,7 @@ import { Product } from "../types/product.type";
 const initialState = {
   products: [] as Array<Product>,
   err: null,
-}
+};
 
 const products = createSlice({
   name: "products",
@@ -15,7 +15,7 @@ const products = createSlice({
     },
     setErrProductSlice: (state, action) => {
       state.err = action.payload;
-    }
+    },
   },
 });
 

@@ -1,13 +1,7 @@
 import Image from "next/image";
 import { ComponentPropsWithoutRef } from "react";
 
-declare const VALID_LAYOUT_VALUES: readonly [
-  "fill",
-  "fixed",
-  "intrinsic",
-  "responsive",
-  undefined
-];
+declare const VALID_LAYOUT_VALUES: readonly ["fill", "fixed", "intrinsic", "responsive", undefined];
 declare type LayoutValue = (typeof VALID_LAYOUT_VALUES)[number];
 // declare type ImgElementStyle = NonNullable<
 //   JSX.IntrinsicElements["img"]["style"]
@@ -67,17 +61,13 @@ const Img = ({
       {...props}
       id={id}
       objectPosition={objectPosition}
-      layout={layout && layout}
+      layout={layout ? layout : null}
       loading={loading || "lazy"}
       placeholder={hasNotplaceholder ? undefined : "blur"}
-      blurDataURL="/images/favicon.png"
+      blurDataURL='/images/favicon.png'
       loader={myLoader}
       src={
-        compress
-          ? `https://images.weserv.nl/?url=${src}${
-              compress ? `&w=${compress}` : ""
-            }`
-          : src
+        compress ? `https://images.weserv.nl/?url=${src}${compress ? `&w=${compress}` : ""}` : src
       }
       alt={alt}
       width={width}

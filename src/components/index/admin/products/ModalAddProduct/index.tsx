@@ -19,7 +19,6 @@ type ModalAddProductProps = {
 
 const ModalAddProduct = ({ product }: ModalAddProductProps) => {
   const {
-    getValues,
     watch,
     setValue,
     register,
@@ -65,14 +64,14 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         }).then(() => {
           dispatch({ type: GET_PRODUCTS });
         }),
-        "Cập nhật sản phẩm thất bại"
+        "Cập nhật sản phẩm thất bại",
       );
     return toast.promise(
       "Thêm sản phẩm thành công",
       ProductServices.createProduct(data).then(() => {
         dispatch({ type: GET_PRODUCTS });
       }),
-      "Thêm sản phẩm thất bại"
+      "Thêm sản phẩm thất bại",
     );
   };
 
@@ -81,11 +80,11 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
       {product ? <h1>Cập nhật sản phẩm</h1> : <h1>Thêm sản phẩm</h1>}
       <Input
         {...register("title")}
-        type="text"
-        placeholder="Tên sản phẩm"
-        label="title"
-        name="title"
         error={errors.title?.message}
+        label='title'
+        name='title'
+        placeholder='Tên sản phẩm'
+        type='text'
       />
 
       <div
@@ -99,69 +98,69 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         <div style={{ width: "50%" }}>
           <Input
             {...register("image01")}
-            type="text"
-            placeholder="Ảnh sản phẩm"
-            label="image01"
-            name="image01"
             error={errors.image01?.message}
+            label='image01'
+            name='image01'
             onChange={(e) => {
               setImg1(e.target.value);
             }}
+            placeholder='Ảnh sản phẩm'
+            type='text'
           />
-          <img src={img1} alt="image01" />
+          <img alt='image01' src={img1} />
         </div>
         <div style={{ width: "50%" }}>
           <Input
             {...register("image02")}
-            type="text"
-            placeholder="Ảnh sản phẩm"
-            label="image02"
-            name="image02"
             error={errors.image02?.message}
+            label='image02'
+            name='image02'
             onChange={(e) => {
               setImg2(e.target.value);
             }}
+            placeholder='Ảnh sản phẩm'
+            type='text'
           />
-          <img src={img2} alt="image02" />
+          <img alt='image02' src={img2} />
         </div>
       </div>
       <Input
         {...register("stock")}
-        type="number"
-        placeholder="Số lượng"
-        label="stock"
-        name="stock"
         error={errors.stock?.message}
+        label='stock'
+        name='stock'
+        placeholder='Số lượng'
+        type='number'
       />
       <Input
         {...register("price")}
-        type="number"
-        placeholder="Giá sản phẩm"
-        label="price"
-        name="price"
         error={errors.price?.message}
+        label='price'
+        name='price'
+        placeholder='Giá sản phẩm'
+        type='number'
       />
       <Input
         {...register("discount")}
-        type="number"
-        placeholder="Phần trăm giảm giá"
-        label="discount"
-        name="discount"
         error={errors.discount?.message}
+        label='discount'
+        name='discount'
+        placeholder='Phần trăm giảm giá'
+        type='number'
       />
       <Input
-        type="editor"
-        label="editor"
-        value={editorContent}
-        onChange={onEditorStateChange as any}
-        placeholder="Mô tả sản phẩm"
         error={errors.description?.message}
+        label='editor'
+        onChange={onEditorStateChange}
+        placeholder='Mô tả sản phẩm'
+        type='editor'
+        value={editorContent}
       />
       <Select
         {...register("categorySlug")}
         defaultValue={product?.categorySlug || ""}
-        label="CategorySlug"
         error={errors.categorySlug?.message}
+        label='CategorySlug'
       >
         {category.map((item) => (
           <MenuItem key={item.categorySlug} value={item.categorySlug}>
@@ -172,9 +171,9 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
       <Select
         {...register("size")}
         defaultValue={product?.size || []}
-        multiple
-        label="Size"
         error={errors.size?.message}
+        label='Size'
+        multiple
       >
         {size.map((size) => (
           <MenuItem key={size.size} value={size.size}>
@@ -185,9 +184,9 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
       <Select
         {...register("colors")}
         defaultValue={product?.size || []}
-        multiple
-        label="Colors"
         error={errors.colors?.message}
+        label='Colors'
+        multiple
       >
         {colors.map((color) => (
           <MenuItem key={color.color} value={color.color}>
@@ -195,11 +194,7 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
           </MenuItem>
         ))}
       </Select>
-      <Button
-        type="submit"
-        variant="contained"
-        style={{ width: "100%", marginTop: "20px" }}
-      >
+      <Button style={{ width: "100%", marginTop: "20px" }} type='submit' variant='contained'>
         {product ? "Cập nhật" : "Thêm sản phẩm"}
       </Button>
     </form>

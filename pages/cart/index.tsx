@@ -16,7 +16,7 @@ export const getServerSideProps = async () => {
     props: JSON.parse(
       JSON.stringify({
         seo,
-      })
+      }),
     ),
   };
 };

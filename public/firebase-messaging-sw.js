@@ -1,8 +1,6 @@
 /* eslint-disable no-undef */
 importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js");
-importScripts(
-  "https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js"
-);
+importScripts("https://www.gstatic.com/firebasejs/8.10.0/firebase-messaging.js");
 
 const firebaseConfig = {
   apiKey: "AIzaSyBRZFSe-wZBxuq1H1klKDORGNMfZv9Y3G8",
@@ -19,18 +17,12 @@ const messaging = firebase.messaging();
 const channel = new BroadcastChannel("notifications");
 
 messaging.onBackgroundMessage((payload) => {
-  console.log(
-    "[firebase-messaging-sw.js] Received background message ",
-    payload
-  );
+  console.log("[firebase-messaging-sw.js] Received background message ", payload);
   channel.postMessage(payload);
   const notificationTitle = payload.notification.title;
   const notificationOptions = {
     body: payload.notification.body,
     icon: payload.notification.image,
   };
-  self.registration.showNotification(
-    notificationTitle || "no title",
-    notificationOptions
-  );
+  self.registration.showNotification(notificationTitle || "no title", notificationOptions);
 });

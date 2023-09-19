@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  value: null as object | null
-}
+  value: null as object | null,
+};
 
 const cartItemsModel = createSlice({
   name: "cartItemsModel",
@@ -12,8 +12,8 @@ const cartItemsModel = createSlice({
       state.value = action.payload;
     },
   },
-})
+});
 
-export const { setCartItemsSlice } = cartItemsModel.actions
+export const { setCartItemsSlice } = cartItemsModel.actions;
 
-export default cartItemsModel.reducer
+export default cartItemsModel.reducer;

@@ -9,28 +9,17 @@ export const get = async (path: string, config?: AxiosRequestConfig<any>) => {
   return response.data;
 };
 
-export const post = async (
-  path: string,
-  data: object = {},
-  config?: AxiosRequestConfig<any>
-) => {
+export const post = async (path: string, data: object = {}, config?: AxiosRequestConfig<any>) => {
   const response = await request.post(path, data, config);
   return response.data;
 };
 
-export const put = async (
-  path: string,
-  data: object = {},
-  config?: AxiosRequestConfig<any>
-) => {
+export const put = async (path: string, data: object = {}, config?: AxiosRequestConfig<any>) => {
   const response = await request.put(path, data, config);
   return response.data;
 };
 
-export const deleteReq = async (
-  path: string,
-  config?: AxiosRequestConfig<any>
-) => {
+export const deleteReq = async (path: string, config?: AxiosRequestConfig<any>) => {
   const response = await request.delete(path, config);
   return response.data;
 };

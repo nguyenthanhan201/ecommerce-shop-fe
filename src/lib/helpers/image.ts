@@ -42,7 +42,6 @@ export function compressImage(image: string, compress?: number): string {
       return imageUrl;
     }
   } else {
-    return `https://images.weserv.nl/?url=${imageUrl}${compress ? `&w=${compress}` : ""
-      }`;
+    return `https://images.weserv.nl/?url=${imageUrl}${compress ? `&w=${compress}` : ""}`;
   }
 }

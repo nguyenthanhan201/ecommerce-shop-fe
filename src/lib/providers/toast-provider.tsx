@@ -1,10 +1,5 @@
 import Loading from "@/components/shared/Loading/Loading";
-import {
-  Cancel,
-  CheckCircle,
-  Info,
-  WarningOutlined,
-} from "@mui/icons-material";
+import { Cancel, CheckCircle, Info, WarningOutlined } from "@mui/icons-material";
 import { useTheme } from "@mui/material";
 import React, { createContext, ReactNode, useContext } from "react";
 import {
@@ -17,19 +12,13 @@ import {
 
 const ToastContext = createContext<{
   default: (content: ToastContent, options?: ToastOptions | undefined) => void;
-  success: (
-    content: ToastContent,
-    options?: ToastOptions | undefined
-  ) => React.ReactText;
-  error: (
-    content: ToastContent,
-    options?: ToastOptions | undefined
-  ) => React.ReactText;
+  success: (content: ToastContent, options?: ToastOptions | undefined) => React.ReactText;
+  error: (content: ToastContent, options?: ToastOptions | undefined) => React.ReactText;
   promise: (
     contentSuccess: ToastContent,
     func: Promise<any>,
     contentError: ToastContent,
-    options?: ToastOptions | undefined
+    options?: ToastOptions | undefined,
   ) => React.ReactText;
 }>(null as any);
 
@@ -51,22 +40,18 @@ export function ToastProvider({ children }: any) {
   const icons = {
     info: <Info />,
     success: <CheckCircle sx={{ fontSize: "60px", color: "green" }} />,
-    error: <Cancel className="text-red-500" />,
+    error: <Cancel className='text-red-500' />,
     warn: <WarningOutlined />,
     loading: <Loading />,
   };
 
   const createToastContent = (
     type: "info" | "success" | "error" | "warn" | "loading",
-    content?: ToastContent
+    content?: ToastContent,
   ) => (
-    <div className="flex flex-col items-center p-4">
+    <div className='flex flex-col items-center p-4'>
       <i>{icons[type]}</i>
-      {content !== "" ? (
-        <div className="mt-5">{content as ReactNode}</div>
-      ) : (
-        <></>
-      )}
+      {content !== "" ? <div className='mt-5'>{content as ReactNode}</div> : <></>}
     </div>
   );
 
@@ -89,7 +74,7 @@ export function ToastProvider({ children }: any) {
       content: ToastContent,
       func: Promise<any>,
       contentError?: ToastContent,
-      options?: ToastOptions
+      options?: ToastOptions,
     ) =>
       toastify.promise(
         func,
@@ -110,10 +95,7 @@ export function ToastProvider({ children }: any) {
             render({ data }: any) {
               // console.log("👌 ~ data", data);
               // When the promise reject, data will contains the error
-              return createToastContent(
-                "error",
-                data?.message || contentError || "Tải thất bại"
-              );
+              return createToastContent("error", data?.message || contentError || "Tải thất bại");
             },
             icon: false,
           },
@@ -122,19 +104,14 @@ export function ToastProvider({ children }: any) {
           ...defaultOptions,
 
           ...options,
-        }
+        },
       ),
   };
 
   return (
     <ToastContext.Provider value={toast as any}>
       {children}
-      <ToastContainer
-        position="top-center"
-        containerId="toast-root"
-        limit={1}
-        transition={Zoom}
-      />
+      <ToastContainer position='top-center' containerId='toast-root' limit={1} transition={Zoom} />
     </ToastContext.Provider>
   );
 }

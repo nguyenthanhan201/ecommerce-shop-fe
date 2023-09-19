@@ -1,8 +1,5 @@
 import { ToastProvider } from "@/lib/providers/toast-provider";
-import {
-  QueryClientProvider,
-  queryClient,
-} from "@/lib/react-query/queryClient";
+import { QueryClientProvider, queryClient } from "@/lib/react-query/queryClient";
 import store from "@/lib/redux/store";
 import { ColorModeContext, useMode } from "@/lib/theme/theme";
 import { ThemeProvider } from "@mui/material";

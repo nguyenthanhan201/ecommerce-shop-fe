@@ -37,8 +37,8 @@ const DefaultLayout = ({ ...props }: any) => {
     <>
       {/* <div id="progressbar" /> */}
       <DefaultHeader />
-      <div className="container app">
-        <div className="main">
+      <div className='container app'>
+        <div className='main'>
           {props.children}
           <DefaultFooter />
         </div>

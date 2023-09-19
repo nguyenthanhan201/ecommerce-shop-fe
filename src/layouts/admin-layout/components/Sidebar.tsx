@@ -54,10 +54,10 @@ const Sidebar = () => {
           color: "#6870fa !important",
         },
       }}
-      className="h-[100vh]"
+      className='h-[100vh]'
     >
       <ProSidebar collapsed={isCollapsed}>
-        <Menu iconShape="square">
+        <Menu iconShape='square'>
           <MenuItem
             onClick={() => setIsCollapsed(!isCollapsed)}
             icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
@@ -66,96 +66,83 @@ const Sidebar = () => {
               color: colors.grey[100],
             }}
           >
-            {!isCollapsed && (
-              <Box
-                display="flex"
-                justifyContent="space-between"
-                alignItems="center"
-                ml="15px"
-              >
-                <Typography variant="h3" color={colors.grey[100]}>
+            {!isCollapsed ? (
+              <Box display='flex' justifyContent='space-between' alignItems='center' ml='15px'>
+                <Typography variant='h3' color={colors.grey[100]}>
                   ADMINIS
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>
-            )}
+            ) : null}
           </MenuItem>
-          {!isCollapsed && (
-            <Box mb="25px">
-              <Box display="flex" justifyContent="center" alignItems="center">
+          {!isCollapsed ? (
+            <Box mb='25px'>
+              <Box display='flex' justifyContent='center' alignItems='center'>
                 <img
-                  alt="profile-user"
-                  width="100px"
-                  height="100px"
-                  src="/images/Logo.png"
+                  alt='profile-user'
+                  width='100px'
+                  height='100px'
+                  src='/images/Logo.png'
                   style={{ cursor: "pointer", borderRadius: "50%" }}
                 />
               </Box>
-              <Box textAlign="center">
+              <Box textAlign='center'>
                 <Typography
-                  variant="h2"
+                  variant='h2'
                   color={colors.grey[100]}
-                  fontWeight="bold"
+                  fontWeight='bold'
                   sx={{ m: "10px 0 0 0" }}
                 >
                   Thanh An
                 </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
+                <Typography variant='h5' color={colors.greenAccent[500]}>
                   VP Fancy Admin
                 </Typography>
               </Box>
             </Box>
-          )}
+          ) : null}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
             <Item
-              title="Dashboard"
-              to="/admin"
+              title='Dashboard'
+              to='/admin'
               icon={<HomeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
 
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
+            <Typography variant='h6' color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
               Quản lí dữ liệu
             </Typography>
             <Item
-              title="Quản lí sản phẩm"
-              to="/admin/products"
+              title='Quản lí sản phẩm'
+              to='/admin/products'
               icon={<RemoveRedEyeOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Sản phẩm ẩn"
-              to="/admin/hide-products"
+              title='Sản phẩm ẩn'
+              to='/admin/hide-products'
               icon={<VisibilityOffOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
-              title="Quản lí đơn hàng"
-              to="/admin/orders"
+              title='Quản lí đơn hàng'
+              to='/admin/orders'
               icon={<ReceiptLongOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
-            <Typography
-              variant="h6"
-              color={colors.grey[300]}
-              sx={{ m: "15px 0 5px 20px" }}
-            >
+            <Typography variant='h6' color={colors.grey[300]} sx={{ m: "15px 0 5px 20px" }}>
               Phân tích dữ liệu
             </Typography>
             <Item
-              title="Thống kê lượt xem"
-              to="/admin/analytics"
+              title='Thống kê lượt xem'
+              to='/admin/analytics'
               icon={<AnalyticsIcon />}
               selected={selected}
               setSelected={setSelected}

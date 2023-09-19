@@ -19,9 +19,7 @@ const Page = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const products = useAppSelector((state) => state.products.products);
-  const errProducts: string | null = useAppSelector(
-    (state) => state.products.err
-  );
+  const errProducts: string | null = useAppSelector((state) => state.products.err);
   const auth = useAppSelector((state) => state.auth.auth);
 
   const columns: any = [
@@ -89,9 +87,9 @@ const Page = () => {
       align: "center",
       renderCell: (row: any) => {
         return (
-          <Box display="flex" justifyContent="center">
+          <Box display='flex' justifyContent='center'>
             <Button
-              variant="contained"
+              variant='contained'
               style={{ backgroundColor: "#70d8bd" }}
               onClick={() => {
                 handleShowProduct(row.row._id);
@@ -100,7 +98,7 @@ const Page = () => {
               Hiện
             </Button>
             <Button
-              variant="contained"
+              variant='contained'
               style={{ backgroundColor: "#70d8bd" }}
               onClick={() => {
                 ProductServices.deleteProduct(row.row._id).then(() => {
@@ -131,7 +129,7 @@ const Page = () => {
           .catch((err) => {
             Promise.reject(err);
           }),
-        "Làm mới access token thất bại"
+        "Làm mới access token thất bại",
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -140,15 +138,13 @@ const Page = () => {
   const handleShowProduct = (id: string) => {
     toast.promise(
       "Hiện sản phẩm thành công",
-      ProductServices.unhideProduct(id).then(() =>
-        dispatch({ type: GET_HIDE_PRODUCTS })
-      ),
-      "Hiện sản phẩm thất bại"
+      ProductServices.unhideProduct(id).then(() => dispatch({ type: GET_HIDE_PRODUCTS })),
+      "Hiện sản phẩm thất bại",
     );
   };
 
   return (
-    <Box m="20px">
+    <Box m='20px'>
       <Box
         sx={{
           justifyContent: "space-between",
@@ -156,14 +152,11 @@ const Page = () => {
           alignItems: "center",
         }}
       >
-        <Header
-          title="Sản phẩm ẩn"
-          subtitle="Chào mừng tới quản lí sản phẩm ẩn"
-        />
+        <Header title='Sản phẩm ẩn' subtitle='Chào mừng tới quản lí sản phẩm ẩn' />
       </Box>
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        m='40px 0 0 0'
+        height='75vh'
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -191,12 +184,7 @@ const Page = () => {
           },
         }}
       >
-        <DataGrid
-          checkboxSelection
-          rows={products}
-          columns={columns}
-          getRowId={(row) => row._id}
-        />
+        <DataGrid checkboxSelection rows={products} columns={columns} getRowId={(row) => row._id} />
       </Box>
     </Box>
   );

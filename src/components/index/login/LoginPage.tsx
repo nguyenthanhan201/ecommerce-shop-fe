@@ -6,9 +6,7 @@ const LoginPage = () => {
   const router = useRouter();
 
   const googleSignIn = async () => {
-    const { signInWithPopup, GoogleAuthProvider } = await import(
-      "firebase/auth"
-    );
+    const { signInWithPopup, GoogleAuthProvider } = await import("firebase/auth");
 
     await signInWithPopup(authentication, new GoogleAuthProvider())
       .then((result) => {
@@ -28,16 +26,12 @@ const LoginPage = () => {
       });
   };
   return (
-    <div className="form-login">
-      <img
-        src="/images/gifs/ezgif.com-gif-maker.webp"
-        alt="yolo-gif"
-        loading="lazy"
-      />
-      <div className="form-login__left">
-        <img src="/images/Logo-2.png" alt="logo" />
-        <button className="btn btn-google" onClick={googleSignIn}>
-          <i className="bx bxl-google"></i> <p>Đăng nhập với google</p>
+    <div className='form-login'>
+      <img alt='yolo-gif' loading='lazy' src='/images/gifs/ezgif.com-gif-maker.webp' />
+      <div className='form-login__left'>
+        <img alt='logo' src='/images/Logo-2.png' />
+        <button className='btn btn-google' onClick={googleSignIn} type='button'>
+          <i className='bx bxl-google' /> <p>Đăng nhập với google</p>
         </button>
       </div>
     </div>

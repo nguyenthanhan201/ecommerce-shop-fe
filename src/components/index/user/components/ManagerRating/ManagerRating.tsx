@@ -44,8 +44,7 @@ const ManagerRating = () => {
       flex: 1,
       headerAlign: "center",
       align: "center",
-      renderCell: (row: GridCellParams) =>
-        formatDate(row.row.createdAt, "date"),
+      renderCell: (row: GridCellParams) => formatDate(row.row.createdAt, "date"),
     },
     {
       field: "actions2",
@@ -74,11 +73,12 @@ const ManagerRating = () => {
           className={`cursor-pointer text-white px-2 py-1 rounded ${
             !row.row.comment ? "bg-green-500" : "bg-gray-500"
           } outline-none border-none`}
+          disabled={row.row.comment ? true : false}
           onClick={() => {
             setOpen(true);
             setSelectedRating(row.row);
           }}
-          disabled={row.row.comment ? true : false}
+          type='button'
         >
           {row.row.comment ? "Đã đánh giá" : "Đánh giá"}
         </button>
@@ -89,8 +89,8 @@ const ManagerRating = () => {
   return (
     <>
       <Box
-        m="40px 0 0 0"
-        height="75vh"
+        height='75vh'
+        m='40px 0 0 0'
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
@@ -119,17 +119,15 @@ const ManagerRating = () => {
         }}
       >
         <DataGrid
-          getRowHeight={() => "auto"}
           checkboxSelection
-          rows={ratings}
           columns={columns}
+          getRowHeight={() => "auto"}
           getRowId={(row) => row._id!}
+          rows={ratings}
         />
       </Box>
-      <Modal open={open} handleClose={() => setOpen(false)}>
-        {open && selectedRating && (
-          <ModalRating selectedRating={selectedRating} />
-        )}
+      <Modal handleClose={() => setOpen(false)} open={open}>
+        {open && selectedRating ? <ModalRating selectedRating={selectedRating} /> : null}
       </Modal>
     </>
   );

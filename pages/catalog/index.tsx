@@ -12,7 +12,7 @@ Page.Layout = DefaultLayout;
 export const getServerSideProps = async () => {
   await queryClient.prefetchQuery(
     "productsCatalogQuery",
-    async () => await ProductServices.getAll(true)
+    async () => await ProductServices.getAll(true),
   );
 
   const seo = useSEO("Danh sách sản phẩm");
@@ -21,7 +21,7 @@ export const getServerSideProps = async () => {
     props: JSON.parse(
       JSON.stringify({
         seo,
-      })
+      }),
     ),
   };
 };

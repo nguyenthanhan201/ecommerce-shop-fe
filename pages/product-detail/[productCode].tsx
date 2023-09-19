@@ -23,7 +23,7 @@ export const getServerSideProps = async (context: NextPageContext) => {
       JSON.stringify({
         seo,
         query,
-      })
+      }),
     ),
   };
 };

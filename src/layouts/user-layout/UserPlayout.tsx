@@ -19,10 +19,10 @@ const UserPlayout = ({ ...props }: any) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      let progress: any = document.querySelector("#progressbar");
+      const progress: any = document.querySelector("#progressbar");
 
-      let totalHeight = document.body.scrollHeight - window.innerHeight;
-      let progressHeight = (window.pageYOffset / totalHeight) * 100;
+      const totalHeight = document.body.scrollHeight - window.innerHeight;
+      const progressHeight = (window.pageYOffset / totalHeight) * 100;
       progress.style.height = progressHeight + "%";
     };
 
@@ -35,12 +35,12 @@ const UserPlayout = ({ ...props }: any) => {
 
   return (
     <>
-      <div id="progressbar"></div>
+      <div id='progressbar'></div>
       <DefaultHeader />
-      <div className="container">
-        <div className="main user-layout">
+      <div className='container'>
+        <div className='main user-layout'>
           <SiderBar />
-          <div className="context">{props.children}</div>
+          <div className='context'>{props.children}</div>
         </div>
         <DefaultFooter />
       </div>

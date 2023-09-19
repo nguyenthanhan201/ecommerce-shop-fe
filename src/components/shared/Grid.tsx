@@ -9,17 +9,19 @@ type GridProps = {
 };
 
 const Grid = (props: GridProps) => {
+  const { children, gap, col, mdCol, smCol } = props;
+
   const style = {
-    gap: props.gap ? `${props.gap}px` : "0",
+    gap: gap ? `${gap}px` : "0",
   };
 
-  const col = props.col ? `grid-col-${props.col}` : "";
-  const mdCol = props.col ? `grid-col-md-${props.mdCol}` : "";
-  const smCol = props.col ? `grid-col-sm-${props.smCol}` : "";
+  const finalCol = col ? `grid-col-${col}` : "";
+  const finalMdCol = col ? `grid-col-md-${mdCol}` : "";
+  const finalSmCol = col ? `grid-col-sm-${smCol}` : "";
 
   return (
-    <div className={`grid ${col} ${mdCol} ${smCol}`} style={style}>
-      {props.children}
+    <div className={`grid ${finalCol} ${finalMdCol} ${finalSmCol}`} style={style}>
+      {children}
     </div>
   );
 };

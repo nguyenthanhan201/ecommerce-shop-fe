@@ -32,10 +32,7 @@ const Defaultheader = () => {
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
-      if (
-        document.body.scrollTop > 80 ||
-        document.documentElement.scrollTop > 80
-      ) {
+      if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
         setHeaderShrink(true);
       } else {
         setHeaderShrink(false);
@@ -51,10 +48,7 @@ const Defaultheader = () => {
     const root = document.documentElement;
     root?.style.setProperty("--main-bg", darkTheme ? "#262833" : "#fff");
     root?.style.setProperty("--main-color", darkTheme ? "#fff" : "#262833");
-    root?.style.setProperty(
-      "--txt-second-color",
-      darkTheme ? "#fff" : "#8d8d8d"
-    );
+    root?.style.setProperty("--txt-second-color", darkTheme ? "#fff" : "#8d8d8d");
   }, [theme.palette.mode]);
 
   const menuToggle = useCallback(() => {
@@ -79,14 +73,14 @@ const Defaultheader = () => {
 
   return (
     <div className={`header ${headerShrink && "shrink"}`}>
-      <div className="container">
-        <div className="header_menu">
-          <div className="header_menu_mobile-toggle" onClick={menuToggle}>
-            <MenuIcon fontSize="inherit" />
+      <div className='container'>
+        <div className='header_menu'>
+          <div className='header_menu_mobile-toggle' onClick={menuToggle}>
+            <MenuIcon fontSize='inherit' />
           </div>
-          <div className="header_menu_left" ref={menuLeft}>
-            <div className="header_menu_left_close" onClick={menuToggle}>
-              <KeyboardArrowLeftIcon fontSize="inherit" />
+          <div className='header_menu_left' ref={menuLeft}>
+            <div className='header_menu_left_close' onClick={menuToggle}>
+              <KeyboardArrowLeftIcon fontSize='inherit' />
             </div>
             {mainNav.map((item, index) => (
               <div
@@ -102,51 +96,45 @@ const Defaultheader = () => {
               </div>
             ))}
           </div>
-          <Link href="/" className="header_logo">
+          <Link href='/' className='header_logo'>
             <Img
-              src="/images/Logo-2.png"
-              alt="Yolo"
-              layout="fill"
-              loading="eager"
+              src='/images/Logo-2.png'
+              alt='Yolo'
+              layout='fill'
+              loading='eager'
               style={{
                 objectFit: "contain",
               }}
             />
           </Link>
-          <div className="header_menu_right">
-            {auth && (
-              <div className="header_menu_item header_menu_right_item">
-                <Tooltip title="Giỏ hàng">
-                  <Link href="/cart">
+          <div className='header_menu_right'>
+            {auth ? (
+              <div className='header_menu_item header_menu_right_item'>
+                <Tooltip title='Giỏ hàng'>
+                  <Link href='/cart'>
                     <Badge
-                      badgeContent={
-                        cartItems.value
-                          ? Object.keys(cartItems.value).length
-                          : 0
-                      }
-                      color="primary"
+                      badgeContent={cartItems.value ? Object.keys(cartItems.value).length : 0}
+                      color='primary'
                     >
                       <LocalMallOutlinedIcon />
                     </Badge>
                   </Link>
                 </Tooltip>
               </div>
-            )}
+            ) : null}
             <div
-              className="header_menu_item header_menu_right_item"
+              className='header_menu_item header_menu_right_item'
               onMouseEnter={onHoverMenu}
               onMouseLeave={onHoverMenu}
             >
               {auth ? (
                 <>
-                  <Avatar sx={{ width: 27, height: 27 }}>
-                    {auth.name?.charAt(0)}
-                  </Avatar>
-                  {isShowMenu && <Menu handleLogout={handleLogout} />}
+                  <Avatar sx={{ width: 27, height: 27 }}>{auth.name?.charAt(0)}</Avatar>
+                  {isShowMenu ? <Menu handleLogout={handleLogout} /> : null}
                 </>
               ) : (
-                <Tooltip title="Đăng nhập">
-                  <Link href="/login">
+                <Tooltip title='Đăng nhập'>
+                  <Link href='/login'>
                     <LoginIcon />
                   </Link>
                 </Tooltip>
