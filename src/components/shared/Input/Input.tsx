@@ -1,14 +1,14 @@
-import { FormControl, Select } from "@mui/material";
-import dynamic from "next/dynamic";
-import React from "react";
+import { FormControl, Select } from '@mui/material';
+import dynamic from 'next/dynamic';
+import React from 'react';
 
-const ReactQuill = dynamic(import("react-quill"), {
+const ReactQuill = dynamic(import('react-quill'), {
   ssr: false,
   loading: () => <p>Loading ...</p>,
 });
 
 interface InputProps extends FormControlProps {
-  type: "text" | "password" | "email" | "number" | "tel" | "editor" | "select";
+  type: 'text' | 'password' | 'email' | 'number' | 'tel' | 'editor' | 'select';
   name?: string;
   label?: string;
   defaultValue?: string;
@@ -55,13 +55,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
               {label}
             </label>
           ) : null}
-          {type === "select" ? (
+          {type === 'select' ? (
             <FormControl fullWidth>
               <Select {...props} defaultValue={defaultValue} multiple={multiple}>
                 {children}
               </Select>
             </FormControl>
-          ) : type === "editor" ? (
+          ) : type === 'editor' ? (
             <ReactQuill
               onChange={onChange as any}
               placeholder={placeholder}
@@ -93,5 +93,5 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
   },
 );
 
-Input.displayName = "Input";
+Input.displayName = 'Input';
 export default Input;

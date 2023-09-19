@@ -1,5 +1,5 @@
-import { Modal as ModalMUI } from "@mui/material";
-import React from "react";
+import { Modal as ModalMUI } from '@mui/material';
+import React from 'react';
 
 type ModalProps = {
   open: boolean;
@@ -15,6 +15,6 @@ const Modal = React.forwardRef((props: ModalProps, _ref) => {
   );
 });
 
-Modal.displayName = "Modal";
+Modal.displayName = 'Modal';
 
 export default Modal;

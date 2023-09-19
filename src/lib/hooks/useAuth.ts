@@ -1,15 +1,16 @@
-import { useEffect } from "react";
-import { authentication } from "../../config/firebase.config";
-import { setAuthSlice } from "../redux/slices/auth";
-import { AuthServices } from "../repo/auth.repo";
-import { useAppDispatch } from "./useAppDispatch";
+import { useEffect } from 'react';
+
+import { authentication } from '../../config/firebase.config';
+import { setAuthSlice } from '../redux/slices/auth';
+import { AuthServices } from '../repo/auth.repo';
+import { useAppDispatch } from './useAppDispatch';
 
 function useAuth() {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     (async function unsubscribe() {
-      const { onAuthStateChanged } = await import("firebase/auth");
+      const { onAuthStateChanged } = await import('firebase/auth');
       onAuthStateChanged(authentication, (user) => {
         // console.log("👌 ~ user", user);
         if (!user) return dispatch(setAuthSlice(undefined));
@@ -25,7 +26,7 @@ function useAuth() {
             );
           })
           .catch((err: any) => {
-            console.log("err", err);
+            console.log('err', err);
           });
       });
     })();

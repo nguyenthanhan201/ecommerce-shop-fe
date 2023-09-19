@@ -1,5 +1,11 @@
 // https://dev.to/timwjames/the-best-eslint-rules-for-react-projects-30i8
 {
+  "ignorePatterns": ["node_modules/", "build/", "dist/", "tailwind.config.js", "postcss.config.js"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "env": {
     "browser": true,
     "es2021": true,
@@ -8,7 +14,10 @@
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
     "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "plugin:react/jsx-runtime",
     "plugin:prettier/recommended"
   ],
   "parser": "@typescript-eslint/parser",
@@ -16,9 +25,29 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "react"],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "import",
+    "simple-import-sort",
+    "jsx-a11y",
+    "react-hooks",
+    "prettier"
+  ],
   "rules": {
-    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "@typescript-eslint/no-non-null-assertion": "off",
+    "no-console": "warn",
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "warn",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "singleQuote": true
+      }
+    ],
     "react/react-in-jsx-scope": "off",
     "react/prefer-stateless-function": "error",
     "react/button-has-type": "error",
@@ -75,7 +104,7 @@
       },
       {
         "selector": "parameter",
-        "format": ["camelCase"],
+        "format": ["camelCase", "PascalCase"],
         "leadingUnderscore": "allow"
       },
       {
@@ -86,10 +115,13 @@
       {
         "selector": "typeLike",
         "format": ["PascalCase"]
+      },
+      {
+        "selector": "function",
+        "format": ["camelCase", "PascalCase"]
       }
     ]
     // "filename-rules/match": [2, { ".ts": "camelcase", ".tsx": "pascalcase" }]
     // "import/no-default-export": "error"
-  },
-  "ignorePatterns": ["node_modules/", "build/", "dist/", "tailwind.config.js"]
+  }
 }

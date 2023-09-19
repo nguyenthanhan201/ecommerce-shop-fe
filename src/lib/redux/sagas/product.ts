@@ -1,7 +1,9 @@
-import { ProductServices } from "@/lib/repo/product.repo";
-import { put, takeEvery } from "redux-saga/effects";
-import { setErrProductSlice, setProductsSlice } from "../slices/products";
-import { GET_HIDE_PRODUCTS, GET_PRODUCTS } from "../types";
+import { put, takeEvery } from 'redux-saga/effects';
+
+import { ProductServices } from '@/lib/repo/product.repo';
+
+import { setErrProductSlice, setProductsSlice } from '../slices/products';
+import { GET_HIDE_PRODUCTS, GET_PRODUCTS } from '../types';
 
 export function* getProductsSaga(): any {
   const products = yield ProductServices.getAll();

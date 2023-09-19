@@ -1,9 +1,10 @@
-import createSagaMiddleware from "@redux-saga/core";
-import { configureStore } from "@reduxjs/toolkit";
-import { rootSaga } from "./sagas";
-import auth from "./slices/auth";
-import cartItems from "./slices/cartItems";
-import products from "./slices/products";
+import createSagaMiddleware from '@redux-saga/core';
+import { configureStore } from '@reduxjs/toolkit';
+
+import { rootSaga } from './sagas';
+import auth from './slices/auth';
+import cartItems from './slices/cartItems';
+import products from './slices/products';
 
 const sagaMiddleware = createSagaMiddleware();
 const store = configureStore({

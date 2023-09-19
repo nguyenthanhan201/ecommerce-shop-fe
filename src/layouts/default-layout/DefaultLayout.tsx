@@ -1,10 +1,11 @@
-import { useAppDispatch } from "lib/hooks/useAppDispatch";
-import { useAppSelector } from "lib/hooks/useAppSelector";
-import useAuth from "lib/hooks/useAuth";
-import { GET_CART_ITEMS } from "lib/redux/types";
-import { useEffect } from "react";
-import DefaultFooter from "../default-footer/DefaultFooter";
-import DefaultHeader from "../default-header/DefaultHeader";
+import { useAppDispatch } from 'lib/hooks/useAppDispatch';
+import { useAppSelector } from 'lib/hooks/useAppSelector';
+import useAuth from 'lib/hooks/useAuth';
+import { GET_CART_ITEMS } from 'lib/redux/types';
+import { useEffect } from 'react';
+
+import DefaultFooter from '../default-footer/DefaultFooter';
+import DefaultHeader from '../default-header/DefaultHeader';
 
 const DefaultLayout = ({ ...props }: any) => {
   useAuth();

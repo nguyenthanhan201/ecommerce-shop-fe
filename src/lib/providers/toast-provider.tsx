@@ -1,14 +1,15 @@
-import Loading from "@/components/shared/Loading/Loading";
-import { Cancel, CheckCircle, Info, WarningOutlined } from "@mui/icons-material";
-import { useTheme } from "@mui/material";
-import React, { createContext, ReactNode, useContext } from "react";
+import { Cancel, CheckCircle, Info, WarningOutlined } from '@mui/icons-material';
+import { useTheme } from '@mui/material';
+import React, { createContext, ReactNode, useContext } from 'react';
 import {
   toast as toastify,
   ToastContainer,
   ToastContent,
   ToastOptions,
   Zoom,
-} from "react-toastify";
+} from 'react-toastify';
+
+import Loading from '@/components/shared/Loading/Loading';
 
 const ToastContext = createContext<{
   default: (content: ToastContent, options?: ToastOptions | undefined) => void;
@@ -31,27 +32,27 @@ export function ToastProvider({ children }: any) {
     pauseOnHover: false,
     draggable: false,
     pauseOnFocusLoss: false,
-    bodyClassName: "font-medium",
+    bodyClassName: 'font-medium',
     closeButton: false,
     icon: false,
-    toastId: "toast",
+    toastId: 'toast',
     theme: theme.palette.mode,
   };
   const icons = {
     info: <Info />,
-    success: <CheckCircle sx={{ fontSize: "60px", color: "green" }} />,
+    success: <CheckCircle sx={{ fontSize: '60px', color: 'green' }} />,
     error: <Cancel className='text-red-500' />,
     warn: <WarningOutlined />,
     loading: <Loading />,
   };
 
   const createToastContent = (
-    type: "info" | "success" | "error" | "warn" | "loading",
+    type: 'info' | 'success' | 'error' | 'warn' | 'loading',
     content?: ToastContent,
   ) => (
     <div className='flex flex-col items-center p-4'>
       <i>{icons[type]}</i>
-      {content !== "" ? <div className='mt-5'>{content as ReactNode}</div> : <></>}
+      {content !== '' ? <div className='mt-5'>{content as ReactNode}</div> : <></>}
     </div>
   );
 
@@ -59,14 +60,14 @@ export function ToastProvider({ children }: any) {
     default: (content: ToastContent, options?: ToastOptions) =>
       toastify(content, { ...defaultOptions, ...options }),
     success: (content: ToastContent, options?: ToastOptions) =>
-      toastify.success(createToastContent("success", content), {
-        className: "",
+      toastify.success(createToastContent('success', content), {
+        className: '',
         ...defaultOptions,
         ...options,
       }),
     error: (content: ToastContent, options?: ToastOptions) =>
-      toastify.error(createToastContent("error", content), {
-        className: "text-red-500",
+      toastify.error(createToastContent('error', content), {
+        className: 'text-red-500',
         ...defaultOptions,
         ...options,
       }),
@@ -81,13 +82,13 @@ export function ToastProvider({ children }: any) {
         {
           pending: {
             render() {
-              return createToastContent("loading", "Đang tải...");
+              return createToastContent('loading', 'Đang tải...');
             },
             icon: false,
           },
           success: {
             render() {
-              return createToastContent("success", content);
+              return createToastContent('success', content);
             },
             icon: false,
           },
@@ -95,7 +96,7 @@ export function ToastProvider({ children }: any) {
             render({ data }: any) {
               // console.log("👌 ~ data", data);
               // When the promise reject, data will contains the error
-              return createToastContent("error", data?.message || contentError || "Tải thất bại");
+              return createToastContent('error', data?.message || contentError || 'Tải thất bại');
             },
             icon: false,
           },

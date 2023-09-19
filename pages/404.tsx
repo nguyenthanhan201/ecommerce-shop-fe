@@ -1,7 +1,8 @@
-import DefaultLayout from "@/layouts/default-layout/DefaultLayout";
-import Link from "next/link";
+import Link from 'next/link';
 
-function Page404() {
+import DefaultLayout from '@/layouts/default-layout/DefaultLayout';
+
+const Page404 = () => {
   return (
     <div className='min-h-fit bg-white px-4 py-16 lg:px-8 md:grid md:place-items-center sm:px-6 sm:py-24'>
       <div className='mx-auto max-w-max'>
@@ -31,7 +32,7 @@ function Page404() {
       </div>
     </div>
   );
-}
+};
 
 export default Page404;
 Page404.Layout = DefaultLayout;

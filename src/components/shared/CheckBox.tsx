@@ -1,5 +1,5 @@
-import CheckOutlinedIcon from "@mui/icons-material/CheckOutlined";
-import { ElementRef, useRef } from "react";
+import CheckOutlinedIcon from '@mui/icons-material/CheckOutlined';
+import { ElementRef, useRef } from 'react';
 
 type CheckBoxProps = {
   label: string;
@@ -9,7 +9,7 @@ type CheckBoxProps = {
 
 const CheckBox = (props: CheckBoxProps) => {
   const { label, onChange, checked } = props;
-  const inputRef = useRef<ElementRef<"input"> | null>(null);
+  const inputRef = useRef<ElementRef<'input'> | null>(null);
 
   const onChangeCheckBox = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (onChange) {

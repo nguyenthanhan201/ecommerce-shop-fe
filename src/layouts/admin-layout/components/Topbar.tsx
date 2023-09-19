@@ -1,10 +1,11 @@
-import { ColorModeContext } from "@/lib/theme/theme";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import LightModeOutlinedIcon from "@mui/icons-material/LightModeOutlined";
-import { Box, IconButton, useTheme } from "@mui/material";
-import { useRouter } from "next/router";
-import { useContext } from "react";
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
+import LightModeOutlinedIcon from '@mui/icons-material/LightModeOutlined';
+import { Box, IconButton, useTheme } from '@mui/material';
+import { useRouter } from 'next/router';
+import { useContext } from 'react';
+
+import { ColorModeContext } from '@/lib/theme/theme';
 
 const Topbar = () => {
   const router = useRouter();
@@ -22,11 +23,11 @@ const Topbar = () => {
       </Box> */}
       {/* ICONS */}
       <Box display='flex'>
-        <IconButton onClick={() => router.push("/")}>
+        <IconButton onClick={() => router.push('/')}>
           <HomeOutlinedIcon />
         </IconButton>
         <IconButton onClick={colorMode.toggleColorMode}>
-          {theme.palette.mode === "dark" ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
+          {theme.palette.mode === 'dark' ? <DarkModeOutlinedIcon /> : <LightModeOutlinedIcon />}
         </IconButton>
         {/* <IconButton
           onClick={() => {

@@ -1,6 +1,7 @@
 /* eslint-disable no-restricted-globals */
-import { ProductServices } from "@/lib/repo/product.repo";
-import { ProcessList } from "./enums";
+import { ProductServices } from '@/lib/repo/product.repo';
+
+import { ProcessList } from './enums';
 
 self.onmessage = async (e: MessageEvent<string>) => {
   if (e.data === ProcessList.getDataMostViewedProducts) {

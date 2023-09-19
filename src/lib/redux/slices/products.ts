@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Product } from "../types/product.type";
+import { createSlice } from '@reduxjs/toolkit';
+
+import { Product } from '../types/product.type';
 
 const initialState = {
   products: [] as Array<Product>,
@@ -7,7 +8,7 @@ const initialState = {
 };
 
 const products = createSlice({
-  name: "products",
+  name: 'products',
   initialState,
   reducers: {
     setProductsSlice: (state, action) => {

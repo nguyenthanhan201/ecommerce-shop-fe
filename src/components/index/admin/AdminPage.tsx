@@ -1,11 +1,12 @@
-import Header from "@/components/index/admin/components/Header";
-import StatBox from "@/components/index/admin/components/StatBox";
-import { tokens } from "@/lib/theme/theme";
-import EmailIcon from "@mui/icons-material/Email";
-import PersonAddIcon from "@mui/icons-material/PersonAdd";
-import PointOfSaleIcon from "@mui/icons-material/PointOfSale";
-import TrafficIcon from "@mui/icons-material/Traffic";
-import { Box, useTheme } from "@mui/material";
+import EmailIcon from '@mui/icons-material/Email';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
+import TrafficIcon from '@mui/icons-material/Traffic';
+import { Box, useTheme } from '@mui/material';
+
+import Header from '@/components/index/admin/components/Header';
+import StatBox from '@/components/index/admin/components/StatBox';
+import { tokens } from '@/lib/theme/theme';
 
 const AdminPage = () => {
   const theme = useTheme();
@@ -32,7 +33,7 @@ const AdminPage = () => {
             subtitle='Emails Sent'
             progress='0.75'
             increase='+14%'
-            icon={<EmailIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
+            icon={<EmailIcon sx={{ color: colors.greenAccent[600], fontSize: '26px' }} />}
           />
         </Box>
         <Box
@@ -47,7 +48,7 @@ const AdminPage = () => {
             subtitle='Sales Obtained'
             progress='0.50'
             increase='+21%'
-            icon={<PointOfSaleIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
+            icon={<PointOfSaleIcon sx={{ color: colors.greenAccent[600], fontSize: '26px' }} />}
           />
         </Box>
         <Box
@@ -62,7 +63,7 @@ const AdminPage = () => {
             subtitle='New Clients'
             progress='0.30'
             increase='+5%'
-            icon={<PersonAddIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
+            icon={<PersonAddIcon sx={{ color: colors.greenAccent[600], fontSize: '26px' }} />}
           />
         </Box>
         <Box
@@ -77,7 +78,7 @@ const AdminPage = () => {
             subtitle='Traffic Received'
             progress='0.80'
             increase='+43%'
-            icon={<TrafficIcon sx={{ color: colors.greenAccent[600], fontSize: "26px" }} />}
+            icon={<TrafficIcon sx={{ color: colors.greenAccent[600], fontSize: '26px' }} />}
           />
         </Box>
       </Box>

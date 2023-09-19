@@ -1,10 +1,12 @@
-import InfinityList from "@/components/shared/InfinityList";
-import Loading from "@/components/shared/Loading/Loading";
-import { ProductServices } from "@/lib/repo/product.repo";
-import { productData } from "@/utils/index";
-import { memo, useEffect, useState } from "react";
-import { useQuery } from "react-query";
-import CatalogFilter from "./components/CatalogFilter";
+import { memo, useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
+
+import InfinityList from '@/components/shared/InfinityList';
+import Loading from '@/components/shared/Loading/Loading';
+import { ProductServices } from '@/lib/repo/product.repo';
+import { productData } from '@/utils/index';
+
+import CatalogFilter from './components/CatalogFilter';
 
 export type FilterType = {
   category: string[];
@@ -22,7 +24,7 @@ const initFilter = {
 
 const CatalogPage = () => {
   const { isLoading } = useQuery({
-    queryKey: "products",
+    queryKey: 'products',
     queryFn: async () =>
       await ProductServices.getAll().then((res: any) => {
         setProductList([...res, ...productList]);

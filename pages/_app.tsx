@@ -1,26 +1,30 @@
-import { ToastProvider } from "@/lib/providers/toast-provider";
-import { QueryClientProvider, queryClient } from "@/lib/react-query/queryClient";
-import store from "@/lib/redux/store";
-import { ColorModeContext, useMode } from "@/lib/theme/theme";
-import { ThemeProvider } from "@mui/material";
-import { useNetWork } from "my-package";
-import { DefaultSeo, NextSeo } from "next-seo";
-import { Roboto } from "next/font/google";
-import { useRouter } from "next/router";
-import { Fragment, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { Hydrate } from "react-query";
-import { Provider } from "react-redux";
-import "../src/i18n/i18n";
-import "../src/sass/index.scss";
-import Page404 from "./404";
+// eslint-disable-next-line simple-import-sort/imports
+import '../src/i18n/i18n';
+import '../src/sass/index.scss';
+
+import { ThemeProvider } from '@mui/material';
+import { useNetWork } from 'my-package';
+import { DefaultSeo, NextSeo } from 'next-seo';
+import { Roboto } from 'next/font/google';
+import { useRouter } from 'next/router';
+import { Fragment, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
+import { Hydrate } from 'react-query';
+import { Provider } from 'react-redux';
+
+import { ToastProvider } from '@/lib/providers/toast-provider';
+import { queryClient, QueryClientProvider } from '@/lib/react-query/queryClient';
+import store from '@/lib/redux/store';
+import { ColorModeContext, useMode } from '@/lib/theme/theme';
+
+import Page404 from './404';
 
 const roboto = Roboto({
-  weight: ["400", "500", "700"],
-  subsets: ["vietnamese"],
+  weight: ['400', '500', '700'],
+  subsets: ['vietnamese'],
 });
 
-function MyApp({ Component, pageProps }: any) {
+const MyApp = ({ Component, pageProps }: any) => {
   const Layout = Component.Layout ? Component.Layout : Fragment;
   const layoutProps = Component.LayoutProps ? Component.LayoutProps : {};
   const [theme, colorMode] = useMode();
@@ -66,12 +70,12 @@ function MyApp({ Component, pageProps }: any) {
       <DefaultSeo
         additionalLinkTags={[
           {
-            rel: "shortcut icon",
-            href: "/images/favicon.png",
+            rel: 'shortcut icon',
+            href: '/images/favicon.png',
           },
         ]}
       />
-      {pageProps.seo && <NextSeo {...pageProps.seo} />}
+      {pageProps.seo ? <NextSeo {...pageProps.seo} /> : null}
       <ColorModeContext.Provider value={colorMode as any}>
         <ThemeProvider theme={theme as any}>
           <ToastProvider>
@@ -92,5 +96,5 @@ function MyApp({ Component, pageProps }: any) {
       </ColorModeContext.Provider>
     </>
   );
-}
+};
 export default MyApp;

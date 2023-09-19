@@ -1,5 +1,6 @@
-import CheckBox from "@/components/shared/CheckBox";
-import { memo } from "react";
+import { memo } from 'react';
+
+import CheckBox from '@/components/shared/CheckBox';
 
 type Props = {
   filter: any;

@@ -1,31 +1,32 @@
-import Img from "@/components/shared/Img/Img";
-import AdminLayout from "@/layouts/admin-layout/AdminLayout";
-import { formatDate, getSalePrice, numberWithCommans } from "@/lib/helpers/parser";
-import { useAppSelector } from "@/lib/hooks/useAppSelector";
-import { useToast } from "@/lib/providers/toast-provider";
-import { AuthServices } from "@/lib/repo/auth.repo";
-import { OrderServices } from "@/lib/repo/order.repo";
-import { Box, Button as ButtonMUI, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
-import Header from "components/index/admin/components/Header";
-import { tokens } from "lib/theme/theme";
-import { useEffect, useMemo, useState } from "react";
+import { Box, Button as ButtonMUI, useTheme } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import Header from 'components/index/admin/components/Header';
+import { tokens } from 'lib/theme/theme';
+import { useEffect, useMemo, useState } from 'react';
+
+import Img from '@/components/shared/Img/Img';
+import AdminLayout from '@/layouts/admin-layout/AdminLayout';
+import { formatDate, getSalePrice, numberWithCommans } from '@/lib/helpers/parser';
+import { useAppSelector } from '@/lib/hooks/useAppSelector';
+import { useToast } from '@/lib/providers/toast-provider';
+import { AuthServices } from '@/lib/repo/auth.repo';
+import { OrderServices } from '@/lib/repo/order.repo';
 // import { useExcelDownloder } from "react-xls";
 
 const columns: any = [
   {
-    field: "idAuth",
-    headerName: "User",
+    field: 'idAuth',
+    headerName: 'User',
     flex: 1,
-    headerAlign: "center",
-    align: "center",
+    headerAlign: 'center',
+    align: 'center',
   },
   {
-    field: "actions1",
-    headerName: "Title",
+    field: 'actions1',
+    headerName: 'Title',
     flex: 1,
-    headerAlign: "center",
-    align: "left",
+    headerAlign: 'center',
+    align: 'left',
     renderCell: (row: any) => {
       return (
         <div className='flex flex-col gap-2'>
@@ -41,7 +42,7 @@ const columns: any = [
                   className='rounded-full'
                   hasNotplaceholder
                 />
-                <p style={{ whiteSpace: "break-spaces" }}>{`${product.title}-${size}-${color}`}</p>
+                <p style={{ whiteSpace: 'break-spaces' }}>{`${product.title}-${size}-${color}`}</p>
               </div>
             );
           })}
@@ -50,26 +51,26 @@ const columns: any = [
     },
   },
   {
-    field: "createdAt",
-    headerName: "createdAt",
+    field: 'createdAt',
+    headerName: 'createdAt',
     flex: 1,
-    headerAlign: "center",
-    align: "center",
-    renderCell: (row: any) => formatDate(row.row.createdAt, "date"),
+    headerAlign: 'center',
+    align: 'center',
+    renderCell: (row: any) => formatDate(row.row.createdAt, 'date'),
   },
   {
-    field: "actions2",
-    headerName: "Price",
+    field: 'actions2',
+    headerName: 'Price',
     flex: 1,
-    headerAlign: "center",
-    align: "center",
+    headerAlign: 'center',
+    align: 'center',
     renderCell: (row: any) => {
       return (
         <div className='flex flex-col gap-2'>
           {Object.values(row.row.order).map((item: any, index: number) => {
             const { quantity, price, product } = item[0];
             return (
-              <div key={index} style={{ display: "flex", alignItems: "center" }}>
+              <div key={index} style={{ display: 'flex', alignItems: 'center' }}>
                 {product.discount
                   ? numberWithCommans(getSalePrice(product.price, product.discount) * quantity)
                   : numberWithCommans(price * quantity)}
@@ -81,13 +82,13 @@ const columns: any = [
     },
   },
   {
-    field: "actions3",
-    headerName: "actions",
+    field: 'actions3',
+    headerName: 'actions',
     flex: 1,
-    headerAlign: "center",
-    align: "center",
+    headerAlign: 'center',
+    align: 'center',
     renderCell: () => {
-      return <> {"Hoàn thành"}</>;
+      return <> {'Hoàn thành'}</>;
     },
   },
 ];
@@ -114,8 +115,8 @@ const Page = () => {
       return {
         idAuth,
         createdAt,
-        order: Purchaseorders.map((item3: any) => item3).join("; "),
-        price: PurchasePrice.map((item3: any) => item3).join("; "),
+        order: Purchaseorders.map((item3: any) => item3).join('; '),
+        price: PurchasePrice.map((item3: any) => item3).join('; '),
       };
     });
     return { Data1: [...data] };
@@ -129,18 +130,18 @@ const Page = () => {
         setOrders(res);
       })
       .catch((err) => {
-        console.log("👌 ~ err", err);
-        if (err.response.data.error.name === "TokenExpiredError" && auth?.email) {
+        console.log('👌 ~ err', err);
+        if (err.response.data.error.name === 'TokenExpiredError' && auth?.email) {
           toast.promise(
-            "Làm mới access token thành công. Làm mới trang để tiếp tục",
+            'Làm mới access token thành công. Làm mới trang để tiếp tục',
             AuthServices.token(auth?.email)
               .then((res) => {
-                localStorage.setItem("token", res.accessToken);
+                localStorage.setItem('token', res.accessToken);
               })
               .catch((err) => {
                 Promise.reject(err);
               }),
-            "Làm mới access token thất bại",
+            'Làm mới access token thất bại',
           );
         }
       });
@@ -154,9 +155,9 @@ const Page = () => {
           sx={{
             backgroundColor: colors.blueAccent[700],
             color: colors.grey[100],
-            fontSize: "14px",
-            fontWeight: "bold",
-            padding: "10px 20px",
+            fontSize: '14px',
+            fontWeight: 'bold',
+            padding: '10px 20px',
           }}
         >
           {/* <ExcelDownloder
@@ -184,34 +185,34 @@ const Page = () => {
         m='20px 0 0 0'
         height='75vh'
         sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
+          '& .MuiDataGrid-root': {
+            border: 'none',
           },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
+          '& .MuiDataGrid-cell': {
+            borderBottom: 'none',
           },
-          "& .name-column--cell": {
+          '& .name-column--cell': {
             color: colors.greenAccent[300],
-            textAlign: "center",
+            textAlign: 'center',
           },
-          "& .MuiDataGrid-columnHeaders": {
+          '& .MuiDataGrid-columnHeaders': {
             backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
+            borderBottom: 'none',
           },
-          "& .MuiDataGrid-virtualScroller": {
+          '& .MuiDataGrid-virtualScroller': {
             backgroundColor: colors.primary[400],
           },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
+          '& .MuiDataGrid-footerContainer': {
+            borderTop: 'none',
             backgroundColor: colors.blueAccent[700],
           },
-          "& .MuiCheckbox-root": {
+          '& .MuiCheckbox-root': {
             color: `${colors.greenAccent[200]} !important`,
           },
         }}
       >
         <DataGrid
-          getRowHeight={() => "auto"}
+          getRowHeight={() => 'auto'}
           checkboxSelection
           rows={orders}
           columns={columns}

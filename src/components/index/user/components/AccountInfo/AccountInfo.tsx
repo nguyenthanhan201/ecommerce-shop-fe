@@ -1,4 +1,4 @@
-import { useAppSelector } from "lib/hooks/useAppSelector";
+import { useAppSelector } from 'lib/hooks/useAppSelector';
 
 const AccountInfo = () => {
   const auth = useAppSelector((state) => state.auth.auth);

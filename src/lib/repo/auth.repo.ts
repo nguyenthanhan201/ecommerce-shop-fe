@@ -1,4 +1,4 @@
-import { post } from "../axios/requests";
+import { post } from '../axios/requests';
 
 export class AuthRepository {
   async getUserByEmail(name: string, email: string) {

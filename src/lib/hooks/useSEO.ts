@@ -37,22 +37,22 @@ export function useSEO(
     description: data.description,
     image: data.image,
     openGraph: {
-      type: "website",
-      locale: "vi_VN",
-      site_name: "Shop",
+      type: 'website',
+      locale: 'vi_VN',
+      site_name: 'Shop',
       title,
       description: data.description,
       images: [
         {
-          url: data.image || "",
-          alt: data.shopName || "",
+          url: data.image || '',
+          alt: data.shopName || '',
         },
       ],
     },
     additionalMetaTags: [
       {
-        property: "keywords",
-        content: data.keyword || "",
+        property: 'keywords',
+        content: data.keyword || '',
       },
     ],
   };

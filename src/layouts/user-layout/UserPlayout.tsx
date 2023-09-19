@@ -1,11 +1,12 @@
-import DefaultFooter from "layouts/default-footer/DefaultFooter";
-import DefaultHeader from "layouts/default-header/DefaultHeader";
-import { useAppDispatch } from "lib/hooks/useAppDispatch";
-import { useAppSelector } from "lib/hooks/useAppSelector";
-import useAuth from "lib/hooks/useAuth";
-import { GET_CART_ITEMS } from "lib/redux/types";
-import { useEffect } from "react";
-import SiderBar from "./components/SiderBar";
+import DefaultFooter from 'layouts/default-footer/DefaultFooter';
+import DefaultHeader from 'layouts/default-header/DefaultHeader';
+import { useAppDispatch } from 'lib/hooks/useAppDispatch';
+import { useAppSelector } from 'lib/hooks/useAppSelector';
+import useAuth from 'lib/hooks/useAuth';
+import { GET_CART_ITEMS } from 'lib/redux/types';
+import { useEffect } from 'react';
+
+import SiderBar from './components/SiderBar';
 
 const UserPlayout = ({ ...props }: any) => {
   useAuth();
@@ -19,17 +20,17 @@ const UserPlayout = ({ ...props }: any) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      const progress: any = document.querySelector("#progressbar");
+      const progress: any = document.querySelector('#progressbar');
 
       const totalHeight = document.body.scrollHeight - window.innerHeight;
       const progressHeight = (window.pageYOffset / totalHeight) * 100;
-      progress.style.height = progressHeight + "%";
+      progress.style.height = progressHeight + '%';
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener('scroll', handleScroll);
     };
   }, []);
 

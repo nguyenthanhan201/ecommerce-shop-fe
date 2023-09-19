@@ -1,5 +1,5 @@
 /* eslint-disable react/destructuring-assignment */
-import { memo, ReactNode } from "react";
+import { memo, ReactNode } from 'react';
 
 type ButtonProps = {
   children: ReactNode;
@@ -12,11 +12,11 @@ type ButtonProps = {
 
 const Button = (props: ButtonProps) => {
   // console.log("button");
-  const bg = props.backgroundColor ? "bg-" + props.backgroundColor : "bg-main";
+  const bg = props.backgroundColor ? 'bg-' + props.backgroundColor : 'bg-main';
 
-  const size = props.size ? "btn-" + props.size : "";
+  const size = props.size ? 'btn-' + props.size : '';
 
-  const animate = props.animate ? "btn-animate" : "";
+  const animate = props.animate ? 'btn-animate' : '';
 
   return (
     <button

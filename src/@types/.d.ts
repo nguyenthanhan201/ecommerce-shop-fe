@@ -1,5 +1,5 @@
-declare module "*.png";
-declare module "*.gif";
+declare module '*.png';
+declare module '*.gif';
 
 interface ReactProps {
   className?: string;
@@ -15,18 +15,18 @@ interface Option<T = any> {
   className?: string;
   disabled?: boolean;
   color?:
-    | "primary"
-    | "accent"
-    | "info"
-    | "success"
-    | "danger"
-    | "warning"
-    | "bluegray"
-    | "orange"
-    | "teal"
-    | "cyan"
-    | "purple"
-    | "pink"
+    | 'primary'
+    | 'accent'
+    | 'info'
+    | 'success'
+    | 'danger'
+    | 'warning'
+    | 'bluegray'
+    | 'orange'
+    | 'teal'
+    | 'cyan'
+    | 'purple'
+    | 'pink'
     | (string & {});
 
   cols?: Cols;

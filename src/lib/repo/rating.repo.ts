@@ -1,4 +1,4 @@
-import { get, put } from "../axios/requests";
+import { get, put } from '../axios/requests';
 
 export class RatingRepository {
   async getRatingByIdAuth(idAuth: string) {

@@ -1,12 +1,12 @@
-import Image from "next/image";
-import { ComponentPropsWithoutRef } from "react";
+import Image from 'next/image';
+import { ComponentPropsWithoutRef } from 'react';
 
-declare const VALID_LAYOUT_VALUES: readonly ["fill", "fixed", "intrinsic", "responsive", undefined];
+declare const VALID_LAYOUT_VALUES: readonly ['fill', 'fixed', 'intrinsic', 'responsive', undefined];
 declare type LayoutValue = (typeof VALID_LAYOUT_VALUES)[number];
 // declare type ImgElementStyle = NonNullable<
 //   JSX.IntrinsicElements["img"]["style"]
 // >;
-export interface ImgProps extends ComponentPropsWithoutRef<"img"> {
+export interface ImgProps extends ComponentPropsWithoutRef<'img'> {
   src: string;
   alt: string;
   width?: number;
@@ -59,26 +59,26 @@ const Img = ({
   return (
     <Image
       {...props}
-      id={id}
-      objectPosition={objectPosition}
-      layout={layout ? layout : null}
-      loading={loading || "lazy"}
-      placeholder={hasNotplaceholder ? undefined : "blur"}
-      blurDataURL='/images/favicon.png'
-      loader={myLoader}
-      src={
-        compress ? `https://images.weserv.nl/?url=${src}${compress ? `&w=${compress}` : ""}` : src
-      }
       alt={alt}
-      width={width}
-      height={height}
+      blurDataURL='/images/favicon.png'
       className={className}
-      sizes={sizes || undefined}
-      unoptimized={unoptimized || false}
-      quality={70}
-      priority={priority}
+      height={height}
+      id={id}
+      layout={layout ? layout : undefined}
+      loader={myLoader}
+      loading={loading || 'lazy'}
+      objectPosition={objectPosition}
       onClick={onClick}
+      placeholder={hasNotplaceholder ? undefined : 'blur'}
+      priority={priority}
+      quality={70}
+      sizes={sizes || undefined}
+      src={
+        compress ? `https://images.weserv.nl/?url=${src}${compress ? `&w=${compress}` : ''}` : src
+      }
       style={props.style}
+      unoptimized={unoptimized || false}
+      width={width}
     />
   );
 };

@@ -1,8 +1,10 @@
-import { tokens } from "@/lib/theme/theme";
-import { CssBaseline, useTheme } from "@mui/material";
-import useAuth from "lib/hooks/useAuth";
-import Sidebar from "./components/Sidebar";
-import Topbar from "./components/Topbar";
+import { CssBaseline, useTheme } from '@mui/material';
+import useAuth from 'lib/hooks/useAuth';
+
+import { tokens } from '@/lib/theme/theme';
+
+import Sidebar from './components/Sidebar';
+import Topbar from './components/Topbar';
 
 const AdminLayout = ({ ...props }: any) => {
   useAuth();

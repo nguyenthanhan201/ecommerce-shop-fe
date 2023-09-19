@@ -1,5 +1,5 @@
-import { Auth } from "./auth.type";
-import { Product } from "./product.type";
+import { Auth } from './auth.type';
+import { Product } from './product.type';
 export interface CartItem {
   idAuth: Auth;
   idProduct: Product;

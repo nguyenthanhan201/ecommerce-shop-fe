@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 const getDevice = (userAgent: string, vendor: string) => {
   const isAndroid = Boolean(userAgent.match(/Android/i));
@@ -6,7 +6,7 @@ const getDevice = (userAgent: string, vendor: string) => {
   const isOpera = Boolean(userAgent.match(/Opera Mini/i));
   const isWindows = Boolean(userAgent.match(/IEMobile/i));
   const isSSR = Boolean(
-    !(typeof window !== "undefined" && window.document && window.document.createElement),
+    !(typeof window !== 'undefined' && window.document && window.document.createElement),
   );
   const isSafari =
     vendor.match(/apple/i) &&
@@ -27,7 +27,7 @@ const getDevice = (userAgent: string, vendor: string) => {
 };
 export function useDevice() {
   useEffect(() => {}, []);
-  const userAgent = typeof navigator === "undefined" ? "SSR" : navigator.userAgent;
-  const vendor = typeof navigator === "undefined" ? "SSR" : navigator.vendor;
+  const userAgent = typeof navigator === 'undefined' ? 'SSR' : navigator.userAgent;
+  const vendor = typeof navigator === 'undefined' ? 'SSR' : navigator.vendor;
   return getDevice(userAgent, vendor);
 }

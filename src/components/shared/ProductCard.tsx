@@ -1,14 +1,16 @@
-import { Product } from "@/lib/redux/types/product.type";
-import { ProductServices } from "@/lib/repo/product.repo";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { getSalePrice, numberWithCommans } from "lib/helpers/parser";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { useState } from "react";
-import Button from "./Button";
-import Img from "./Img/Img";
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { getSalePrice, numberWithCommans } from 'lib/helpers/parser';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useState } from 'react';
 
-const ProductViewModel = dynamic(() => import("./ProductViewModel"), {
+import { Product } from '@/lib/redux/types/product.type';
+import { ProductServices } from '@/lib/repo/product.repo';
+
+import Button from './Button';
+import Img from './Img/Img';
+
+const ProductViewModel = dynamic(() => import('./ProductViewModel'), {
   ssr: false,
 });
 

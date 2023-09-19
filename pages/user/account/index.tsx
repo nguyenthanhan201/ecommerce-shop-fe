@@ -1,5 +1,6 @@
-import UserPlayout from "@/layouts/user-layout/UserPlayout";
-import AccountInfo from "components/index/user/components/AccountInfo/AccountInfo";
+import AccountInfo from 'components/index/user/components/AccountInfo/AccountInfo';
+
+import UserPlayout from '@/layouts/user-layout/UserPlayout';
 
 const Page = () => {
   return <AccountInfo />;

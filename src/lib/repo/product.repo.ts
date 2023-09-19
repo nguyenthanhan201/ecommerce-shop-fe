@@ -1,13 +1,13 @@
-import { deleteReq, get, post, put } from "../axios/requests";
-import { Product } from "../redux/types/product.type";
-import { CrudRepository } from "./crud.repo";
+import { deleteReq, get, post, put } from '../axios/requests';
+import { Product } from '../redux/types/product.type';
+import { CrudRepository } from './crud.repo';
 
 export class ProductRepository extends CrudRepository<Product> {
-  apiName = "product";
-  displayName = "Products";
+  apiName = 'product';
+  displayName = 'Products';
 
   async createProduct(product: Product) {
-    const res = await post("/product/store", product);
+    const res = await post('/product/store', product);
     return res;
   }
 
@@ -34,7 +34,7 @@ export class ProductRepository extends CrudRepository<Product> {
   async getHideProducts() {
     const res = await get(`/product/hide`, {
       headers: {
-        Authorization: "Bearer " + localStorage.getItem("token"),
+        Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     });
     return res;

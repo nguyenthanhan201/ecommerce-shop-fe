@@ -1,16 +1,17 @@
-import AdminLayout from "@/layouts/admin-layout/AdminLayout";
-import { AuthServices } from "@/lib/repo/auth.repo";
-import { ProductServices } from "@/lib/repo/product.repo";
-import { Box, Button, useTheme } from "@mui/material";
-import { DataGrid } from "@mui/x-data-grid";
-import Header from "components/index/admin/components/Header";
-import { useAppDispatch } from "lib/hooks/useAppDispatch";
-import { useAppSelector } from "lib/hooks/useAppSelector";
-import useAuth from "lib/hooks/useAuth";
-import { useToast } from "lib/providers/toast-provider";
-import { GET_HIDE_PRODUCTS } from "lib/redux/types";
-import { tokens } from "lib/theme/theme";
-import { useEffect } from "react";
+import { Box, Button, useTheme } from '@mui/material';
+import { DataGrid } from '@mui/x-data-grid';
+import Header from 'components/index/admin/components/Header';
+import { useAppDispatch } from 'lib/hooks/useAppDispatch';
+import { useAppSelector } from 'lib/hooks/useAppSelector';
+import useAuth from 'lib/hooks/useAuth';
+import { useToast } from 'lib/providers/toast-provider';
+import { GET_HIDE_PRODUCTS } from 'lib/redux/types';
+import { tokens } from 'lib/theme/theme';
+import { useEffect } from 'react';
+
+import AdminLayout from '@/layouts/admin-layout/AdminLayout';
+import { AuthServices } from '@/lib/repo/auth.repo';
+import { ProductServices } from '@/lib/repo/product.repo';
 
 const Page = () => {
   useAuth();
@@ -24,73 +25,73 @@ const Page = () => {
 
   const columns: any = [
     {
-      field: "title",
-      headerName: "Title",
+      field: 'title',
+      headerName: 'Title',
       flex: 1,
-      headerAlign: "center",
-      align: "center",
-      cellClassName: "name-column--cell",
+      headerAlign: 'center',
+      align: 'center',
+      cellClassName: 'name-column--cell',
     },
     {
-      field: "price",
-      headerName: "Price",
-      type: "number",
-      headerAlign: "center",
-      align: "center",
-      cellClassName: "name-column--cell",
+      field: 'price',
+      headerName: 'Price',
+      type: 'number',
+      headerAlign: 'center',
+      align: 'center',
+      cellClassName: 'name-column--cell',
     },
     {
-      field: "slug",
-      headerName: "slug",
+      field: 'slug',
+      headerName: 'slug',
       flex: 1,
-      headerAlign: "center",
-      align: "center",
-      cellClassName: "name-column--cell",
+      headerAlign: 'center',
+      align: 'center',
+      cellClassName: 'name-column--cell',
     },
     {
-      field: "categorySlug",
-      headerName: "categorySlug",
+      field: 'categorySlug',
+      headerName: 'categorySlug',
       flex: 1,
-      headerAlign: "center",
-      align: "center",
-      cellClassName: "name-column--cell",
+      headerAlign: 'center',
+      align: 'center',
+      cellClassName: 'name-column--cell',
     },
     {
-      field: "description",
-      headerName: "description",
+      field: 'description',
+      headerName: 'description',
       flex: 1,
-      headerAlign: "center",
-      align: "center",
-      cellClassName: "name-column--cell",
+      headerAlign: 'center',
+      align: 'center',
+      cellClassName: 'name-column--cell',
     },
     {
-      field: "size",
-      headerName: "size",
+      field: 'size',
+      headerName: 'size',
       flex: 1,
-      headerAlign: "center",
-      align: "center",
-      cellClassName: "name-column--cell",
+      headerAlign: 'center',
+      align: 'center',
+      cellClassName: 'name-column--cell',
     },
     {
-      field: "colors",
-      headerName: "colors",
+      field: 'colors',
+      headerName: 'colors',
       flex: 1,
-      headerAlign: "center",
-      align: "center",
-      cellClassName: "name-column--cell",
+      headerAlign: 'center',
+      align: 'center',
+      cellClassName: 'name-column--cell',
     },
     {
-      field: "actions",
-      headerName: "Hoạt động",
+      field: 'actions',
+      headerName: 'Hoạt động',
       flex: 1,
-      headerAlign: "center",
-      align: "center",
+      headerAlign: 'center',
+      align: 'center',
       renderCell: (row: any) => {
         return (
           <Box display='flex' justifyContent='center'>
             <Button
               variant='contained'
-              style={{ backgroundColor: "#70d8bd" }}
+              style={{ backgroundColor: '#70d8bd' }}
               onClick={() => {
                 handleShowProduct(row.row._id);
               }}
@@ -99,7 +100,7 @@ const Page = () => {
             </Button>
             <Button
               variant='contained'
-              style={{ backgroundColor: "#70d8bd" }}
+              style={{ backgroundColor: '#70d8bd' }}
               onClick={() => {
                 ProductServices.deleteProduct(row.row._id).then(() => {
                   dispatch({ type: GET_HIDE_PRODUCTS });
@@ -119,27 +120,26 @@ const Page = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    if (errProducts === "TokenExpiredError" && auth) {
+    if (errProducts === 'TokenExpiredError' && auth) {
       toast.promise(
-        "Làm mới access token thành công. Làm mới trang để tiếp tục",
+        'Làm mới access token thành công. Làm mới trang để tiếp tục',
         AuthServices.token(auth?.email)
           .then((res) => {
-            localStorage.setItem("token", res.accessToken);
+            localStorage.setItem('token', res.accessToken);
           })
           .catch((err) => {
             Promise.reject(err);
           }),
-        "Làm mới access token thất bại",
+        'Làm mới access token thất bại',
       );
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [errProducts, auth]);
 
   const handleShowProduct = (id: string) => {
     toast.promise(
-      "Hiện sản phẩm thành công",
+      'Hiện sản phẩm thành công',
       ProductServices.unhideProduct(id).then(() => dispatch({ type: GET_HIDE_PRODUCTS })),
-      "Hiện sản phẩm thất bại",
+      'Hiện sản phẩm thất bại',
     );
   };
 
@@ -147,9 +147,9 @@ const Page = () => {
     <Box m='20px'>
       <Box
         sx={{
-          justifyContent: "space-between",
-          display: "flex",
-          alignItems: "center",
+          justifyContent: 'space-between',
+          display: 'flex',
+          alignItems: 'center',
         }}
       >
         <Header title='Sản phẩm ẩn' subtitle='Chào mừng tới quản lí sản phẩm ẩn' />
@@ -158,28 +158,28 @@ const Page = () => {
         m='40px 0 0 0'
         height='75vh'
         sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
+          '& .MuiDataGrid-root': {
+            border: 'none',
           },
-          "& .MuiDataGrid-cell": {
-            borderBottom: "none",
+          '& .MuiDataGrid-cell': {
+            borderBottom: 'none',
           },
-          "& .name-column--cell": {
+          '& .name-column--cell': {
             color: colors.greenAccent[300],
-            textAlign: "center",
+            textAlign: 'center',
           },
-          "& .MuiDataGrid-columnHeaders": {
+          '& .MuiDataGrid-columnHeaders': {
             backgroundColor: colors.blueAccent[700],
-            borderBottom: "none",
+            borderBottom: 'none',
           },
-          "& .MuiDataGrid-virtualScroller": {
+          '& .MuiDataGrid-virtualScroller': {
             backgroundColor: colors.primary[400],
           },
-          "& .MuiDataGrid-footerContainer": {
-            borderTop: "none",
+          '& .MuiDataGrid-footerContainer': {
+            borderTop: 'none',
             backgroundColor: colors.blueAccent[700],
           },
-          "& .MuiCheckbox-root": {
+          '& .MuiCheckbox-root': {
             color: `${colors.greenAccent[200]} !important`,
           },
         }}

@@ -1,46 +1,46 @@
-import Button from "../../components/shared/Button";
+import Link from 'next/link';
+import { memo } from 'react';
 
-import Grid from "../../components/shared/Grid";
+import Img from '@/components/shared/Img/Img';
 
-import Img from "@/components/shared/Img/Img";
-import Link from "next/link";
-import { memo } from "react";
+import Button from '../../components/shared/Button';
+import Grid from '../../components/shared/Grid';
 
 const footerAboutLinks = [
   {
-    display: "Giới Thiệu",
-    path: "/about",
+    display: 'Giới Thiệu',
+    path: '/about',
   },
   {
-    display: "Liên Hệ",
-    path: "/about",
+    display: 'Liên Hệ',
+    path: '/about',
   },
   {
-    display: "Tuyển Dụng",
-    path: "/about",
+    display: 'Tuyển Dụng',
+    path: '/about',
   },
   {
-    display: "Tin Tức",
-    path: "/about",
+    display: 'Tin Tức',
+    path: '/about',
   },
   {
-    display: "Hệ Thống Của Hàng",
-    path: "/about",
+    display: 'Hệ Thống Của Hàng',
+    path: '/about',
   },
 ];
 
 const footerCustomerLinks = [
   {
-    display: "Chính Sách Đổi Trả",
-    path: "/about",
+    display: 'Chính Sách Đổi Trả',
+    path: '/about',
   },
   {
-    display: "Chính Sách Bảo Hành",
-    path: "/about",
+    display: 'Chính Sách Bảo Hành',
+    path: '/about',
   },
   {
-    display: "Chính Sách Hoàn Tiền",
-    path: "/about",
+    display: 'Chính Sách Hoàn Tiền',
+    path: '/about',
   },
 ];
 

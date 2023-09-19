@@ -1,5 +1,5 @@
-import { FormControl, InputLabel, Select as SelectMUI } from "@mui/material";
-import React from "react";
+import { FormControl, InputLabel, Select as SelectMUI } from '@mui/material';
+import React from 'react';
 
 interface SelectProps extends FormControlProps {
   defaultValue?: string | string[];
@@ -11,7 +11,7 @@ interface SelectProps extends FormControlProps {
 const Select = React.forwardRef(
   ({ defaultValue, label, error, children, multiple, ...props }: SelectProps, _ref) => {
     return (
-      <FormControl className='input' error={error} fullWidth style={{ marginTop: "20px" }}>
+      <FormControl className='input' error={error} fullWidth style={{ marginTop: '20px' }}>
         <InputLabel>{label}</InputLabel>
         <SelectMUI {...props} defaultValue={defaultValue} multiple={multiple}>
           {children}
@@ -23,6 +23,6 @@ const Select = React.forwardRef(
   },
 );
 
-Select.displayName = "Select";
+Select.displayName = 'Select';
 
 export default Select;

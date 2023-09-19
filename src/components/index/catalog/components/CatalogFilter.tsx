@@ -1,9 +1,11 @@
-import Button from "@/components/shared/Button";
-import { category, colors, prices, size } from "@/utils/index";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import { Dispatch, SetStateAction, useCallback, useRef } from "react";
-import { FilterType } from "../CataLogPage";
-import CatalogFilterItem from "./CatalogFilterItem";
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import { Dispatch, SetStateAction, useCallback, useRef } from 'react';
+
+import Button from '@/components/shared/Button';
+import { category, colors, prices, size } from '@/utils/index';
+
+import { FilterType } from '../CataLogPage';
+import CatalogFilterItem from './CatalogFilterItem';
 
 const initFilter = {
   category: [],
@@ -24,25 +26,25 @@ const CatalogFilter = ({ filter, setFilter }: CatalogFilterProps) => {
   const filterSelect = (type: any, checked: any, item: any) => {
     if (checked) {
       switch (type) {
-        case "CATEGORYSLUG":
+        case 'CATEGORYSLUG':
           setFilter((prevState: any) => ({
             ...prevState,
             category: [...prevState.category, item.categorySlug],
           }));
           break;
-        case "COLOR":
+        case 'COLOR':
           setFilter((prevState: any) => ({
             ...prevState,
             color: [...prevState.color, item.color],
           }));
           break;
-        case "SIZE":
+        case 'SIZE':
           setFilter((prevState: any) => ({
             ...prevState,
             size: [...prevState.size, item.size],
           }));
           break;
-        case "PRICE":
+        case 'PRICE':
           setFilter((prevState: any) => ({
             ...prevState,
             prices: [...prevState.prices, item.price],
@@ -52,28 +54,28 @@ const CatalogFilter = ({ filter, setFilter }: CatalogFilterProps) => {
       }
     } else {
       switch (type) {
-        case "CATEGORYSLUG":
+        case 'CATEGORYSLUG':
           newCategory = filter.category.filter((e: unknown) => e !== item.categorySlug);
           setFilter((prevState: any) => ({
             ...prevState,
             category: newCategory,
           }));
           break;
-        case "COLOR":
+        case 'COLOR':
           newColor = filter.color.filter((e: any) => e !== item.color);
           setFilter((prevState: any) => ({
             ...prevState,
             color: newColor,
           }));
           break;
-        case "SIZE":
+        case 'SIZE':
           newSize = filter.size.filter((e: any) => e !== item.size);
           setFilter((prevState: any) => ({
             ...prevState,
             size: newSize,
           }));
           break;
-        case "PRICE":
+        case 'PRICE':
           newPrice = filter.prices.filter((e: any) => e !== item.price);
           setFilter((prevState: any) => ({
             ...prevState,
@@ -91,14 +93,14 @@ const CatalogFilter = ({ filter, setFilter }: CatalogFilterProps) => {
 
   const showHideFilter = useCallback(() => {
     if (filterRef.current) {
-      filterRef.current.classList.toggle("active");
+      filterRef.current.classList.toggle('active');
     }
   }, []);
 
   return (
     <>
       <div className='catalog_filter' ref={filterRef}>
-        <div className='catalog_filter_close' onClick={() => showHideFilter()}>
+        <div className='catalog_filter_close' onClick={() => showHideFilter()} role='presentation'>
           <KeyboardArrowLeftIcon fontSize='inherit' />
         </div>
         <div className='catalog_filter_widget'>

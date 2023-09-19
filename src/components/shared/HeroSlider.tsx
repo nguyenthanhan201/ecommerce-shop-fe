@@ -1,13 +1,15 @@
-import { HeroSliderData } from "@/utils/fake-data/hero-slider";
-import KeyboardArrowLeftOutlinedIcon from "@mui/icons-material/KeyboardArrowLeftOutlined";
-import KeyboardArrowRightOutlinedIcon from "@mui/icons-material/KeyboardArrowRightOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { clsx } from "clsx";
-import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import Button from "./Button";
-import Img from "./Img/Img";
+import KeyboardArrowLeftOutlinedIcon from '@mui/icons-material/KeyboardArrowLeftOutlined';
+import KeyboardArrowRightOutlinedIcon from '@mui/icons-material/KeyboardArrowRightOutlined';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import { clsx } from 'clsx';
+import Link from 'next/link';
+import { useCallback, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+
+import { HeroSliderData } from '@/utils/fake-data/hero-slider';
+
+import Button from './Button';
+import Img from './Img/Img';
 
 type HeroSliderProps = {
   data: HeroSliderData[];
@@ -64,15 +66,15 @@ const HeroSlider = ({ data, timeOut, auto, control }: HeroSliderProps) => {
 };
 // http://localhost:3000/images/slider/slide-1.webp?w=1920&q=70
 const HeroSliderItem = ({ item, active, index }: any) => {
-  const { t } = useTranslation("home");
+  const { t } = useTranslation('home');
   return (
-    <div className={clsx("hero-slider_item", { active })}>
+    <div className={clsx('hero-slider_item', { active })}>
       <div className='hero-slider_item_info'>
         <div className={`hero-slider_item_info_title color-${item.color}`}>
-          <span>{t(`HeroSlider.${index}.title`, "")}</span>
+          <span>{t(`HeroSlider.${index}.title`, '')}</span>
         </div>
         <div className='hero-slider_item_info_description'>
-          <span>{t(`HeroSlider.${index}.description`, "")}</span>
+          <span>{t(`HeroSlider.${index}.description`, '')}</span>
         </div>
         <div className='hero-slider_item_info_btn'>
           <Link href={item.path as any}>
@@ -81,7 +83,7 @@ const HeroSliderItem = ({ item, active, index }: any) => {
               icon={<ShoppingCartOutlinedIcon fontSize='inherit' />}
               animate={true}
             >
-              {t("HeroSliderButton")}
+              {t('HeroSliderButton')}
             </Button>
           </Link>
         </div>
@@ -93,7 +95,7 @@ const HeroSliderItem = ({ item, active, index }: any) => {
           src={item.img}
           alt='oki'
           layout='fill'
-          loading={item.path === "/catalog/ao-thun-dinosaur-01" ? "eager" : undefined}
+          loading={item.path === '/catalog/ao-thun-dinosaur-01' ? 'eager' : undefined}
           // sizes="(max-width: 768px) 100vw,
           //     (max-width: 1200px) 50vw,
           //     33vw"

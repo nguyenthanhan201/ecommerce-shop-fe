@@ -13,25 +13,25 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     // limit of 50 domains values
     domains: [
-      "picsum.photos",
-      "i.imgur.com",
-      "cf.shopee.vn",
-      "img.websosanh.vn",
-      "gudlogo.com",
-      "bizweb.dktcdn.net",
-      "fakestoreapi.com",
-      "www.godrejinterio.com",
+      'picsum.photos',
+      'i.imgur.com',
+      'cf.shopee.vn',
+      'img.websosanh.vn',
+      'gudlogo.com',
+      'bizweb.dktcdn.net',
+      'fakestoreapi.com',
+      'www.godrejinterio.com',
     ],
     // path prefix for Image Optimization API, useful with `loader`
-    path: "/_next/image",
+    path: '/_next/image',
     // loader can be 'default', 'imgix', 'cloudinary', 'akamai', or 'custom'
-    loader: "default",
+    loader: 'default',
     // disable static imports for image files
     disableStaticImages: false,
     // minimumCacheTTL is in seconds, must be integer 0 or more
     minimumCacheTTL: 60,
     // ordered list of acceptable optimized image formats (mime types)
-    formats: ["image/webp"],
+    formats: ['image/webp'],
     // enable dangerous use of SVG images
     dangerouslyAllowSVG: false,
     // set the Content-Security-Policy header
@@ -78,8 +78,8 @@ const nextConfig = {
   //   return config;
   // },
   i18n: {
-    locales: ["vi", "en"],
-    defaultLocale: "vi",
+    locales: ['vi', 'en'],
+    defaultLocale: 'vi',
   },
 };
 

@@ -1,12 +1,13 @@
-import CartItem from "@/components/index/cart/components/CartItem";
-import Button from "@/components/shared/Button";
-import { getSalePrice, numberWithCommans } from "@/lib/helpers/parser";
-import { useAppSelector } from "@/lib/hooks/useAppSelector";
-import { useToast } from "@/lib/providers/toast-provider";
-import { CartItem as CartItemType } from "@/lib/redux/types/cartItem.type";
-import { OrderServices } from "@/lib/repo/order.repo";
-import Link from "next/link";
-import { useMemo } from "react";
+import Link from 'next/link';
+import { useMemo } from 'react';
+
+import CartItem from '@/components/index/cart/components/CartItem';
+import Button from '@/components/shared/Button';
+import { getSalePrice, numberWithCommans } from '@/lib/helpers/parser';
+import { useAppSelector } from '@/lib/hooks/useAppSelector';
+import { useToast } from '@/lib/providers/toast-provider';
+import { CartItem as CartItemType } from '@/lib/redux/types/cartItem.type';
+import { OrderServices } from '@/lib/repo/order.repo';
 
 const CartPage = () => {
   const toast = useToast();
@@ -40,7 +41,7 @@ const CartPage = () => {
 
   const handleCreateOrder = () => {
     if (filteredCartItems && filteredCartItems.length === 0)
-      return toast.error("Giỏ hàng trống", { autoClose: 300 });
+      return toast.error('Giỏ hàng trống', { autoClose: 300 });
     return OrderServices.createOrder(totalPrice, cartItems)
       .then((res) => (window.location.href = res.data))
       .catch((err) => {

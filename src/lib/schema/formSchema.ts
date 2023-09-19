@@ -1,29 +1,29 @@
-import * as yup from "yup";
+import * as yup from 'yup';
 
 export const registerSchema = yup.object().shape({
-  title: yup.string().required("Tên không được để trống"),
+  title: yup.string().required('Tên không được để trống'),
   description: yup
     .string()
-    .max(1500, "Mô tả không được quá 700 ký tự")
-    .required("Mô tả không được để trống"),
-  price: yup.string().required("Giá không được để trống"),
-  categorySlug: yup.string().required("Danh mục không được để trống"),
-  image01: yup.string().required("Ảnh không được để trống"),
-  image02: yup.string().required("Ảnh không được để trống"),
-  size: yup.array().required("Kích thước không được để trống"),
-  colors: yup.array().required("Màu sắc không được để trống"),
+    .max(1500, 'Mô tả không được quá 700 ký tự')
+    .required('Mô tả không được để trống'),
+  price: yup.string().required('Giá không được để trống'),
+  categorySlug: yup.string().required('Danh mục không được để trống'),
+  image01: yup.string().required('Ảnh không được để trống'),
+  image02: yup.string().required('Ảnh không được để trống'),
+  size: yup.array().required('Kích thước không được để trống'),
+  colors: yup.array().required('Màu sắc không được để trống'),
   stock: yup
     .number()
-    .min(1, "Số lượng không được nhỏ hơn 1")
-    .max(100, "Số lượng không được lớn hơn 100")
-    .required("Số lượng không được để trống"),
+    .min(1, 'Số lượng không được nhỏ hơn 1')
+    .max(100, 'Số lượng không được lớn hơn 100')
+    .required('Số lượng không được để trống'),
   discount: yup
     .number()
-    .min(1, "Giảm giá không được nhỏ hơn 1")
-    .max(70, "Giảm giá không được lớn hơn 70")
+    .min(1, 'Giảm giá không được nhỏ hơn 1')
+    .max(70, 'Giảm giá không được lớn hơn 70')
     .notRequired()
-    .typeError("Giảm giá phải là số")
-    .transform((value, originalValue) => (originalValue === "" ? null : value))
+    .typeError('Giảm giá phải là số')
+    .transform((value, originalValue) => (originalValue === '' ? null : value))
     .nullable(true),
 });
 

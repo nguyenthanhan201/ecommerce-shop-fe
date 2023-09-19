@@ -28,20 +28,20 @@ export function compressImage(image: string, compress?: number): string {
   if (!image) return image;
 
   const imageUrl = image.toString().trim();
-  if (image.includes("i.imgur.com")) {
-    if (compress && !image.includes(".png")) {
-      let suffix = "";
-      if (compress < 100) suffix = "s";
-      else if (compress < 200) suffix = "t";
-      else if (compress < 350) suffix = "m";
-      else if (compress < 650) suffix = "l";
-      else suffix = "h";
-      const dot = image.lastIndexOf(".");
+  if (image.includes('i.imgur.com')) {
+    if (compress && !image.includes('.png')) {
+      let suffix = '';
+      if (compress < 100) suffix = 's';
+      else if (compress < 200) suffix = 't';
+      else if (compress < 350) suffix = 'm';
+      else if (compress < 650) suffix = 'l';
+      else suffix = 'h';
+      const dot = image.lastIndexOf('.');
       return imageUrl.slice(0, dot) + suffix + imageUrl.slice(dot);
     } else {
       return imageUrl;
     }
   } else {
-    return `https://images.weserv.nl/?url=${imageUrl}${compress ? `&w=${compress}` : ""}`;
+    return `https://images.weserv.nl/?url=${imageUrl}${compress ? `&w=${compress}` : ''}`;
   }
 }

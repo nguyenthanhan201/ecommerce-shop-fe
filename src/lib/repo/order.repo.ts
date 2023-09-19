@@ -1,9 +1,9 @@
-import { get, post } from "../axios/requests";
-import { CrudRepository } from "./crud.repo";
+import { get, post } from '../axios/requests';
+import { CrudRepository } from './crud.repo';
 
 export class OrderRepository extends CrudRepository<any> {
-  apiName = "order";
-  displayName = "Order";
+  apiName = 'order';
+  displayName = 'Order';
 
   async createOrder(amount: number, cartItems: any) {
     const res = await post(`/order/create_payment_url`, { amount, cartItems });

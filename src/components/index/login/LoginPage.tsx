@@ -1,19 +1,21 @@
-import { AuthServices } from "@/lib/repo/auth.repo";
-import { useRouter } from "next/router";
-import { authentication } from "../../../config/firebase.config";
+import { useRouter } from 'next/router';
+
+import { AuthServices } from '@/lib/repo/auth.repo';
+
+import { authentication } from '../../../config/firebase.config';
 
 const LoginPage = () => {
   const router = useRouter();
 
   const googleSignIn = async () => {
-    const { signInWithPopup, GoogleAuthProvider } = await import("firebase/auth");
+    const { signInWithPopup, GoogleAuthProvider } = await import('firebase/auth');
 
     await signInWithPopup(authentication, new GoogleAuthProvider())
       .then((result) => {
         AuthServices.login(result.user.email!, result.user.displayName!)
           .then((res) => {
-            localStorage.setItem("token", res.access_token);
-            router.replace("/");
+            localStorage.setItem('token', res.access_token);
+            router.replace('/');
           })
           .catch((err) => {
             console.log(err);
@@ -21,7 +23,7 @@ const LoginPage = () => {
           });
       })
       .catch((err) => {
-        alert("Đăng nhập thất bại");
+        alert('Đăng nhập thất bại');
         console.log(err);
       });
   };

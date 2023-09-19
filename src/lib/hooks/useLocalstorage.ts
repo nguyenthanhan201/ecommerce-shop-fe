@@ -1,4 +1,4 @@
-import React, { useDebugValue, useEffect, useState } from "react";
+import React, { useDebugValue, useEffect, useState } from 'react';
 
 export const useLocalStorage = <S>(
   key: string,

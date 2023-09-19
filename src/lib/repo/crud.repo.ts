@@ -1,4 +1,4 @@
-import { get } from "../axios/requests";
+import { get } from '../axios/requests';
 
 export abstract class CrudRepository<T> {
   abstract apiName: string;
@@ -8,7 +8,7 @@ export abstract class CrudRepository<T> {
     try {
       const res = await get(`/${this.apiName}/getAll${this.displayName}/${this.apiName}s`, {
         headers: {
-          Authorization: isNotToken ? "" : "Bearer " + localStorage.getItem("token"),
+          Authorization: isNotToken ? '' : 'Bearer ' + localStorage.getItem('token'),
         },
       });
       // console.log("👌  res:", res);

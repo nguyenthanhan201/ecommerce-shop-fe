@@ -1,5 +1,6 @@
-import UserPlayout from "@/layouts/user-layout/UserPlayout";
-import ManagerOrders from "components/index/user/components/ManagerOrders/ManagerOrders";
+import ManagerOrders from 'components/index/user/components/ManagerOrders/ManagerOrders';
+
+import UserPlayout from '@/layouts/user-layout/UserPlayout';
 
 const Page = () => {
   return <ManagerOrders />;

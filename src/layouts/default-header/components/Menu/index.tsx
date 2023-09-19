@@ -1,20 +1,21 @@
-import { ColorModeContext } from "@/lib/theme/theme";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import AdminPanelSettingsOutlinedIcon from "@mui/icons-material/AdminPanelSettingsOutlined";
-import ArrowBackIosNewOutlinedIcon from "@mui/icons-material/ArrowBackIosNewOutlined";
-import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
-import LanguageOutlinedIcon from "@mui/icons-material/LanguageOutlined";
-import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
-import WbSunnyOutlinedIcon from "@mui/icons-material/WbSunnyOutlined";
-import { useTheme } from "@mui/material";
-import { setCookie } from "cookies-next";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useContext, useMemo, useState } from "react";
-import { useTranslation } from "react-i18next";
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import AdminPanelSettingsOutlinedIcon from '@mui/icons-material/AdminPanelSettingsOutlined';
+import ArrowBackIosNewOutlinedIcon from '@mui/icons-material/ArrowBackIosNewOutlined';
+import DarkModeOutlinedIcon from '@mui/icons-material/DarkModeOutlined';
+import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
+import { useTheme } from '@mui/material';
+import { setCookie } from 'cookies-next';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useContext, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
-const MenuChild = dynamic(() => import("../MenuChild"), { ssr: false });
+import { ColorModeContext } from '@/lib/theme/theme';
+
+const MenuChild = dynamic(() => import('../MenuChild'), { ssr: false });
 type MenuProps = {
   handleLogout: () => void;
 };
@@ -39,40 +40,40 @@ const Menu = ({ handleLogout }: MenuProps) => {
   const MENU_ITEMS: MenuItemsProps[] = useMemo(() => {
     return [
       {
-        icon: <AccountCircleOutlinedIcon sx={{ fontSize: "80% !important" }} />,
-        title: "Tài khoản của tôi",
-        to: "/user/account",
+        icon: <AccountCircleOutlinedIcon sx={{ fontSize: '80% !important' }} />,
+        title: 'Tài khoản của tôi',
+        to: '/user/account',
       },
       {
-        icon: <AdminPanelSettingsOutlinedIcon sx={{ fontSize: "80% !important" }} />,
-        title: "Trang Admin",
-        to: "/admin",
+        icon: <AdminPanelSettingsOutlinedIcon sx={{ fontSize: '80% !important' }} />,
+        title: 'Trang Admin',
+        to: '/admin',
       },
       {
-        icon: <LanguageOutlinedIcon sx={{ fontSize: "80% !important" }} />,
-        title: "Ngôn ngữ",
+        icon: <LanguageOutlinedIcon sx={{ fontSize: '80% !important' }} />,
+        title: 'Ngôn ngữ',
         func: () => setIsChangedDropdown(true),
         children: {
-          type: "language",
+          type: 'language',
           data: [
             {
-              title: "Tiếng Việt",
+              title: 'Tiếng Việt',
               func: () => {
-                i18n.changeLanguage("vi");
-                setCookie("NEXT_LOCALE", "vi", {
+                i18n.changeLanguage('vi');
+                setCookie('NEXT_LOCALE', 'vi', {
                   maxAge: 365 * 24 * 60 * 60,
                 });
-                router.replace({ pathname, query }, asPath, { locale: "vi" });
+                router.replace({ pathname, query }, asPath, { locale: 'vi' });
               },
             },
             {
-              title: "Tiếng Anh",
+              title: 'Tiếng Anh',
               func: () => {
-                i18n.changeLanguage("en");
-                setCookie("NEXT_LOCALE", "en", {
+                i18n.changeLanguage('en');
+                setCookie('NEXT_LOCALE', 'en', {
                   maxAge: 365 * 24 * 60 * 60,
                 });
-                router.replace({ pathname, query }, asPath, { locale: "en" });
+                router.replace({ pathname, query }, asPath, { locale: 'en' });
               },
             },
           ],
@@ -80,17 +81,17 @@ const Menu = ({ handleLogout }: MenuProps) => {
       },
       {
         icon:
-          theme.palette.mode === "dark" ? (
-            <DarkModeOutlinedIcon className='dark_toggle' sx={{ fontSize: "80% !important" }} />
+          theme.palette.mode === 'dark' ? (
+            <DarkModeOutlinedIcon className='dark_toggle' sx={{ fontSize: '80% !important' }} />
           ) : (
-            <WbSunnyOutlinedIcon className='dark_toggle' sx={{ fontSize: "80% !important" }} />
+            <WbSunnyOutlinedIcon className='dark_toggle' sx={{ fontSize: '80% !important' }} />
           ),
-        title: "Giao diện",
+        title: 'Giao diện',
         func: () => colorMode.toggleColorMode(),
       },
       {
-        icon: <LogoutOutlinedIcon sx={{ fontSize: "80% !important" }} />,
-        title: "Đăng xuất",
+        icon: <LogoutOutlinedIcon sx={{ fontSize: '80% !important' }} />,
+        title: 'Đăng xuất',
         func: () => handleLogout(),
       },
     ];
@@ -105,28 +106,32 @@ const Menu = ({ handleLogout }: MenuProps) => {
 
   return (
     <div
-      className={`dropdown ${isChangedDropdown && "expand"}`}
+      className={`dropdown ${isChangedDropdown && 'expand'}`}
       onMouseLeave={() => setIsChangedDropdown(false)}
     >
       <div className='dropdown-content'>
         <div className='dropdown-enter'>
           {MENU_ITEMS.map((menu, index) => {
             return (
-              <div key={index} onClick={() => setSelectedTypeChild(menu.children?.type || null)}>
+              <div
+                key={index}
+                onClick={() => setSelectedTypeChild(menu.children?.type || null)}
+                role='presentation'
+              >
                 {menu.to ? (
                   <Link className='dropdown_item' href={menu.to}>
                     {menu.icon}
                     <span>{menu.title}</span>
                   </Link>
                 ) : (
-                  <p className='dropdown_item' onClick={menu.func}>
+                  <p className='dropdown_item' onClick={menu.func} role='presentation'>
                     {menu.icon}
                     <span>{menu.title}</span>
                     {menu.children ? (
                       <ArrowBackIosNewOutlinedIcon
                         sx={{
-                          fontSize: "80% !important",
-                          transform: "rotate(180deg)",
+                          fontSize: '80% !important',
+                          transform: 'rotate(180deg)',
                         }}
                       />
                     ) : null}

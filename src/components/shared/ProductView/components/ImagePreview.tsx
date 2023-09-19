@@ -1,5 +1,5 @@
 /* eslint-disable prefer-const */
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
 type ImagePreviewProps = {
   previewImg: string;
@@ -14,8 +14,8 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
       // console.log("👌 ~ img", img.height);
       result = document.getElementById(resultID);
       /*create lens:*/
-      lens = document.createElement("DIV");
-      lens.setAttribute("class", "img-zoom-lens");
+      lens = document.createElement('DIV');
+      lens.setAttribute('class', 'img-zoom-lens');
       /*insert lens:*/
       img.parentElement.insertBefore(lens, img);
       /*calculate the ratio between result DIV and lens:*/
@@ -23,10 +23,10 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
       cy = result.offsetHeight / lens.offsetHeight;
       /*set background properties for the result DIV:*/
       result.style.backgroundImage = "url('" + img.src + "')";
-      result.style.backgroundSize = img.width * cx + "px " + img.height * cy + "px";
+      result.style.backgroundSize = img.width * cx + 'px ' + img.height * cy + 'px';
       /*execute a function when someone moves the cursor over the image, or the lens:*/
-      lens.addEventListener("mousemove", moveLens);
-      img.addEventListener("mousemove", moveLens);
+      lens.addEventListener('mousemove', moveLens);
+      img.addEventListener('mousemove', moveLens);
       /*and also for touch screens:*/
       // lens.addEventListener("touchmove", moveLens);
       // img.addEventListener("touchmove", moveLens);
@@ -53,10 +53,10 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
           y = 0;
         }
         /*set the position of the lens:*/
-        lens.style.left = x + "px";
-        lens.style.top = y + "px";
+        lens.style.left = x + 'px';
+        lens.style.top = y + 'px';
         /*display what the lens "sees":*/
-        result.style.backgroundPosition = "-" + x * cx + "px -" + y * cy + "px";
+        result.style.backgroundPosition = '-' + x * cx + 'px -' + y * cy + 'px';
       }
       function getCursorPos(e: any) {
         let a,
@@ -76,31 +76,31 @@ const ImagePreview = ({ previewImg }: ImagePreviewProps) => {
     }
 
     function customRightResult() {
-      window.addEventListener("load", () => {
-        let elementResult: any = document.querySelector("#myresult");
+      window.addEventListener('load', () => {
+        let elementResult: any = document.querySelector('#myresult');
 
         // ?Lay cac phan tu tinh toan do dai zoom_result
-        let container = Array.from(document.getElementsByClassName("container"));
+        let container = Array.from(document.getElementsByClassName('container'));
         // console.log(container[1].clientWidth);
-        let product_image: any = document.querySelector(".product_image");
+        let product_image: any = document.querySelector('.product_image');
         let num: any = (product_image.clientWidth * 100) / container[1].clientWidth;
         // console.log("phan tram cua product_image:" + num.toFixed());
 
         let widthOfResult = 98 - num.toFixed();
         // console.log("phan tram cua result:" + widthOfResult);
 
-        if (typeof elementResult != "undefined") {
+        if (typeof elementResult != 'undefined') {
           if (widthOfResult > 51) {
             widthOfResult = 51;
-            elementResult.style.width = widthOfResult + "%";
+            elementResult.style.width = widthOfResult + '%';
           } else {
-            elementResult.style.width = widthOfResult + "%";
+            elementResult.style.width = widthOfResult + '%';
           }
         }
       });
     }
     if (!ignore) {
-      imageZoom("myimage", "myresult");
+      imageZoom('myimage', 'myresult');
       customRightResult();
     }
     return () => {

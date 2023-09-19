@@ -1,8 +1,9 @@
-import { Product } from "@/lib/redux/types/product.type";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
-import Grid from "./Grid";
-import ProductCard from "./ProductCard";
+import { Product } from '@/lib/redux/types/product.type';
+
+import Grid from './Grid';
+import ProductCard from './ProductCard';
 
 type InfinityListProps = {
   data: Product[];
@@ -25,18 +26,18 @@ const InfinityList = (props: InfinityListProps) => {
   }, [dataProp]);
 
   useEffect(() => {
-    window.addEventListener("scroll", () => {
+    window.addEventListener('scroll', () => {
       if (listRef && listRef.current) {
         if (
           window.scrollY + window.innerHeight >=
           listRef.current.clientHeight + listRef.current.offsetTop + 200
         ) {
-          console.log("bottom reach");
+          console.log('bottom reach');
           setLoad(true);
         }
       }
     });
-    return () => window.removeEventListener("scroll", () => {});
+    return () => window.removeEventListener('scroll', () => {});
   }, [listRef]);
 
   useEffect(() => {

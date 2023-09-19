@@ -1,14 +1,15 @@
-import { formatDate } from "@/lib/helpers/parser";
-import { Rating } from "@/lib/redux/types/rating.type";
-import { Avatar } from "@mui/material";
-import RatingMUI from "@mui/material/Rating";
-import { memo } from "react";
+import { Avatar } from '@mui/material';
+import RatingMUI from '@mui/material/Rating';
+import { memo } from 'react';
+
+import { formatDate } from '@/lib/helpers/parser';
+import { Rating } from '@/lib/redux/types/rating.type';
 
 type Props = {
   ratings: Rating[];
 };
 const ModalSeeComments = ({ ratings }: Props) => {
-  console.log("👌  ratings:", ratings);
+  console.log('👌  ratings:', ratings);
   return (
     <>
       {ratings.length > 0 ? (
@@ -22,7 +23,7 @@ const ModalSeeComments = ({ ratings }: Props) => {
                   <div>
                     <p>{item.idAuth.name}</p>
                     <RatingMUI value={item.rating} readOnly size='small' />
-                    <p className='product-rating__time'>{formatDate(item.updatedAt, "date")}</p>
+                    <p className='product-rating__time'>{formatDate(item.updatedAt, 'date')}</p>
                   </div>
                   {/* eslint-disable-next-line react/no-danger */}
                   <p dangerouslySetInnerHTML={{ __html: item.comment }} />

@@ -1,4 +1,4 @@
-import { get, post } from "../axios/requests";
+import { get, post } from '../axios/requests';
 
 export class CartRepository {
   async createCartItem(

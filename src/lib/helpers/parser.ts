@@ -1,7 +1,7 @@
-import format from "date-fns/format";
+import format from 'date-fns/format';
 
 export const numberWithCommans = (num: number) =>
-  num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + "₫";
+  num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',') + '₫';
 
 export const getSalePrice = (basePrice: number | string, discount: number) => {
   return Number(basePrice) - (Number(basePrice) * discount) / 100;
@@ -9,24 +9,24 @@ export const getSalePrice = (basePrice: number | string, discount: number) => {
 
 export function formatDate(
   date: string | Date | number | undefined,
-  formatText: "date" | "time" | "datetime" | "year_month_date" | (string & object) = "date",
+  formatText: 'date' | 'time' | 'datetime' | 'year_month_date' | (string & object) = 'date',
 ): string {
   let formatString;
   switch (formatText) {
-    case "date": {
-      formatString = "dd/MM/yyyy";
+    case 'date': {
+      formatString = 'dd/MM/yyyy';
       break;
     }
-    case "time": {
-      formatString = "HH:mm";
+    case 'time': {
+      formatString = 'HH:mm';
       break;
     }
-    case "datetime": {
-      formatString = "HH:mm dd/MM/yyyy";
+    case 'datetime': {
+      formatString = 'HH:mm dd/MM/yyyy';
       break;
     }
-    case "year_month_date": {
-      formatString = "yyyy-MM-dd";
+    case 'year_month_date': {
+      formatString = 'yyyy-MM-dd';
       break;
     }
     default: {
@@ -34,5 +34,5 @@ export function formatDate(
       break;
     }
   }
-  return date ? format(new Date(date), formatString) : "";
+  return date ? format(new Date(date), formatString) : '';
 }

@@ -1,17 +1,18 @@
-import { GET_PRODUCTS } from "@/lib/redux/types";
-import { Product } from "@/lib/redux/types/product.type";
-import { ProductServices } from "@/lib/repo/product.repo";
-import { category, colors, size } from "@/utils/index";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { Button } from "@mui/material";
-import MenuItem from "@mui/material/MenuItem";
-import Input from "components/shared/Input/Input";
-import Select from "components/shared/Select/Select";
-import { useAppDispatch } from "lib/hooks/useAppDispatch";
-import { useToast } from "lib/providers/toast-provider";
-import { registerSchema } from "lib/schema/formSchema";
-import { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
+import { yupResolver } from '@hookform/resolvers/yup';
+import { Button } from '@mui/material';
+import MenuItem from '@mui/material/MenuItem';
+import Input from 'components/shared/Input/Input';
+import Select from 'components/shared/Select/Select';
+import { useAppDispatch } from 'lib/hooks/useAppDispatch';
+import { useToast } from 'lib/providers/toast-provider';
+import { registerSchema } from 'lib/schema/formSchema';
+import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+import { GET_PRODUCTS } from '@/lib/redux/types';
+import { Product } from '@/lib/redux/types/product.type';
+import { ProductServices } from '@/lib/repo/product.repo';
+import { category, colors, size } from '@/utils/index';
 
 type ModalAddProductProps = {
   product?: Product;
@@ -42,36 +43,36 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
   });
   const toast = useToast();
   const dispatch = useAppDispatch();
-  const [img1, setImg1] = useState(product?.image01 || "");
-  const [img2, setImg2] = useState(product?.image02 || "");
-  const editorContent = watch("description");
+  const [img1, setImg1] = useState(product?.image01 || '');
+  const [img2, setImg2] = useState(product?.image02 || '');
+  const editorContent = watch('description');
 
   useEffect(() => {
-    register("description");
+    register('description');
   }, [register]);
 
   const onEditorStateChange = (editorState: any) => {
-    setValue("description", String(editorState));
+    setValue('description', String(editorState));
   };
 
   const formSubmit = (data: Product) => {
     if (product)
       return toast.promise(
-        "Cập nhật sản phẩm thành công",
+        'Cập nhật sản phẩm thành công',
         ProductServices.updateProduct({
           ...data,
           _id: product._id,
         }).then(() => {
           dispatch({ type: GET_PRODUCTS });
         }),
-        "Cập nhật sản phẩm thất bại",
+        'Cập nhật sản phẩm thất bại',
       );
     return toast.promise(
-      "Thêm sản phẩm thành công",
+      'Thêm sản phẩm thành công',
       ProductServices.createProduct(data).then(() => {
         dispatch({ type: GET_PRODUCTS });
       }),
-      "Thêm sản phẩm thất bại",
+      'Thêm sản phẩm thất bại',
     );
   };
 
@@ -79,7 +80,7 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
     <form onSubmit={handleSubmit(formSubmit)}>
       {product ? <h1>Cập nhật sản phẩm</h1> : <h1>Thêm sản phẩm</h1>}
       <Input
-        {...register("title")}
+        {...register('title')}
         error={errors.title?.message}
         label='title'
         name='title'
@@ -89,15 +90,15 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
 
       <div
         style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginTop: "1.5rem",
-          gap: "12px",
+          display: 'flex',
+          justifyContent: 'space-between',
+          marginTop: '1.5rem',
+          gap: '12px',
         }}
       >
-        <div style={{ width: "50%" }}>
+        <div style={{ width: '50%' }}>
           <Input
-            {...register("image01")}
+            {...register('image01')}
             error={errors.image01?.message}
             label='image01'
             name='image01'
@@ -109,9 +110,9 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
           />
           <img alt='image01' src={img1} />
         </div>
-        <div style={{ width: "50%" }}>
+        <div style={{ width: '50%' }}>
           <Input
-            {...register("image02")}
+            {...register('image02')}
             error={errors.image02?.message}
             label='image02'
             name='image02'
@@ -125,7 +126,7 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         </div>
       </div>
       <Input
-        {...register("stock")}
+        {...register('stock')}
         error={errors.stock?.message}
         label='stock'
         name='stock'
@@ -133,7 +134,7 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         type='number'
       />
       <Input
-        {...register("price")}
+        {...register('price')}
         error={errors.price?.message}
         label='price'
         name='price'
@@ -141,7 +142,7 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         type='number'
       />
       <Input
-        {...register("discount")}
+        {...register('discount')}
         error={errors.discount?.message}
         label='discount'
         name='discount'
@@ -157,8 +158,8 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         value={editorContent}
       />
       <Select
-        {...register("categorySlug")}
-        defaultValue={product?.categorySlug || ""}
+        {...register('categorySlug')}
+        defaultValue={product?.categorySlug || ''}
         error={errors.categorySlug?.message}
         label='CategorySlug'
       >
@@ -169,7 +170,7 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         ))}
       </Select>
       <Select
-        {...register("size")}
+        {...register('size')}
         defaultValue={product?.size || []}
         error={errors.size?.message}
         label='Size'
@@ -182,7 +183,7 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
         ))}
       </Select>
       <Select
-        {...register("colors")}
+        {...register('colors')}
         defaultValue={product?.size || []}
         error={errors.colors?.message}
         label='Colors'
@@ -194,8 +195,8 @@ const ModalAddProduct = ({ product }: ModalAddProductProps) => {
           </MenuItem>
         ))}
       </Select>
-      <Button style={{ width: "100%", marginTop: "20px" }} type='submit' variant='contained'>
-        {product ? "Cập nhật" : "Thêm sản phẩm"}
+      <Button style={{ width: '100%', marginTop: '20px' }} type='submit' variant='contained'>
+        {product ? 'Cập nhật' : 'Thêm sản phẩm'}
       </Button>
     </form>
   );

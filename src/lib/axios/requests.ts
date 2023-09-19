@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig } from 'axios';
 
 const request = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BE,

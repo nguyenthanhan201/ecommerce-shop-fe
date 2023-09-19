@@ -1,12 +1,13 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { Auth } from "../types/auth.type";
+import { createSlice } from '@reduxjs/toolkit';
+
+import { Auth } from '../types/auth.type';
 
 const initialState = {
   auth: null as Auth | null,
 };
 
 const auth = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState,
   reducers: {
     setAuthSlice: (state, action) => {
