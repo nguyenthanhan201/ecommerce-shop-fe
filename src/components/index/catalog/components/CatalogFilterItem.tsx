@@ -10,8 +10,6 @@ type Props = {
 };
 
 const CatalogFilterItem = ({ filter, filterContent, filterSelect, customValueInclude }: Props) => {
-  // useEffect(() => {
-  // }, [customValueInclude]);
   return (
     <>
       {filterContent.map((item: any, index: number) => (
@@ -19,8 +17,8 @@ const CatalogFilterItem = ({ filter, filterContent, filterSelect, customValueInc
           <CheckBox
             checked={filter.includes(customValueInclude ? item[customValueInclude] : item.value)}
             label={item.display}
-            onChange={(input: any) =>
-              filterSelect(customValueInclude?.toUpperCase(), input.checked, item)
+            onChange={(input) =>
+              filterSelect(customValueInclude?.toUpperCase(), input.target.checked, item)
             }
           />
         </div>

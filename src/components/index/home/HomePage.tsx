@@ -18,17 +18,17 @@ const SlideBanner = dynamic(import('@/components/shared/SlideBanner'), {
 const HomePage = ({ products }: any) => {
   return (
     <>
-      <HeroSlider data={heroSliderData} control={true} auto={false} timeOut={1000} />
+      <HeroSlider auto={false} control={true} data={heroSliderData} timeOut={1000} />
       <Section>
         <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
+          <Grid col={4} gap={20} mdCol={2} smCol={1}>
             {policy.map((item, index) => (
               <PolicyCard
-                key={index}
-                name={item.name}
                 description={item.description}
                 icon={item.icon}
-              ></PolicyCard>
+                key={index}
+                name={item.name}
+              />
             ))}
           </Grid>
         </SectionBody>
@@ -36,7 +36,7 @@ const HomePage = ({ products }: any) => {
       <Section>
         <SectionTitle>top sản phẩm bản chạy trong tuần</SectionTitle>
         <SectionBody>
-          <Grid col={4} mdCol={2} smCol={1} gap={20}>
+          <Grid col={4} gap={20} mdCol={2} smCol={1}>
             {products.length > 0
               ? products.map((item: Product) => {
                   // console.log("👌 ~ products", products);

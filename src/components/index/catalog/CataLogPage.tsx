@@ -1,10 +1,11 @@
-import { memo, useEffect, useState } from 'react';
-import { useQuery } from 'react-query';
+import { useVirtual } from '@tanstack/react-virtual';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
+import { QueryFunctionContext, useInfiniteQuery } from 'react-query';
 
-import InfinityList from '@/components/shared/InfinityList';
+import Grid from '@/components/shared/Grid';
+import { InfiniteScroll } from '@/components/shared/InfiniteScroll';
 import Loading from '@/components/shared/Loading/Loading';
-import { ProductServices } from '@/lib/repo/product.repo';
-import { productData } from '@/utils/index';
+import ProductCard from '@/components/shared/ProductCard';
 
 import CatalogFilter from './components/CatalogFilter';
 
@@ -22,18 +23,58 @@ const initFilter = {
   prices: [],
 };
 
-const CatalogPage = () => {
-  const { isLoading } = useQuery({
-    queryKey: 'products',
-    queryFn: async () =>
-      await ProductServices.getAll().then((res: any) => {
-        setProductList([...res, ...productList]);
-      }),
-  });
+const getProducts = async ({ pageParam: _pageParam = 0 }: QueryFunctionContext) => {
+  return await fetch('http://localhost:3000/api/product', {
+    method: 'GET',
+  })
+    .then((res) => res.json())
+    .then((res) => res.data);
 
-  const [productList, setProductList] = useState(productData.getAllProducts());
-  const [products, setProducts] = useState(productList);
+  // const res = await fetch(`https://api.realworld.io/api/articles?limit=10&offset=${pageParam}`);
+  // const data = await res.json();
+  // return { ...data, prevOffset: pageParam };
+};
+
+const CatalogPage = () => {
+  const { isLoading, fetchNextPage, hasNextPage } = useInfiniteQuery(
+    ['catalogProducts'],
+    getProducts,
+    {
+      onError: (error) => {
+        alert(error);
+      },
+      onSuccess: (data) => {
+        setProductList((prevState) => [...prevState, ...data.pages.at(0)]);
+      },
+      getNextPageParam: (lastPage, allPages) => {
+        const lengths = [];
+        for (const subArray of allPages) {
+          lengths.push(subArray.length);
+        }
+
+        const sum = lengths.reduce((a, b) => a + b, 0);
+
+        if (sum > 100) {
+          return undefined;
+        }
+
+        return true;
+      },
+      refetchOnWindowFocus: false,
+    },
+  );
+
+  const [productList, setProductList] = useState<Array<any>>([]);
+  const [products, setProducts] = useState<Array<any>>([]);
   const [filter, setFilter] = useState<FilterType>(initFilter);
+  const listRef = useRef(null);
+
+  const rowVirtualizer = useVirtual({
+    size: products.length,
+    parentRef: listRef,
+    estimateSize: useCallback(() => 35, []),
+    overscan: 5,
+  });
 
   useEffect(() => {
     (function updateProducts() {
@@ -48,14 +89,14 @@ const CatalogPage = () => {
 
       if (filter.color.length > 0) {
         temp = temp.filter((e) => {
-          const check = e.colors.find((color) => filter.color.includes(color));
+          const check = e.colors.find((color: any) => filter.color.includes(color));
           return check !== undefined;
         });
       }
 
       if (filter.size.length > 0) {
         temp = temp.filter((e) => {
-          const check = e.size.find((size) => filter.size.includes(size));
+          const check = e.size.find((size: any) => filter.size.includes(size));
           return check !== undefined;
         });
       }
@@ -73,14 +114,29 @@ const CatalogPage = () => {
   }, [filter, productList]);
 
   return (
-    <>
-      <div className='catalog'>
-        <CatalogFilter filter={filter} setFilter={setFilter} />
-        <div className='catalog_content'>
-          {isLoading ? <Loading /> : <InfinityList data={products as any} />}
-        </div>
+    <div className='catalog'>
+      <CatalogFilter filter={filter} setFilter={setFilter} />
+      <div className='catalog_content'>
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <div ref={listRef}>
+            <InfiniteScroll
+              dataLength={products.length}
+              hasMore={hasNextPage!}
+              loader={<>Loading...</>}
+              next={fetchNextPage}
+            >
+              <Grid col={3} gap={20} mdCol={2} smCol={1}>
+                {rowVirtualizer.virtualItems.map((virtualRow) => (
+                  <ProductCard key={virtualRow.index} product={products[virtualRow.index]} />
+                ))}
+              </Grid>
+            </InfiniteScroll>
+          </div>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
