@@ -157,14 +157,14 @@ const ProductView = ({ product }: ProductViewProps) => {
         </div>
         <div className='product_info'>
           <h1 className='product_info_title'>{product.title}</h1>
-          <div className='flex gap-2 items-start'>
+          <div className='flex items-start gap-2'>
             {isLoading ? (
               <p className='animate-pulse'>Đang lấy thông tin đánh giá</p>
             ) : (
               <>
                 {ratings.length > 0 && ratings[0].rating !== 0 ? (
                   <div
-                    className='flex flex-col gap-1 cursor-pointer'
+                    className='flex cursor-pointer flex-col gap-1'
                     onClick={() => setShowModal(true)}
                     role='presentation'
                   >
@@ -255,7 +255,7 @@ const ProductView = ({ product }: ProductViewProps) => {
               </div>
             </>
           ) : (
-            <p className='text-red-500 text-32 mt-6'>Hết hàng</p>
+            <p className='mt-6 text-32 text-red-500'>Hết hàng</p>
           )}
         </div>
         {isMobile ? (

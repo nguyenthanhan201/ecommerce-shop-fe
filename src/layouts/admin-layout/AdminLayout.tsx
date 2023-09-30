@@ -15,7 +15,7 @@ const AdminLayout = ({ ...props }: any) => {
       <CssBaseline />
       <div className='flex'>
         <Sidebar />
-        <main className='w-full h-full'>
+        <main className='h-full w-full'>
           <Topbar />
           {props.children}
         </main>

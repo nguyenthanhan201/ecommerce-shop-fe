@@ -6,7 +6,7 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import { useTheme } from '@mui/material';
-import { setCookie } from 'cookies-next';
+import { set } from 'js-cookie';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -60,7 +60,7 @@ const Menu = ({ handleLogout }: MenuProps) => {
               title: 'Tiếng Việt',
               func: () => {
                 i18n.changeLanguage('vi');
-                setCookie('NEXT_LOCALE', 'vi', {
+                set('NEXT_LOCALE', 'vi', {
                   maxAge: 365 * 24 * 60 * 60,
                 });
                 router.replace({ pathname, query }, asPath, { locale: 'vi' });
@@ -70,7 +70,7 @@ const Menu = ({ handleLogout }: MenuProps) => {
               title: 'Tiếng Anh',
               func: () => {
                 i18n.changeLanguage('en');
-                setCookie('NEXT_LOCALE', 'en', {
+                set('NEXT_LOCALE', 'en', {
                   maxAge: 365 * 24 * 60 * 60,
                 });
                 router.replace({ pathname, query }, asPath, { locale: 'en' });

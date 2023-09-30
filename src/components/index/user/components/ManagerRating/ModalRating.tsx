@@ -47,7 +47,7 @@ const ModalRating = ({ selectedRating }: ModalRatingProps) => {
         value={comment}
       />
       <button
-        className='px-2 py-1 rounded border-none mt-3 cursor-pointer bg-main'
+        className='mt-3 cursor-pointer rounded border-none bg-main px-2 py-1'
         disabled={idDisabled}
         onClick={handleRating}
         type='button'

@@ -71,9 +71,9 @@ const ManagerRating = () => {
       align: 'center',
       renderCell: (row: GridCellParams) => (
         <button
-          className={`cursor-pointer text-white px-2 py-1 rounded ${
+          className={`cursor-pointer rounded px-2 py-1 text-white ${
             !row.row.comment ? 'bg-green-500' : 'bg-gray-500'
-          } outline-none border-none`}
+          } border-none outline-none`}
           disabled={row.row.comment ? true : false}
           onClick={() => {
             setOpen(true);

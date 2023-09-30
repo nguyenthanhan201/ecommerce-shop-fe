@@ -49,7 +49,7 @@ const DefaultFooter = () => {
     <footer className='footer'>
       <div className='container'>
         <div className='new_footer_logo'>
-          <Link className='relative w-[10%] h-10 block' href='/'>
+          <Link className='relative block h-10 w-[10%]' href='/'>
             <Img
               alt='yolo-logo'
               className='footer_logo object-contain'
