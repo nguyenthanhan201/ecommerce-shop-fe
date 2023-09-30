@@ -113,6 +113,9 @@ const CatalogPage = () => {
     })();
   }, [filter, productList]);
 
+  const items = rowVirtualizer.virtualItems;
+  console.log(items);
+
   return (
     <div className='catalog'>
       <CatalogFilter filter={filter} setFilter={setFilter} />
@@ -126,10 +129,13 @@ const CatalogPage = () => {
               hasMore={hasNextPage!}
               loader={<>Loading...</>}
               next={fetchNextPage}
+              // className='max-h-[100vh] overflow-auto'
             >
               <Grid col={3} gap={20} mdCol={2} smCol={1}>
                 {rowVirtualizer.virtualItems.map((virtualRow) => (
-                  <ProductCard key={virtualRow.index} product={products[virtualRow.index]} />
+                  <div key={virtualRow.index} ref={rowVirtualizer.measure}>
+                    <ProductCard product={products[virtualRow.index]} />
+                  </div>
                 ))}
               </Grid>
             </InfiniteScroll>

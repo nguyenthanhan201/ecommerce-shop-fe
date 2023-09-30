@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import { shallowEqual } from 'react-redux';
 
 import Img from '@/components/shared/Img/Img';
+import { removeCookie } from '@/lib/hooks/useCookie';
 import { AuthServices } from '@/lib/repo/auth.repo';
 
 import { authentication } from '../../config/firebase.config';
@@ -64,13 +65,19 @@ const Defaultheader = () => {
   const handleLogout = useCallback(async () => {
     if (!auth?.email) return;
     const { signOut } = await import('firebase/auth');
-    const promise1 = await signOut(authentication);
+    // const promise1 = await signOut(authentication);
     const promise2 = await AuthServices.logout(auth.email);
-    const promise3 = await localStorage.setItem('token', 'null');
-    await Promise.all([promise1, promise2, promise3]).catch((err) => {
-      console.log(err);
-      alert(err);
-    });
+
+    await Promise.all([promise2])
+      .then(async () => {
+        await signOut(authentication);
+        removeCookie('token');
+        removeCookie('refreshToken');
+      })
+      .catch((err) => {
+        console.log(err);
+        alert(err);
+      });
   }, [auth?.email]);
 
   return (

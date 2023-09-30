@@ -4,12 +4,12 @@ export abstract class CrudRepository<T> {
   abstract apiName: string;
   abstract displayName: string;
 
-  async getAll(isNotToken?: boolean): Promise<{ fromCache: boolean; data: T[] }> {
+  async getAll(_isNotToken?: boolean): Promise<{ fromCache: boolean; data: T[] }> {
     try {
       const res = await get(`/${this.apiName}/getAll${this.displayName}/${this.apiName}s`, {
-        headers: {
-          Authorization: isNotToken ? '' : 'Bearer ' + localStorage.getItem('token'),
-        },
+        // headers: {
+        //   Authorization: isNotToken ? '' : 'Bearer ' + localStorage.getItem('token'),
+        // },
       });
       // console.log("👌  res:", res);
 

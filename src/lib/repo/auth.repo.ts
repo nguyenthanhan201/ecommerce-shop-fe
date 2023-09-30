@@ -1,4 +1,4 @@
-import { post } from '../axios/requests';
+import { get, post } from '../axios/requests';
 
 export class AuthRepository {
   async getUserByEmail(name: string, email: string) {
@@ -18,6 +18,11 @@ export class AuthRepository {
 
   async logout(email: string) {
     const res = await post(`auth/logout`, { email });
+    return res;
+  }
+
+  async refreshToken() {
+    const res = await get(`auth/refresh-token`);
     return res;
   }
 }

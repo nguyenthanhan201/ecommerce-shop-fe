@@ -34,7 +34,7 @@ export class ProductRepository extends CrudRepository<Product> {
   async getHideProducts() {
     const res = await get(`/product/hide`, {
       headers: {
-        Authorization: 'Bearer ' + localStorage.getItem('token'),
+        // Authorization: 'Bearer ' + localStorage.getItem('token'),
       },
     });
     return res;

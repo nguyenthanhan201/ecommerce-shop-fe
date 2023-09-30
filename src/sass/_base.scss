@@ -36,8 +36,7 @@ body:has(.user-layout) {
   color: var(--main-color);
 }
 
-.app,
-.admin {
+.app {
   display: flex;
   justify-content: center;
   position: relative;

@@ -1,21 +1,26 @@
-import { useRouter } from 'next/router';
-
+import { setCookie } from '@/lib/hooks/useCookie';
 import { AuthServices } from '@/lib/repo/auth.repo';
 
 import { authentication } from '../../../config/firebase.config';
 
 const LoginPage = () => {
-  const router = useRouter();
-
   const googleSignIn = async () => {
     const { signInWithPopup, GoogleAuthProvider } = await import('firebase/auth');
 
     await signInWithPopup(authentication, new GoogleAuthProvider())
-      .then((result) => {
-        AuthServices.login(result.user.email!, result.user.displayName!)
+      .then(async (result) => {
+        await AuthServices.login(result.user.email!, result.user.displayName!)
           .then((res) => {
-            localStorage.setItem('token', res.access_token);
-            router.replace('/');
+            setCookie('token', res.access_token, {
+              // 2 day
+              expires: new Date(Date.now() + 2 + 24 * 60 * 60 * 1000),
+            });
+            setCookie('refreshToken', res.refresh_token, {
+              // 7 days
+              expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
+            });
+
+            window.location.replace('/');
           })
           .catch((err) => {
             console.log(err);
@@ -27,6 +32,7 @@ const LoginPage = () => {
         console.log(err);
       });
   };
+
   return (
     <div className='form-login'>
       <img alt='yolo-gif' loading='lazy' src='/images/gifs/ezgif.com-gif-maker.webp' />

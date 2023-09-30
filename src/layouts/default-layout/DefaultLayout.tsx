@@ -9,6 +9,7 @@ import DefaultHeader from '../default-header/DefaultHeader';
 
 const DefaultLayout = ({ ...props }: any) => {
   useAuth();
+
   const dispatch = useAppDispatch();
   const auth = useAppSelector((state) => state.auth.auth);
   // console.log("👌  auth:", auth);
@@ -32,6 +33,10 @@ const DefaultLayout = ({ ...props }: any) => {
   //   return () => {
   //     window.removeEventListener("scroll", handleScroll);
   //   };
+  // }, []);
+
+  // useEffect(() => {
+  //   handleGetUser();
   // }, []);
 
   return (

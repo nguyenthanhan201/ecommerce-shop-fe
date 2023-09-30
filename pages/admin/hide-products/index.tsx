@@ -3,23 +3,25 @@ import { DataGrid } from '@mui/x-data-grid';
 import Header from 'components/index/admin/components/Header';
 import { useAppDispatch } from 'lib/hooks/useAppDispatch';
 import { useAppSelector } from 'lib/hooks/useAppSelector';
-import useAuth from 'lib/hooks/useAuth';
 import { useToast } from 'lib/providers/toast-provider';
 import { GET_HIDE_PRODUCTS } from 'lib/redux/types';
 import { tokens } from 'lib/theme/theme';
 import { useEffect } from 'react';
 
 import AdminLayout from '@/layouts/admin-layout/AdminLayout';
+import useCookie from '@/lib/hooks/useCookie';
 import { AuthServices } from '@/lib/repo/auth.repo';
 import { ProductServices } from '@/lib/repo/product.repo';
 
 const Page = () => {
-  useAuth();
+  // useAuth();
   const toast = useToast();
   const dispatch = useAppDispatch();
+  const { set } = useCookie('token');
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const products = useAppSelector((state) => state.products.products);
+  console.log('👌  products:', products);
   const errProducts: string | null = useAppSelector((state) => state.products.err);
   const auth = useAppSelector((state) => state.auth.auth);
 
@@ -125,7 +127,8 @@ const Page = () => {
         'Làm mới access token thành công. Làm mới trang để tiếp tục',
         AuthServices.token(auth?.email)
           .then((res) => {
-            localStorage.setItem('token', res.accessToken);
+            // localStorage.setItem('token', res.accessToken);
+            set(res.accessToken);
           })
           .catch((err) => {
             Promise.reject(err);
@@ -152,11 +155,11 @@ const Page = () => {
           alignItems: 'center',
         }}
       >
-        <Header title='Sản phẩm ẩn' subtitle='Chào mừng tới quản lí sản phẩm ẩn' />
+        <Header subtitle='Chào mừng tới quản lí sản phẩm ẩn' title='Sản phẩm ẩn' />
       </Box>
       <Box
-        m='40px 0 0 0'
         height='75vh'
+        m='40px 0 0 0'
         sx={{
           '& .MuiDataGrid-root': {
             border: 'none',
@@ -184,7 +187,7 @@ const Page = () => {
           },
         }}
       >
-        <DataGrid checkboxSelection rows={products} columns={columns} getRowId={(row) => row._id} />
+        <DataGrid checkboxSelection columns={columns} getRowId={(row) => row._id} rows={products} />
       </Box>
     </Box>
   );
