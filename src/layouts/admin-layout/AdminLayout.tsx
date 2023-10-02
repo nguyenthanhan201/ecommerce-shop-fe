@@ -1,6 +1,5 @@
 import { CssBaseline } from '@mui/material';
 
-import RequiredAuth from '../required-auth/RequiredAuth';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
@@ -10,7 +9,7 @@ const AdminLayout = ({ ...props }: any) => {
   // const _colors = tokens(theme.palette.mode);
 
   return (
-    <RequiredAuth>
+    <>
       <CssBaseline />
       <div className='flex'>
         <Sidebar />
@@ -19,7 +18,7 @@ const AdminLayout = ({ ...props }: any) => {
           {props.children}
         </main>
       </div>
-    </RequiredAuth>
+    </>
   );
 };
 

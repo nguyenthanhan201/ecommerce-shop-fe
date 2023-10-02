@@ -35,7 +35,7 @@ export class ProductRepository extends CrudRepository<Product> {
 
   async getHideProducts(config?: AxiosRequestConfig<any> | undefined) {
     const res = await get(`/product/hide`, config);
-    console.log('👌  res:', res);
+    // console.log('👌  res:', res);
     return res;
   }
 

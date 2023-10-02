@@ -11,7 +11,7 @@ export abstract class CrudRepository<T> {
   ): Promise<{ fromCache: boolean; data: T[] }> {
     try {
       const res = await get(`/${this.apiName}/getAll${this.displayName}/${this.apiName}s`, config);
-      console.log('👌  res:', res);
+      // console.log('👌  res:', res);
 
       return res;
     } catch (err) {
