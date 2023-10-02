@@ -8,22 +8,26 @@ export async function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const isPathProtected = requiredAuthPaths
     .concat(retrictedAuthPaths)
-    ?.map((path) => pathname.startsWith(path))
-    .includes(true);
-  const res = NextResponse.next();
+    .some((path) => pathname.includes(path));
+  const token = req.cookies.get('token');
+
   if (isPathProtected) {
-    const token = req.cookies.get('token');
-    if (!token) {
+    const isRequiredAuthPath = requiredAuthPaths.some((path) => pathname.includes(path));
+
+    if (!token && isRequiredAuthPath) {
       const url = new URL(`/login`, req.url);
       url.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(url);
     }
 
-    if (token) {
+    const isRetrictedAuthPath = retrictedAuthPaths.some((path) => pathname.includes(path));
+
+    if (token && isRetrictedAuthPath) {
       const url = new URL(`/`, req.url);
       url.searchParams.set('callbackUrl', pathname);
       return NextResponse.redirect(url);
     }
   }
-  return res;
+
+  return NextResponse.next();
 }
