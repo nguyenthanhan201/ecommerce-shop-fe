@@ -1,26 +1,19 @@
-import EmailIcon from '@mui/icons-material/Email';
-import PersonAddIcon from '@mui/icons-material/PersonAdd';
-import PointOfSaleIcon from '@mui/icons-material/PointOfSale';
-import TrafficIcon from '@mui/icons-material/Traffic';
-import { Box, useTheme } from '@mui/material';
+import { Box } from '@mui/material';
 
 import Header from '@/components/index/admin/components/Header';
-import StatBox from '@/components/index/admin/components/StatBox';
-import { tokens } from '@/lib/theme/theme';
 
 const AdminPage = () => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
+  // const theme = useTheme();
+  // const colors = tokens(theme.palette.mode);
 
   return (
     <Box m='20px'>
       {/* HEADER */}
-      <Box display='flex' justifyContent='space-between' alignItems='center'>
-        <Header title='DASHBOARD' subtitle='Welcome to your dashboard' />
+      <Box alignItems='center' display='flex' justifyContent='space-between'>
+        <Header subtitle='Welcome to your dashboard' title='DASHBOARD' />
       </Box>
       {/* GRID & CHARTS */}
-      <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gridAutoRows='140px' gap='20px'>
-        {/* ROW 1 */}
+      {/* <Box display='grid' gridTemplateColumns='repeat(12, 1fr)' gridAutoRows='140px' gap='20px'>
         <Box
           gridColumn='span 3'
           bgcolor={colors.primary[400]}
@@ -81,7 +74,7 @@ const AdminPage = () => {
             icon={<TrafficIcon sx={{ color: colors.greenAccent[600], fontSize: '26px' }} />}
           />
         </Box>
-      </Box>
+      </Box> */}
     </Box>
   );
 };

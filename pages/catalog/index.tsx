@@ -13,7 +13,7 @@ Page.Layout = DefaultLayout;
 export const getServerSideProps = async () => {
   await queryClient.prefetchQuery(
     'productsCatalogQuery',
-    async () => await ProductServices.getAll(true),
+    async () => await ProductServices.getAll(),
   );
 
   // eslint-disable-next-line react-hooks/rules-of-hooks

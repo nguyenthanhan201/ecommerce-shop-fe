@@ -2,14 +2,15 @@ import { Box, Button as ButtonMUI, useTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import Header from 'components/index/admin/components/Header';
 import { tokens } from 'lib/theme/theme';
-import { useEffect, useMemo, useState } from 'react';
+import { NextPageContext } from 'next';
+import { useMemo, useState } from 'react';
+import { dehydrate } from 'react-query';
 
 import Img from '@/components/shared/Img/Img';
 import AdminLayout from '@/layouts/admin-layout/AdminLayout';
 import { formatDate, getSalePrice, numberWithCommans } from '@/lib/helpers/parser';
-import { useAppSelector } from '@/lib/hooks/useAppSelector';
-import { useToast } from '@/lib/providers/toast-provider';
-import { AuthServices } from '@/lib/repo/auth.repo';
+import { useSEO } from '@/lib/hooks/useSEO';
+import { queryClient } from '@/lib/react-query/queryClient';
 import { OrderServices } from '@/lib/repo/order.repo';
 // import { useExcelDownloder } from "react-xls";
 
@@ -93,14 +94,12 @@ const columns: any = [
   },
 ];
 
-const Page = () => {
+const Page = (pageProps: PageProps<{ orders: Array<any> }>) => {
+  const { dehydratedState } = pageProps;
   // const { ExcelDownloder } = useExcelDownloder();
-  const auth = useAppSelector((state) => state.auth.auth);
-  const toast = useToast();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [orders, setOrders] = useState<any>([]);
-  // console.log("👌 ~ orders", orders);
+  const [orders] = useState<any>(dehydratedState.queries.at(0)?.state.data || []);
 
   const convertOrdersToExcel = () => {
     if (orders.length <= 0) return;
@@ -122,30 +121,30 @@ const Page = () => {
     return { Data1: [...data] };
   };
 
-  useEffect(() => {
-    if (!auth?.email) return;
-    OrderServices.getAll()
-      .then((res) => {
-        // console.log("👌 ~ res", res);
-        setOrders(res);
-      })
-      .catch((err) => {
-        console.log('👌 ~ err', err);
-        if (err.response.data.error.name === 'TokenExpiredError' && auth?.email) {
-          toast.promise(
-            'Làm mới access token thành công. Làm mới trang để tiếp tục',
-            AuthServices.token(auth?.email)
-              .then((res) => {
-                localStorage.setItem('token', res.accessToken);
-              })
-              .catch((err) => {
-                Promise.reject(err);
-              }),
-            'Làm mới access token thất bại',
-          );
-        }
-      });
-  }, [auth?.email]);
+  // useEffect(() => {
+  //   if (!auth?.email) return;
+  //   OrderServices.getAll()
+  //     .then((res) => {
+  //       // console.log("👌 ~ res", res);
+  //       setOrders(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log('👌 ~ err', err);
+  //       if (err.response.data.error.name === 'TokenExpiredError' && auth?.email) {
+  //         toast.promise(
+  //           'Làm mới access token thành công. Làm mới trang để tiếp tục',
+  //           AuthServices.token(auth?.email)
+  //             .then((res) => {
+  //               localStorage.setItem('token', res.accessToken);
+  //             })
+  //             .catch((err) => {
+  //               Promise.reject(err);
+  //             }),
+  //           'Làm mới access token thất bại',
+  //         );
+  //       }
+  //     });
+  // }, [auth?.email]);
 
   const ButtonExcel = useMemo(() => {
     if (!convertOrdersToExcel()) return null;
@@ -225,3 +224,45 @@ const Page = () => {
 
 export default Page;
 Page.Layout = AdminLayout;
+
+export async function getServerSideProps(ctx: NextPageContext) {
+  const cookies = ctx.req?.headers.cookie;
+  await queryClient.prefetchQuery(
+    'ordersQuery',
+    async () =>
+      await OrderServices.getAll({
+        headers: {
+          Cookie: cookies!,
+        },
+      }),
+  );
+
+  // const products = await ProductServices.getAll(true)
+  //   .then((res) => {
+  //     // console.log("👌 ~ res", res);
+  //     return res;
+  //   })
+  //   .catch((err) => {
+  //     // console.log("🚀 ~ err", err);
+  //     return [];
+  //   });
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const seo = useSEO('Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi', {
+    description: 'Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi',
+    image: '/images/Logo-2.png',
+    keyword: 'yolo',
+  });
+
+  return {
+    props: JSON.parse(
+      JSON.stringify({
+        seo,
+        dehydratedState: dehydrate(queryClient),
+        // pageData: {
+        //   products,
+        // },
+      }),
+    ) as PageProps<{ orders: Array<any> }>,
+  };
+}

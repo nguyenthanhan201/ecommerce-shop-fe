@@ -17,7 +17,7 @@ export default function Page(pageProps: PageProps<{ products: Product[] }>) {
 Page.Layout = DefaultLayout;
 
 export async function getServerSideProps(_ctx: NextPageContext) {
-  await queryClient.prefetchQuery('productsQuery', async () => await ProductServices.getAll(true));
+  await queryClient.prefetchQuery('productsQuery', async () => await ProductServices.getAll());
 
   // const products = await ProductServices.getAll(true)
   //   .then((res) => {

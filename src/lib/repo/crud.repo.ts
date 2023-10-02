@@ -1,17 +1,17 @@
+import { AxiosRequestConfig } from 'axios';
+
 import { get } from '../axios/requests';
 
 export abstract class CrudRepository<T> {
   abstract apiName: string;
   abstract displayName: string;
 
-  async getAll(_isNotToken?: boolean): Promise<{ fromCache: boolean; data: T[] }> {
+  async getAll(
+    config?: AxiosRequestConfig<any> | undefined,
+  ): Promise<{ fromCache: boolean; data: T[] }> {
     try {
-      const res = await get(`/${this.apiName}/getAll${this.displayName}/${this.apiName}s`, {
-        // headers: {
-        //   Authorization: isNotToken ? '' : 'Bearer ' + localStorage.getItem('token'),
-        // },
-      });
-      // console.log("👌  res:", res);
+      const res = await get(`/${this.apiName}/getAll${this.displayName}/${this.apiName}s`, config);
+      console.log('👌  res:', res);
 
       return res;
     } catch (err) {

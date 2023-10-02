@@ -1,12 +1,11 @@
 import { CssBaseline } from '@mui/material';
-import useAuth from 'lib/hooks/useAuth';
 
 import RequiredAuth from '../required-auth/RequiredAuth';
 import Sidebar from './components/Sidebar';
 import Topbar from './components/Topbar';
 
 const AdminLayout = ({ ...props }: any) => {
-  useAuth();
+  // useAuth();
   // const theme = useTheme();
   // const _colors = tokens(theme.palette.mode);
 

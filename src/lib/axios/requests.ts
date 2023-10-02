@@ -9,6 +9,10 @@ const request = () => {
     baseURL: process.env.NEXT_PUBLIC_BE,
     withCredentials: true,
     timeout: 60000, // 60s
+    // headers: {
+    //   'Access-Control-Allow-Headers': '*', // allow all
+    //   Cookie: `token=${getCookie('token')}`,
+    // },
   });
 
   instance.interceptors.response.use(undefined, async (errorResponse: AxiosError) => {

@@ -15,12 +15,14 @@ import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 
 import AdminLayout from '@/layouts/admin-layout/AdminLayout';
+import { useToast } from '@/lib/providers/toast-provider';
 import { Product } from '@/lib/redux/types/product.type';
 import { ProductServices } from '@/lib/repo/product.repo';
 
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 const Page = () => {
+  const toast = useToast();
   const [chartData, setChartData] = useState<any>();
   // const getDataMostViewedProducts: Worker = useMemo(
   //   () =>
@@ -62,22 +64,27 @@ const Page = () => {
   //   }
   // }, [getDataMostViewedProducts]);
   useEffect(() => {
-    ProductServices.getMostViewedProducts().then((res) => {
-      const nameProducts = res.map((item: Product) => item.title);
-      const viewsProducts = res.map((item: Product) => item.views);
-      setChartData({
-        labels: nameProducts,
-        datasets: [
-          {
-            label: '',
-            data: viewsProducts,
-            backgroundColor: 'rgba(255, 99, 132, 0.5)',
-            borderColor: 'rgba(255, 99, 132, 0.5)',
-            borderWidth: 1,
-          },
-        ],
+    ProductServices.getMostViewedProducts()
+      .then((res) => {
+        const nameProducts = res.map((item: Product) => item.title);
+        const viewsProducts = res.map((item: Product) => item.views);
+        setChartData({
+          labels: nameProducts,
+          datasets: [
+            {
+              label: '',
+              data: viewsProducts,
+              backgroundColor: 'rgba(255, 99, 132, 0.5)',
+              borderColor: 'rgba(255, 99, 132, 0.5)',
+              borderWidth: 1,
+            },
+          ],
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error('Lỗi lấy dữ liệu thống kê');
       });
-    });
   }, []);
 
   const options: ChartOptions = {

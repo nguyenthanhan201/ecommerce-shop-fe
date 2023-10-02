@@ -3,26 +3,29 @@ import { DataGrid, GridColumns } from '@mui/x-data-grid';
 import Header from 'components/index/admin/components/Header';
 import Modal from 'components/shared/Modal/Modal';
 import { useAppDispatch } from 'lib/hooks/useAppDispatch';
-import { useAppSelector } from 'lib/hooks/useAppSelector';
 import { useToast } from 'lib/providers/toast-provider';
 import { GET_PRODUCTS } from 'lib/redux/types';
 import { tokens } from 'lib/theme/theme';
+import { NextPageContext } from 'next';
 import dynamic from 'next/dynamic';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import { dehydrate } from 'react-query';
 
 import AdminLayout from '@/layouts/admin-layout/AdminLayout';
-import { RootState } from '@/lib/redux/store';
+import { useSEO } from '@/lib/hooks/useSEO';
+import { queryClient } from '@/lib/react-query/queryClient';
 import { Product } from '@/lib/redux/types/product.type';
 import { ProductServices } from '@/lib/repo/product.repo';
 
 const ModalAddProduct = dynamic(import('@/components/index/admin/products/ModalAddProduct'));
 
-const Page = () => {
+const Page = (pageProps: PageProps<{ products: Product[] }>) => {
+  const { dehydratedState } = pageProps;
   const toast = useToast();
   const dispatch = useAppDispatch();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const products = useAppSelector((state: RootState) => state.products.products);
+  const products = dehydratedState.queries.at(0)?.state.data;
   const [open, setOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState<Product | undefined>(undefined);
 
@@ -118,10 +121,6 @@ const Page = () => {
     },
   ];
 
-  useEffect(() => {
-    dispatch({ type: GET_PRODUCTS });
-  }, [dispatch]);
-
   const hideProduct = (id: string) => {
     toast.promise(
       'Ẩn sản phẩm thành công',
@@ -211,3 +210,36 @@ const Page = () => {
 
 export default Page;
 Page.Layout = AdminLayout;
+
+export async function getServerSideProps(_ctx: NextPageContext) {
+  await queryClient.prefetchQuery('productsQuery', async () => await ProductServices.getAll());
+
+  // const products = await ProductServices.getAll(true)
+  //   .then((res) => {
+  //     // console.log("👌 ~ res", res);
+  //     return res;
+  //   })
+  //   .catch((err) => {
+  //     // console.log("🚀 ~ err", err);
+  //     return [];
+  //   });
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const seo = useSEO('Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi', {
+    description: 'Dịch vụ đặt sản phẩm trực tuyến và giao hàng tận nơi',
+    image: '/images/Logo-2.png',
+    keyword: 'yolo',
+  });
+
+  return {
+    props: JSON.parse(
+      JSON.stringify({
+        seo,
+        dehydratedState: dehydrate(queryClient),
+        // pageData: {
+        //   products,
+        // },
+      }),
+    ) as PageProps<{ products: Product[] }>,
+  };
+}
