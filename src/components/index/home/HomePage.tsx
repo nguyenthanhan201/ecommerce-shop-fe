@@ -1,3 +1,6 @@
+// import React from 'https://cdn.skypack.dev/react';
+// import React from 'https://unpkg.com/browse/react@18.2.0';
+// import { isEmpty } from 'https://cdn.skypack.dev/lodash';
 import dynamic from 'next/dynamic';
 import { memo } from 'react';
 
@@ -16,6 +19,7 @@ const SlideBanner = dynamic(import('@/components/shared/SlideBanner'), {
 });
 
 const HomePage = ({ products }: any) => {
+  // console.log(React);
   return (
     <>
       <HeroSlider auto={false} control={true} data={heroSliderData} timeOut={1000} />

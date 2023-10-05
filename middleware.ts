@@ -1,7 +1,7 @@
 // https://nextjs.org/docs/pages/building-your-application/routing/middleware#conditional-statements
 import { NextRequest, NextResponse } from 'next/server';
 
-const requiredAuthPaths = ['/admin'];
+const requiredAuthPaths = ['/admin', '/cart'];
 const retrictedAuthPaths = ['/login'];
 
 export async function middleware(req: NextRequest) {

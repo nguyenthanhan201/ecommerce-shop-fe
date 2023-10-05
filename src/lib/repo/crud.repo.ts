@@ -13,6 +13,8 @@ export abstract class CrudRepository<T> {
       const res = await get(`/${this.apiName}/getAll${this.displayName}/${this.apiName}s`, config);
       // console.log('👌  res:', res);
 
+      if (res.fromCache) return res.data;
+
       return res;
     } catch (err) {
       // console.log("👌  err:", err);

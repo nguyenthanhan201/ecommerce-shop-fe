@@ -1,3 +1,5 @@
+// https://bundlephobia.com
+// https://www.skypack.dev
 const nextConfig = {
   compress: true,
   optimizeFonts: true,
@@ -83,9 +85,9 @@ const nextConfig = {
   },
 };
 
-// const withBundleAnalyzer = require('@next/bundle-analyzer')({
-//   enabled: process.env.ANALYZE === 'true',
-// });
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true',
+});
 
-// module.exports = withBundleAnalyzer(nextConfig);
-module.exports = nextConfig;
+module.exports = withBundleAnalyzer(nextConfig);
+// module.exports = nextConfig;

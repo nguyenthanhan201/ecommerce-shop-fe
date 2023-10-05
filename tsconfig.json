@@ -22,6 +22,7 @@
     "strict": true,
     "target": "es2018",
     "incremental": true,
+
     "baseUrl": "./src",
     "paths": {
       "@/components/*": ["components/*"],
