@@ -4,12 +4,12 @@ import LoginIcon from '@mui/icons-material/Login';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar, Badge, useTheme } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
+import { contentHeader } from 'dictionaries/header';
 import { useAppSelector } from 'lib/hooks/useAppSelector';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 import { shallowEqual } from 'react-redux';
 
 import Img from '@/components/shared/Img/Img';
@@ -23,15 +23,12 @@ const Menu = dynamic(() => import('./components/Menu'), { ssr: false });
 
 const Defaultheader = () => {
   const theme = useTheme();
-  const { t } = useTranslation('header');
   const cartItems = useAppSelector((state) => state.cartItems, shallowEqual);
   const auth = useAppSelector((state) => state.auth.auth, shallowEqual);
-  // console.log("👌 ~ auth", auth);
   const router = useRouter();
   const activeNav = mainNav.findIndex((e) => e.path === router.pathname);
   const menuLeft = useRef<any>(null);
   const [headerShrink, setHeaderShrink] = useState(false);
-  const [isShowMenu, setIsShowMenu] = useState(false);
 
   useEffect(() => {
     window.addEventListener('scroll', () => {
@@ -56,10 +53,6 @@ const Defaultheader = () => {
 
   const menuToggle = useCallback(() => {
     menuLeft.current.classList.toggle('active');
-  }, []);
-
-  const onHoverMenu = useCallback(() => {
-    setIsShowMenu((prevState) => !prevState);
   }, []);
 
   const handleLogout = useCallback(async () => {
@@ -101,7 +94,8 @@ const Defaultheader = () => {
                 role='presentation'
               >
                 <Link href={item.path}>
-                  <span>{t('mainNavs.' + item.name, '')}</span>
+                  {/* <span>{t('mainNavs.' + item.name, '')}</span> */}
+                  <span>{(contentHeader as any).mainNavs[router.locale!][item.name]}</span>
                 </Link>
               </div>
             ))}
@@ -118,29 +112,23 @@ const Defaultheader = () => {
             />
           </Link>
           <div className='header_menu_right'>
-            {auth ? (
-              <div className='header_menu_item header_menu_right_item'>
-                <Tooltip title='Giỏ hàng'>
-                  <Link href='/cart'>
-                    <Badge
-                      badgeContent={cartItems.value ? Object.keys(cartItems.value).length : 0}
-                      color='primary'
-                    >
-                      <LocalMallOutlinedIcon />
-                    </Badge>
-                  </Link>
-                </Tooltip>
-              </div>
-            ) : null}
-            <div
-              className='header_menu_item header_menu_right_item'
-              onMouseEnter={onHoverMenu}
-              onMouseLeave={onHoverMenu}
-            >
+            <div className='header_menu_item header_menu_right_item'>
+              <Tooltip title='Giỏ hàng'>
+                <Link href='/cart'>
+                  <Badge
+                    badgeContent={cartItems.value ? Object.keys(cartItems.value).length : 0}
+                    color='primary'
+                  >
+                    <LocalMallOutlinedIcon />
+                  </Badge>
+                </Link>
+              </Tooltip>
+            </div>
+            <div className='header_menu_item header_menu_right_item'>
               {auth ? (
                 <>
                   <Avatar sx={{ width: 27, height: 27 }}>{auth.name?.charAt(0)}</Avatar>
-                  {isShowMenu ? <Menu handleLogout={handleLogout} /> : null}
+                  <Menu handleLogout={handleLogout} />
                 </>
               ) : (
                 <Tooltip title='Đăng nhập'>

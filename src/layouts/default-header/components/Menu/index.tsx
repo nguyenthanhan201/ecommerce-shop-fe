@@ -6,16 +6,16 @@ import LanguageOutlinedIcon from '@mui/icons-material/LanguageOutlined';
 import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 import WbSunnyOutlinedIcon from '@mui/icons-material/WbSunnyOutlined';
 import { useTheme } from '@mui/material';
-import { set } from 'js-cookie';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useContext, useMemo, useState } from 'react';
-import { useTranslation } from 'react-i18next';
 
+import { setCookie } from '@/lib/hooks/useCookie';
 import { ColorModeContext } from '@/lib/theme/theme';
 
 const MenuChild = dynamic(() => import('../MenuChild'), { ssr: false });
+
 type MenuProps = {
   handleLogout: () => void;
 };
@@ -31,7 +31,6 @@ type MenuItemsProps = {
 const Menu = ({ handleLogout }: MenuProps) => {
   const router = useRouter();
   const { pathname, asPath, query } = router;
-  const { i18n } = useTranslation();
   const theme = useTheme();
   const colorMode = useContext(ColorModeContext);
   const [isChangedDropdown, setIsChangedDropdown] = useState<boolean>(false);
@@ -59,9 +58,8 @@ const Menu = ({ handleLogout }: MenuProps) => {
             {
               title: 'Tiếng Việt',
               func: () => {
-                i18n.changeLanguage('vi');
-                set('NEXT_LOCALE', 'vi', {
-                  maxAge: 365 * 24 * 60 * 60,
+                setCookie('i18next', 'vi', {
+                  expires: 365 * 24 * 60 * 60,
                 });
                 router.replace({ pathname, query }, asPath, { locale: 'vi' });
               },
@@ -69,9 +67,8 @@ const Menu = ({ handleLogout }: MenuProps) => {
             {
               title: 'Tiếng Anh',
               func: () => {
-                i18n.changeLanguage('en');
-                set('NEXT_LOCALE', 'en', {
-                  maxAge: 365 * 24 * 60 * 60,
+                setCookie('i18next', 'en', {
+                  expires: 365 * 24 * 60 * 60,
                 });
                 router.replace({ pathname, query }, asPath, { locale: 'en' });
               },

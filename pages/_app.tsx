@@ -8,7 +8,6 @@ import { DefaultSeo, NextSeo } from 'next-seo';
 import { Roboto } from 'next/font/google';
 import { useRouter } from 'next/router';
 import { Fragment, useEffect } from 'react';
-import { useTranslation } from 'react-i18next';
 import { Hydrate } from 'react-query';
 import { Provider } from 'react-redux';
 
@@ -17,6 +16,7 @@ import { queryClient, QueryClientProvider } from '@/lib/react-query/queryClient'
 import store from '@/lib/redux/store';
 import { ColorModeContext, useMode } from '@/lib/theme/theme';
 
+import { getCookie } from '@/lib/hooks/useCookie';
 import Page404 from './404';
 
 const roboto = Roboto({
@@ -24,19 +24,20 @@ const roboto = Roboto({
   subsets: ['vietnamese'],
 });
 
+const defaultLocale = getCookie('i18next') || 'vi';
+
 const MyApp = ({ Component, pageProps }: any) => {
   const Layout = Component.Layout ? Component.Layout : Fragment;
   const layoutProps = Component.LayoutProps ? Component.LayoutProps : {};
   const [theme, colorMode] = useMode();
   const { online } = useNetWork();
   const router = useRouter();
-  const { locale } = router;
-  const { i18n } = useTranslation();
+
   // const channel = new BroadcastChannel("notifications");
 
   useEffect(() => {
-    i18n.changeLanguage(locale);
-  }, [locale]);
+    router.replace(router.asPath, router.asPath, { locale: defaultLocale });
+  }, []);
 
   // useEffect(() => {
   //   channel.addEventListener("message", (event) => {

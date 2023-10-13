@@ -13,7 +13,7 @@ const MenuChild = ({ childrenItems, setIsChangedDropdown }: MenuChildProps) => {
         Quay lại
       </p>
       {childrenItems[0].map((item: any, index: number) => {
-        // console.log(item);
+        console.log(item.func);
         return (
           <p className='dropdown_item' key={index} onClick={item.func} role='presentation'>
             <span>{item.title}</span>

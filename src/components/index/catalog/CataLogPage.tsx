@@ -113,8 +113,8 @@ const CatalogPage = () => {
     })();
   }, [filter, productList]);
 
-  const items = rowVirtualizer.virtualItems;
-  console.log(items);
+  // const items = rowVirtualizer.virtualItems;
+  // console.log(items);
 
   return (
     <div className='catalog'>

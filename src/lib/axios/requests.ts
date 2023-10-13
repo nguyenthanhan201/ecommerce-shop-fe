@@ -8,7 +8,7 @@ const request = () => {
   const instance = axios.create({
     baseURL: process.env.NEXT_PUBLIC_BE,
     withCredentials: true,
-    timeout: 60000, // 60s
+    // timeout: 60000, // 60s
     // headers: {
     //   'Access-Control-Allow-Headers': '*', // allow all
     //   Cookie: `token=${getCookie('token')}`,
