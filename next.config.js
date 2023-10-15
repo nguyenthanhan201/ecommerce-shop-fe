@@ -84,6 +84,9 @@ const nextConfig = {
     locales: ['vi', 'en'],
     defaultLocale: 'vi',
   },
+  experimental: {
+    optimizePackageImports: ['@mui/material'],
+  },
 };
 
 // const withBundleAnalyzer = require('@next/bundle-analyzer')({
