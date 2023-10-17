@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 
-import { authentication } from '../../config/firebase.config';
 import { isEmpty } from '../helpers/functions';
 import { useToast } from '../providers/toast-provider';
 import { setAuthSlice } from '../redux/slices/auth';
@@ -16,6 +15,9 @@ function useAuth() {
 
   useEffect(() => {
     (async function unsubscribe() {
+      const authentication = await import('../../config/firebase.config').then(
+        (res) => res.authentication,
+      );
       const { onAuthStateChanged } = await import('firebase/auth');
       onAuthStateChanged(authentication, (user) => {
         const _isLogined = !isEmpty(getCookie('token'));

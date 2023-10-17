@@ -16,7 +16,6 @@ import Img from '@/components/shared/Img/Img';
 import { removeCookie } from '@/lib/hooks/useCookie';
 import { AuthServices } from '@/lib/repo/auth.repo';
 
-import { authentication } from '../../config/firebase.config';
 import { mainNav } from '../../utils/fake-data/header-navs';
 
 const Menu = dynamic(() => import('./components/Menu'), { ssr: false });
@@ -57,6 +56,9 @@ const Defaultheader = () => {
 
   const handleLogout = useCallback(async () => {
     if (!auth?.email) return;
+    const authentication = await import('../../config/firebase.config').then(
+      (res) => res.authentication,
+    );
     const { signOut } = await import('firebase/auth');
     // const promise1 = await signOut(authentication);
     const promise2 = await AuthServices.logout(auth.email);

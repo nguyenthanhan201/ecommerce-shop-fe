@@ -1,10 +1,11 @@
 import { setCookie } from '@/lib/hooks/useCookie';
 import { AuthServices } from '@/lib/repo/auth.repo';
 
-import { authentication } from '../../../config/firebase.config';
-
 const LoginPage = () => {
   const googleSignIn = async () => {
+    const authentication = await import('../../../config/firebase.config').then(
+      (res) => res.authentication,
+    );
     const { signInWithPopup, GoogleAuthProvider } = await import('firebase/auth');
 
     await signInWithPopup(authentication, new GoogleAuthProvider())
