@@ -16,6 +16,7 @@ import { queryClient, QueryClientProvider } from '@/lib/react-query/queryClient'
 import store from '@/lib/redux/store';
 import { ColorModeContext, useMode } from '@/lib/theme/theme';
 
+import { isEmpty } from '@/lib/helpers/functions';
 import { getCookie } from '@/lib/hooks/useCookie';
 import Page404 from './404';
 
@@ -24,7 +25,7 @@ const roboto = Roboto({
   subsets: ['vietnamese'],
 });
 
-const defaultLocale = getCookie('i18next') || 'vi';
+const defaultLocale = isEmpty(getCookie('i18next')) ? 'vi' : getCookie('i18next');
 
 const MyApp = ({ Component, pageProps }: any) => {
   const Layout = Component.Layout ? Component.Layout : Fragment;
