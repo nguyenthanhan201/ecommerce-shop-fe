@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { isEmpty } from '../helpers/functions';
+import { isEmpty } from '../helpers/assertion';
 import { useToast } from '../providers/toast-provider';
 import { setAuthSlice } from '../redux/slices/auth';
 import { AuthServices } from '../repo/auth.repo';

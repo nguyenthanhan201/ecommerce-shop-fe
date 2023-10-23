@@ -8,7 +8,7 @@ import { dehydrate } from 'react-query';
 
 import Img from '@/components/shared/Img/Img';
 import AdminLayout from '@/layouts/admin-layout/AdminLayout';
-import { formatDate, getSalePrice, numberWithCommans } from '@/lib/helpers/parser';
+import { formatDate, getSalePrice, numberWithCommans } from '@/lib/helpers';
 import { useSEO } from '@/lib/hooks/useSEO';
 import { queryClient } from '@/lib/react-query/queryClient';
 import { OrderServices } from '@/lib/repo/order.repo';

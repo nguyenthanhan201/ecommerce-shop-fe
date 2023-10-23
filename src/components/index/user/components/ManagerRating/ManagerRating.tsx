@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 
 import Modal from '@/components/shared/Modal/Modal';
-import { formatDate } from '@/lib/helpers/parser';
+import { formatDate } from '@/lib/helpers';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { Rating } from '@/lib/redux/types/rating.type';
 import { RatingServices } from '@/lib/repo/rating.repo';

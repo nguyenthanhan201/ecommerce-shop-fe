@@ -1,6 +1,6 @@
 import axios, { AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
 
-import { isEmpty } from '../helpers/functions';
+import { isEmpty } from '../helpers/assertion';
 import { getCookie, removeCookie, setCookie } from '../hooks/useCookie';
 import { AuthServices } from '../repo/auth.repo';
 

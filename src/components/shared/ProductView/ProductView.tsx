@@ -1,4 +1,3 @@
-import { getSalePrice, numberWithCommans } from 'lib/helpers/parser';
 import { useAppDispatch } from 'lib/hooks/useAppDispatch';
 import { useAppSelector } from 'lib/hooks/useAppSelector';
 import { useToast } from 'lib/providers/toast-provider';
@@ -9,6 +8,7 @@ import { memo, useCallback, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from 'react-query';
 
+import { getSalePrice, numberWithCommans } from '@/lib/helpers';
 import { useDevice } from '@/lib/hooks/useDevice';
 import { Product } from '@/lib/redux/types/product.type';
 import { Rating } from '@/lib/redux/types/rating.type';

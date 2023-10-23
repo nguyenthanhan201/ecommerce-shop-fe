@@ -11,13 +11,14 @@ import { Fragment, useEffect } from 'react';
 import { Hydrate } from 'react-query';
 import { Provider } from 'react-redux';
 
-import { ToastProvider } from '@/lib/providers/toast-provider';
 import { queryClient, QueryClientProvider } from '@/lib/react-query/queryClient';
 import store from '@/lib/redux/store';
 import { ColorModeContext, useMode } from '@/lib/theme/theme';
 
-import { isEmpty } from '@/lib/helpers/functions';
+import { buildProvidersTree } from '@/lib/helpers';
+import { isEmpty } from '@/lib/helpers/assertion';
 import { getCookie } from '@/lib/hooks/useCookie';
+import { ToastProvider } from '@/lib/providers/toast-provider';
 import Page404 from './404';
 
 const roboto = Roboto({
@@ -66,6 +67,15 @@ const MyApp = ({ Component, pageProps }: any) => {
   //   }
   // }, []);
 
+  const ProvidersTree = buildProvidersTree([
+    [ColorModeContext.Provider, { value: colorMode }],
+    [ThemeProvider, { theme: theme }],
+    [Provider, { store }],
+    [QueryClientProvider, { client: queryClient }],
+    [Hydrate, { state: pageProps.dehydratedState }],
+    [ToastProvider] as any,
+  ] as const);
+
   if (!online) return <Page404 />;
   return (
     <>
@@ -78,25 +88,33 @@ const MyApp = ({ Component, pageProps }: any) => {
         ]}
       />
       {pageProps.seo ? <NextSeo {...pageProps.seo} /> : null}
-      <ColorModeContext.Provider value={colorMode as any}>
-        <ThemeProvider theme={theme as any}>
-          <ToastProvider>
-            <Provider store={store}>
-              <QueryClientProvider client={queryClient}>
-                {/* Hydrate query cache */}
-                <Hydrate state={pageProps.dehydratedState}>
-                  <main className={roboto.className}>
-                    <Layout {...layoutProps}>
-                      <Component {...pageProps} />
-                    </Layout>
-                  </main>
-                </Hydrate>
-              </QueryClientProvider>
-            </Provider>
-          </ToastProvider>
-        </ThemeProvider>
-      </ColorModeContext.Provider>
+      <ProvidersTree>
+        <main className={roboto.className}>
+          <Layout {...layoutProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </main>
+      </ProvidersTree>
     </>
   );
 };
 export default MyApp;
+
+//  <ColorModeContext.Provider value={colorMode as any}>
+//    <ThemeProvider theme={theme as any}>
+//      <ToastProvider>
+//        <Provider store={store}>
+//          <QueryClientProvider client={queryClient}>
+//            {/* Hydrate query cache */}
+//            <Hydrate state={pageProps.dehydratedState}>
+//              <main className={roboto.className}>
+//                <Layout {...layoutProps}>
+//                  <Component {...pageProps} />
+//                </Layout>
+//              </main>
+//            </Hydrate>
+//          </QueryClientProvider>
+//        </Provider>
+//      </ToastProvider>
+//    </ThemeProvider>
+//  </ColorModeContext.Provider>;

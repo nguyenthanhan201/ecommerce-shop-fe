@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 
 import CartItem from '@/components/index/cart/components/CartItem';
 import Button from '@/components/shared/Button';
-import { getSalePrice, numberWithCommans } from '@/lib/helpers/parser';
+import { getSalePrice, numberWithCommans } from '@/lib/helpers';
 import { useAppSelector } from '@/lib/hooks/useAppSelector';
 import { useToast } from '@/lib/providers/toast-provider';
 import { CartItem as CartItemType } from '@/lib/redux/types/cartItem.type';

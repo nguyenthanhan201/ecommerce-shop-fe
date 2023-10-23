@@ -2,7 +2,7 @@ import { Avatar } from '@mui/material';
 import RatingMUI from '@mui/material/Rating';
 import { memo } from 'react';
 
-import { formatDate } from '@/lib/helpers/parser';
+import { formatDate } from '@/lib/helpers';
 import { Rating } from '@/lib/redux/types/rating.type';
 
 type Props = {

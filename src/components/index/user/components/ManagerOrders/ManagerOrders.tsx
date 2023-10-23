@@ -1,11 +1,11 @@
 import { Box, useTheme } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import Loading from 'components/shared/Loading/Loading';
-import { formatDate, getSalePrice, numberWithCommans } from 'lib/helpers/parser';
 import { useAppSelector } from 'lib/hooks/useAppSelector';
 import { useEffect, useState } from 'react';
 
 import Img from '@/components/shared/Img/Img';
+import { formatDate, getSalePrice, numberWithCommans } from '@/lib/helpers';
 import { OrderServices } from '@/lib/repo/order.repo';
 import { tokens } from '@/lib/theme/theme';
 

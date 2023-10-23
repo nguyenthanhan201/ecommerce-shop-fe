@@ -1,6 +1,6 @@
 import { Cancel, CheckCircle, Info, WarningOutlined } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
-import React, { createContext, ReactNode, useContext } from 'react';
+import { createContext, ReactNode, useContext } from 'react';
 import {
   toast as toastify,
   ToastContainer,
@@ -13,17 +13,17 @@ import Loading from '@/components/shared/Loading/Loading';
 
 const ToastContext = createContext<{
   default: (content: ToastContent, options?: ToastOptions | undefined) => void;
-  success: (content: ToastContent, options?: ToastOptions | undefined) => React.ReactText;
-  error: (content: ToastContent, options?: ToastOptions | undefined) => React.ReactText;
+  success: (content: ToastContent, options?: ToastOptions | undefined) => void;
+  error: (content: ToastContent, options?: ToastOptions | undefined) => void;
   promise: (
     contentSuccess: ToastContent,
     func: Promise<any>,
     contentError: ToastContent,
     options?: ToastOptions | undefined,
-  ) => React.ReactText;
-}>(null as any);
+  ) => void;
+}>(null!);
 
-export function ToastProvider({ children }: any) {
+export const ToastProvider = ({ children }: { children: ReactNode }) => {
   const theme = useTheme();
   const defaultOptions: ToastOptions = {
     autoClose: 1000,
@@ -110,11 +110,11 @@ export function ToastProvider({ children }: any) {
   };
 
   return (
-    <ToastContext.Provider value={toast as any}>
+    <ToastContext.Provider value={toast}>
       {children}
-      <ToastContainer position='top-center' containerId='toast-root' limit={1} transition={Zoom} />
+      <ToastContainer containerId='toast-root' limit={1} position='top-center' transition={Zoom} />
     </ToastContext.Provider>
   );
-}
+};
 
 export const useToast = () => useContext(ToastContext);
