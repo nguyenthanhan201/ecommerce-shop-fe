@@ -1,12 +1,12 @@
 import { Cancel, CheckCircle, Info, WarningOutlined } from '@mui/icons-material';
 import { useTheme } from '@mui/material';
-import { createContext, ReactNode, useContext } from 'react';
+import { ReactNode, createContext, useContext } from 'react';
 import {
-  toast as toastify,
   ToastContainer,
   ToastContent,
   ToastOptions,
   Zoom,
+  toast as toastify,
 } from 'react-toastify';
 
 import Loading from '@/components/shared/Loading/Loading';

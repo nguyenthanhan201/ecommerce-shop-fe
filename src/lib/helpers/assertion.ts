@@ -1,3 +1,5 @@
+import { getCookie } from '../hooks/useCookie';
+
 export type Dict<T = any> = Record<string, T>;
 
 export function isArray<T>(value: any): value is Array<T> {
@@ -25,4 +27,8 @@ export function isEmpty(value: any): boolean {
   if (value == null || value === '') return true;
 
   return false;
+}
+
+export function isEmptyToken(): boolean {
+  return isEmpty(getCookie('token'));
 }
