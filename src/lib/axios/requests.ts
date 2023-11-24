@@ -38,11 +38,11 @@ const request = () => {
 
     // retry if error is not expired token
     if (errorResponse.response?.status !== 401 || isEmptyToken()) {
-      const fetchWithRetry = async (errorCount = 0) => {
+      const fetchWithRetry = (errorCount = 0) => {
         const randomTime = Math.pow(2, errorCount) * 3000 + Math.random() * 1000;
 
         if (errorCount < ERROR_MAX_RETRY) {
-          setTimeout(async () => {
+          return setTimeout(async () => {
             await request
               .then((res) => {
                 return res;

@@ -86,6 +86,7 @@ const nextConfig = {
   },
   experimental: {
     optimizePackageImports: ['@mui/material'],
+    urlImports: ['https://cdn.skypack.dev', 'https://images.unsplash.com'],
   },
 };
 

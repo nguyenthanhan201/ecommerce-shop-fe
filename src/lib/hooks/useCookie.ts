@@ -1,4 +1,4 @@
-import Cookies, { CookieAttributes } from 'js-cookie';
+import Cookies, { CookieAttributes } from 'https://cdn.skypack.dev/js-cookie@^3.0.5';
 
 export enum CookiesKeys {
   'token' = 'token',
