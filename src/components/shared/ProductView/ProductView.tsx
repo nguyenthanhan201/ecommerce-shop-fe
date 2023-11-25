@@ -42,7 +42,9 @@ const ProductView = ({ product }: ProductViewProps) => {
     queryKey: 'rating',
     queryFn: async () =>
       RatingServices.getRatingByIdProduct(product._id).then((res) => {
-        setRatings(res);
+        if (res.code === 'SUCCESS') {
+          setRatings(res.data as any);
+        }
       }),
   });
   const { t } = useTranslation('product');

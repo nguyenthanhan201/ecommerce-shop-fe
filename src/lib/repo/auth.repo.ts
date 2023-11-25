@@ -22,7 +22,7 @@ export class AuthRepository {
   }
 
   async refreshToken() {
-    const res = await get(`auth/refresh-token`);
+    const res = await get<{ access_token: string }>(`auth/refresh-token`);
     return res;
   }
 }

@@ -66,8 +66,10 @@ const Page = () => {
   useEffect(() => {
     ProductServices.getMostViewedProducts()
       .then((res) => {
-        const nameProducts = res.map((item: Product) => item.title);
-        const viewsProducts = res.map((item: Product) => item.views);
+        if (res.code === 'ERROR') return toast.error(String(res.error));
+
+        const nameProducts = res.data.map((item: Product) => item.title);
+        const viewsProducts = res.data.map((item: Product) => item.views);
         setChartData({
           labels: nameProducts,
           datasets: [

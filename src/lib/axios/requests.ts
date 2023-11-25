@@ -4,6 +4,18 @@ import { isEmptyToken } from '../helpers/assertion';
 import { removeCookie, setCookie } from '../hooks/useCookie';
 import { AuthServices } from '../repo/auth.repo';
 
+type SuccessResponse<V> = {
+  code: 'SUCCESS';
+  data: V;
+};
+
+type ErrorResponse<E = AxiosError> = {
+  code: 'ERROR';
+  error: E;
+};
+
+type BaseResponse<V, E = AxiosError> = Promise<SuccessResponse<V> | ErrorResponse<E>>;
+
 const ERROR_MAX_RETRY = 2;
 
 const request = () => {
@@ -60,54 +72,63 @@ const request = () => {
       return fetchWithRetry();
     } else {
       // handle access token expired
-      return await AuthServices.refreshToken().then(
-        async (rs) => {
-          const { access_token: newToken } = await rs;
-
-          setCookie('token', newToken);
-
-          // call expired api again
-          return await request.then(
-            (res) => {
-              return res;
-            },
-            (error) => {
-              console.log('🚀 ~ file: crud-axios.ts error', error);
-              return Promise.reject(error);
-            },
-          );
-        },
-        (error) => {
-          console.log('🚀 ~ file: crud-axios.ts error', error);
+      return await AuthServices.refreshToken().then(async (rs) => {
+        if (rs.code === 'ERROR') {
+          console.log('🚀 ~ file: crud-axios.ts error', rs.error);
           removeCookie('token');
           removeCookie('refreshToken');
-          return Promise.reject(error);
-        },
-      );
+          return Promise.reject(rs.error);
+        }
+
+        const { access_token: newToken } = rs.data;
+        setCookie('token', newToken);
+
+        // call expired api again
+        return await request.then(
+          (res) => {
+            return res;
+          },
+          (error) => {
+            console.log('🚀 ~ file: crud-axios.ts error', error);
+            return Promise.reject(error);
+          },
+        );
+      });
     }
   });
 
   return instance;
 };
 
-export const get = async (path: string, config?: AxiosRequestConfig<any>) => {
-  const response: AxiosResponse = await request().get(path, config);
-  return response.data;
+export const get = async <V, E = AxiosError>(
+  path: string,
+  config?: AxiosRequestConfig,
+): BaseResponse<V, E> => {
+  try {
+    const response = await request().get(path, config);
+    return {
+      code: 'SUCCESS',
+      data: response.data,
+    };
+  } catch (error) {
+    return {
+      code: 'ERROR',
+      error: error as E,
+    };
+  }
 };
 
-export const post = async (path: string, data: object = {}, config?: AxiosRequestConfig<any>) => {
+export const post = async (path: string, data: object = {}, config?: AxiosRequestConfig) => {
   const response: AxiosResponse = await request().post(path, data, config);
   return response.data;
 };
 
-export const put = async (path: string, data: object = {}, config?: AxiosRequestConfig<any>) => {
+export const put = async (path: string, data: object = {}, config?: AxiosRequestConfig) => {
   const response: AxiosResponse = await request().put(path, data, config);
   return response.data;
 };
 
-export const deleteReq = async (path: string, config?: AxiosRequestConfig<any>) => {
+export const deleteReq = async (path: string, config?: AxiosRequestConfig) => {
   const response: AxiosResponse = await request().delete(path, config);
   return response.data;
 };
-
-export default request;

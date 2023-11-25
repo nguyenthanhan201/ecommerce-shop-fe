@@ -94,16 +94,17 @@ const ManagerOrders = () => {
   useEffect(() => {
     setIsLoading(true);
     if (!auth?._id) return;
-    OrderServices.getOrdersByIdAuth(auth._id)
-      .then((res) => {
-        // console.log(res);
-        setOrders(res);
+    OrderServices.getOrdersByIdAuth(auth._id).then((res) => {
+      if (res.code === 'ERROR') {
+        console.log(res.error);
         setIsLoading(false);
-      })
-      .catch((err) => {
-        console.log(err);
-        setIsLoading(false);
-      });
+        return;
+      }
+
+      // console.log(res);
+      setOrders(res.data as any);
+      setIsLoading(false);
+    });
   }, [auth?._id]);
 
   return (
