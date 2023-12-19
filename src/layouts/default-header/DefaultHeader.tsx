@@ -1,10 +1,11 @@
+// eslint-disable-next-line simple-import-sort/imports
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined';
 import LoginIcon from '@mui/icons-material/Login';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Avatar, Badge, useTheme } from '@mui/material';
 import Tooltip from '@mui/material/Tooltip';
-import { contentHeader } from 'dictionaries/header';
+import { LanguageTypes, MainNavTypes, contentHeader } from 'dictionaries/header';
 import { useAppSelector } from 'lib/hooks/useAppSelector';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
@@ -97,7 +98,13 @@ const Defaultheader = () => {
               >
                 <Link href={item.path}>
                   {/* <span>{t('mainNavs.' + item.name, '')}</span> */}
-                  <span>{(contentHeader as any).mainNavs[router.locale!][item.name]}</span>
+                  <span>
+                    {
+                      contentHeader.mainNavs[router.locale as LanguageTypes][
+                        item.name as MainNavTypes
+                      ]
+                    }
+                  </span>
                 </Link>
               </div>
             ))}

@@ -1,4 +1,5 @@
-export type LanguageType = 'vi' | 'en';
+export type LanguageTypes = keyof typeof contentHeader.mainNavs;
+export type MainNavTypes = keyof (typeof contentHeader.mainNavs)[LanguageTypes];
 
 export const contentHeader = {
   mainNavs: {

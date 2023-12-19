@@ -19,7 +19,8 @@ import { buildProvidersTree } from '@/lib/helpers';
 import { isEmpty } from '@/lib/helpers/assertion';
 import { getCookie } from '@/lib/hooks/useCookie';
 import { ToastProvider } from '@/lib/providers/toast-provider';
-import Page404 from './404';
+import { getMessagingToken } from 'config/firebase.config';
+import Page404 from './[...404]';
 
 const roboto = Roboto({
   weight: ['400', '500', '700'],
@@ -35,33 +36,47 @@ const MyApp = ({ Component, pageProps }: any) => {
   const { online } = useNetWork();
   const router = useRouter();
 
-  // const channel = new BroadcastChannel("notifications");
-
   useEffect(() => {
     router.replace(router.asPath, router.asPath, { locale: defaultLocale });
   }, []);
 
-  // useEffect(() => {
-  //   channel.addEventListener("message", (event) => {
-  //     console.log("Receive background: ", event.data);
-  //   });
+  const channel = new BroadcastChannel('notifications');
 
-  //   getMessagingToken();
+  useEffect(() => {
+    getMessagingToken();
+  }, []);
+
+  useEffect(() => {
+    channel.addEventListener('message', (event) => {
+      console.log('Receive background: ', event.data);
+    });
+
+    // onMessage(messaging, (payload) => {
+    //   console.log('Message received. ', payload);
+    //   // ...
+    // });
+  }, []);
+
+  // useEffect(() => {
+  //   window.addEventListener('load', () => {
+  //     if ('serviceWorker' in navigator) {
+  //       navigator.serviceWorker
+  //         .register('/sw.js')
+  //         .then((registration) => console.log('scope is: ', registration.scope));
+  //     }
+  //   });
   // }, []);
 
   // useEffect(() => {
-  //   if ("serviceWorker" in navigator) {
-  //     window.addEventListener("load", function () {
-  //       navigator.serviceWorker.register("/sw.js").then(
+  //   if ('serviceWorker' in navigator) {
+  //     window.addEventListener('load', function () {
+  //       navigator.serviceWorker.register('../firebase-messaging-sw.js').then(
   //         function (registration) {
-  //           console.log(
-  //             "Service Worker registration successful with scope: ",
-  //             registration.scope
-  //           );
+  //           console.log('Service Worker registration successful with scope: ', registration.scope);
   //         },
   //         function (err) {
-  //           console.log("Service Worker registration failed: ", err);
-  //         }
+  //           console.log('Service Worker registration failed: ', err);
+  //         },
   //       );
   //     });
   //   }

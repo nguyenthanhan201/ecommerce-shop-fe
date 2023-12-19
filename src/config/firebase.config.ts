@@ -48,7 +48,7 @@ export const getMessagingToken = async () => {
     // Add the public key generated from the console here.
     await getToken(messaging).then((res) => {
       if (res) {
-        console.log('👌 ~ FCM registration token', res);
+        // console.log('👌 ~ FCM registration token', res);
         // Send the token to your server and update the UI if necessary
         currentToken = res;
       } else {
@@ -62,4 +62,6 @@ export const getMessagingToken = async () => {
   return currentToken;
 };
 
-export { authentication, storage };
+const messaging = typeof window !== 'undefined' ? getMessaging(firebaseApp) : null;
+
+export { authentication, messaging, storage };

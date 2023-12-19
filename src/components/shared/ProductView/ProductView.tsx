@@ -15,7 +15,7 @@ import { Rating } from '@/lib/redux/types/rating.type';
 import { CartServices } from '@/lib/repo/cart.repo';
 import { RatingServices } from '@/lib/repo/rating.repo';
 
-import Page404 from '../../../../pages/404';
+import Page404 from '../../../../pages/[...404]';
 import Button from '../Button';
 import Img from '../Img/Img';
 import Modal from '../Modal/Modal';
