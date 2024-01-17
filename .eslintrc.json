@@ -18,7 +18,8 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:import/typescript",
     "plugin:react/jsx-runtime",
-    "plugin:prettier/recommended"
+    "plugin:prettier/recommended",
+    "next"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -32,7 +33,8 @@
     "simple-import-sort",
     "jsx-a11y",
     "react-hooks",
-    "prettier"
+    "prettier",
+    "@next/eslint-plugin-next"
   ],
   "rules": {
     "@typescript-eslint/no-non-null-assertion": "off",
