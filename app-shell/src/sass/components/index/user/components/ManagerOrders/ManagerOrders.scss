@@ -1,0 +1,42 @@
+.table {
+  width: 100%;
+
+  & .title {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px 0;
+  }
+
+  &__item {
+
+    & td {
+      padding: 10px 0;
+      text-align: center;
+    }
+
+    &-1 {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+
+      img {
+        width: 100px;
+        height: 100px;
+      }
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+        gap: 0;
+
+        img {
+          width: 50%;
+          height: 50%;
+          margin-bottom: 8px;
+        }
+      }
+
+    }
+  }
+}

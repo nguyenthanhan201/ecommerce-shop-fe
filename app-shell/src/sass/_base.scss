@@ -1,0 +1,195 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+  font-size: 13px;
+  scroll-behavior: smooth;
+
+  @include mobile {
+    font-size: 11px;
+  }
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+  background-color: var(--main-bg);
+  color: var(--main-color);
+
+  & .modal-open {
+    overflow: hidden;
+  }
+}
+
+.header {
+  background-color: var(--main-bg);
+  color: var(--main-color);
+}
+
+body:has(.user-layout) {
+  background-color: var(--main-bg);
+  color: var(--main-color);
+}
+
+.app {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  & .content {
+    flex-direction: column;
+  }
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+
+  &:hover {
+    color: $main-color;
+  }
+}
+
+img {
+  max-width: 100%;
+}
+
+@each $color,
+$val in $colors {
+  .color-#{$color} {
+    color: $val;
+  }
+
+  .bg-#{$color} {
+    background-color: $val;
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-#{$val} {
+    grid-template-columns: repeat($val, 1fr);
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-md-#{$val} {
+    @include table {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+
+@each $val in $numbers {
+  .grid-col-sm-#{$val} {
+    @include mobile {
+      grid-template-columns: repeat($val, 1fr);
+    }
+  }
+}
+
+.container {
+  width: 100%;
+  // max-width: 1620px;
+  padding: 0 60px 0 50px;
+  margin: auto;
+
+  @include table {
+    padding: 0 20px;
+  }
+
+  @include mobile {
+    padding: 0 10px;
+  }
+}
+
+.main {
+  margin-top: $header-height;
+  margin-bottom: 2rem;
+  min-height: 100vh;
+
+  @include table {
+    margin-top: calc(#{$header-tablet-height} + 20px);
+  }
+
+  @include mobile {
+    margin-top: calc(#{$header-mobile-height} + 10px);
+  }
+}
+
+.grid {
+  display: grid;
+}
+
+//? Custom progress-bar
+// ::-webkit-scrollbar {
+//   width: 0;
+//   height: 0;
+// }
+
+#progressbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 10px;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  z-index: 999;
+  animation: animate 5s linear infinite;
+}
+
+@keyframes animate {
+
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+
+  50% {
+    filter: hue-rotate(360deg);
+  }
+}
+
+#progressbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(10px);
+}
+
+#progressbar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(30px);
+}
+
+.Toastify__toast-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  transform: translate(0px, 0px);
+  background-color: hsla(0, 0, 0, 0.4);
+}
