@@ -21,6 +21,27 @@
     "sourceMap": true,
     "strict": true,
     "target": "es2018",
-    "incremental": true
-  }
+    "incremental": true,
+    "baseUrl": "./src",
+    "paths": {
+      "@/components/*": ["components/*"],
+      "@/layouts/*": ["layouts/*"],
+      "@/lib/*": ["lib/*"],
+      "@/assets/*": ["assets/*"],
+      "@/longProcesses/*": ["longProcesses/*"],
+      "@/utils/*": ["utils/*"],
+      "@/api/*": ["api/*"],
+      "@/i18n/*": ["i18n/*"]
+    }
+  },
+  "include": [
+    "src/@types/.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "utils/data.js",
+    "utils/icons.js",
+    "pages/_app.tsx",
+    "src/utils/data.js"
+  ],
+  "exclude": ["node_modules"]
 }

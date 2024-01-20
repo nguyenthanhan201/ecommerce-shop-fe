@@ -19,6 +19,8 @@ const SlideBanner = dynamic(import('@/components/shared/SlideBanner'), {
 });
 
 const HomePage = ({ products }: any) => {
+  const test = 'test';
+
   return (
     <>
       <HeroSlider auto={false} control={true} data={heroSliderData} timeOut={1000} />

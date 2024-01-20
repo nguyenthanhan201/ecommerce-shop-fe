@@ -58,10 +58,10 @@ const nextConfig = {
   //   if (!dev && !isServer) {
   //     config.resolve.alias = {
   //       ...config.resolve.alias,
-  //       "react/jsx-runtime.js": "preact/compat/jsx-runtime",
-  //       react: "preact/compat",
-  //       "react-dom/test-utils": "preact/test-utils",
-  //       "react-dom": "preact/compat",
+  //       'react/jsx-runtime.js': 'preact/compat/jsx-runtime',
+  //       react: 'preact/compat',
+  //       'react-dom/test-utils': 'preact/test-utils',
+  //       'react-dom': 'preact/compat'
   //     };
   //   }
 
@@ -72,10 +72,10 @@ const nextConfig = {
   //   config.plugins.push(
   //     new CompressionPlugin({
   //       // filename: "[path].gz[query]",
-  //       algorithm: "gzip",
+  //       algorithm: 'gzip',
   //       test: /\.js$|\.css$|\.tsx$|\.scss$|\.ts$/,
   //       threshold: 10240,
-  //       minRatio: 0.9,
+  //       minRatio: 0.9
   //     })
   //   );
   //   return config;
